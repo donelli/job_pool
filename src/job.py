@@ -1,7 +1,6 @@
 
 from typing import List
 
-
 class Job():
    
    company: str = ''

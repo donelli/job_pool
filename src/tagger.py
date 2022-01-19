@@ -59,6 +59,7 @@ class Tagger:
       Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL' ]),
       Tag('Mongo', [ 'MONGODB', 'MONGO' ]),
       Tag('Oracle', [ 'ORACLE' ]),
+      Tag('GraphQL', [ 'GRAPHQL' ]),
 
       # Containers
       Tag('Docker', [ 'DOCKER' ]),
@@ -138,7 +139,7 @@ class Tagger:
                if index > 0 and self.wordRe.match(text[index - 1]) is not None:
                   continue
                
-               if index < text.__len__() and self.wordRe.match(text[index + word.__len__()]) is not None:
+               if index + len(word) < len(text) and self.wordRe.match(text[index + len(word)]) is not None:
                   continue
                
                hasTag = True

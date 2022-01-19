@@ -8,12 +8,14 @@ from greenhouse import GreenhouseSearcher
 from hotmart import HotmartSearcher
 from repository import Repository
 from job import Job
+from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
 
 gupySearcher         = GupySearcher()
 trakstarSearcher     = TrakstarSearcher()
 greenhouseSearcher   = GreenhouseSearcher()
 hotmartSearcher      = HotmartSearcher()
+spotifySearcher      = SpotifySearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -74,7 +76,9 @@ greenhouseSearcher.search('Ame Digital', 'https://boards.greenhouse.io/amedigita
 
 hotmartSearcher.search()
 
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearcher.jobs + hotmartSearcher.jobs
+spotifySearcher.search()
+
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
@@ -101,6 +105,10 @@ for index, currentJob in enumerate(allJobs):
 
    if not exists:
       print("Salvando novo emprego: " + currentJob.name + ' - ' + currentJob.company)
+      
+      if currentJob.company == 'Spotify':
+         spotifySearcher.loadTags(currentJob)
+
       repo.insertJob(currentJob)
 
 print("Processando empregos existentes...")
