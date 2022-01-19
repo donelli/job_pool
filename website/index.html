@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Jobs</title>
+
+   <!-- development version, includes helpful console warnings -->
+   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+      
+   <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+   <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
+</head>
+<body>
+   
+   <div id="app">
+      
+      <div class="d-flex justify-content-center mt-5" v-if="isLoading || (!isLoading && jobs.length == 0) || error">
+         
+         <div class="spinner-border" role="status" v-if="isLoading">
+           <span class="visually-hidden">Loading...</span>
+         </div>
+
+         <div v-if="!isLoading && !error">
+            Não foram encontrados empregos...
+         </div>
+
+         <div class="text-danger fw-bold" v-if="!isLoading && error">
+            {{ error }}
+         </div>
+         
+      </div>
+
+      <div v-if="!isLoading && jobs.length > 0" class="container-fluid mt-3">
+         <div class="row">
+            <div class="col-6">
+               
+               <label>Companies</label>
+               
+               <vue-multiselect v-model="selectedCompanies" track-by="name" :options="companies" :searchable="false" :close-on-select="false" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" label="nameWithCount" :show-labels="false" placeholder="Select companies"></vue-multiselect>
+               
+            </div>
+            <div class="col-6">
+               
+               <label for="filter">Filter job name and tags</label>
+               <input type="text" id="filter" class="form-control" v-model="textFilter">
+               
+            </div>
+            <div class="col-12 mt-4">
+               
+               <table class="table table-bordered table-hover align-middle" v-if="!isLoading">
+                  <thead class="table-dark">
+                     <tr>
+                        <th style="position: sticky; top: 0">Name</th>
+                        <th style="position: sticky; top: 0">Workplace</th>
+                        <th style="position: sticky; top: 0">Remote</th>
+                        <th colspan="2" style="position: sticky; top: 0">Company</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr v-for="job in filteredJobs">
+                        <td>
+                           {{ job.name }} {{ job.type ? ` (${job.type})` : '' }}
+                           
+                           <div class="mt-1"></div>
+                           
+                           <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.tags">{{ tag }}</span>
+                           
+                        </td>
+                        <td>{{ job.workplace }}</td>
+                        <td>{{ job.remote }}</td>
+                        <td>{{ job.company }}</td>
+                        <td>
+                           <a target="_blank" :href="job.url" class="btn btn-primary">
+                              <i class="bi bi-box-arrow-right"></i>
+                           </a>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               
+            </div>
+         </div>
+      </div>
+       
+    </div>
+   
+   <script src="app.js"></script>
+   
+</body>
+</html>
