@@ -1,4 +1,7 @@
 
+from typing import List
+
+
 class Job():
    
    company: str = ''
@@ -8,7 +11,7 @@ class Job():
    workplace: str = ''
    department: str = ''
    remote: str = ''
-   tags = []
+   tags: List[str] = []
    inclusionDate = ''
 
    def toMap(self):

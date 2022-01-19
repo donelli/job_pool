@@ -1,4 +1,5 @@
 
+from typing import List
 import requests
 import json
 from job import Job
@@ -7,7 +8,7 @@ import helpers
 
 class HotmartSearcher:
    
-   jobs = []
+   jobs: List[Job] = []
    
    areas = [
       'data-science',

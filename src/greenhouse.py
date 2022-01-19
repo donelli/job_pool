@@ -1,3 +1,4 @@
+from typing import List
 from bs4 import BeautifulSoup
 import requests
 from job import Job
@@ -6,7 +7,7 @@ from tagger import Tagger
 
 class GreenhouseSearcher():
    
-   jobs = []
+   jobs: List[Job] = []
 
    def getTags(self, url):
          

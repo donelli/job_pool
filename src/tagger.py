@@ -1,10 +1,11 @@
 
 import re
+from typing import List
 from unidecode import unidecode
 
 class Tag:
    
-   def __init__(self, name, words):
+   def __init__(self, name: str, words: List[str]):
       self.name = name
       self.words = words
 
@@ -107,14 +108,14 @@ class Tagger:
       
    ]
 
-   def __init__(self):
+   def __init__(self) -> None:
       self.wordRe = re.compile('\\w')
    
-   def generateTags(self, text: str):
+   def generateTags(self, text: str) -> List[str]:
       
       text = unidecode(text.upper())
       
-      tags = []
+      tags: List[str] = []
       
       for tag in self.tags:
          

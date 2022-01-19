@@ -1,4 +1,5 @@
 from time import sleep
+from typing import List
 from bs4 import BeautifulSoup
 import requests
 from job import Job
@@ -7,7 +8,7 @@ from tagger import Tagger
 
 class TrakstarSearcher():
    
-   jobs = []
+   jobs: List[Job] = []
    
    def loadTags(self, url):
       
