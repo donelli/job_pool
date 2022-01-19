@@ -43,13 +43,19 @@
                
                <label>Companies</label>
                
-               <vue-multiselect v-model="selectedCompanies" track-by="name" :options="companies" :searchable="false" :close-on-select="false" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" label="nameWithCount" :show-labels="false" placeholder="Select companies"></vue-multiselect>
+               <vue-multiselect v-model="selectedCompanies" track-by="name" :options="companies" :searchable="false" :close-on-select="false" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" label="nameWithCount" :show-labels="false" placeholder="Select companies to filter..."></vue-multiselect>
                
             </div>
             <div class="col-6">
                
                <label for="filter">Filter job name and tags</label>
                <input type="text" id="filter" class="form-control" v-model="textFilter">
+
+               <br>
+
+               <button class="btn btn-danger" @click="clearFilters()">
+                  Clear filters
+               </button>
                
             </div>
             <div class="col-12 mt-4">
@@ -68,7 +74,7 @@
                         <td>
                            {{ job.name }} {{ job.type ? ` (${job.type})` : '' }}
                            
-                           <div class="mt-1"></div>
+                           <div class="mt-2"></div>
                            
                            <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.tags">{{ tag }}</span>
                            

@@ -70,6 +70,10 @@ var app = new Vue({
             this.isLoading = false;            
          });
          
+      },
+      clearFilters: function() {
+         this.selectedCompanies = [];
+         this.textFilter = '';
       }
    }
 })
