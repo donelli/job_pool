@@ -1,6 +1,6 @@
 
 Vue.component('vue-multiselect', window.VueMultiselect.default)
-
+Vue.use(VueGoogleCharts)
 
 var app = new Vue({
    el: '#app',
@@ -23,6 +23,68 @@ var app = new Vue({
          return this.jobs.filter(job => {
             return companyNames.includes(job.company) && (!this.textFilter || job.filters.includes(this.textFilter.toLowerCase()));
          });
+      },
+      tagsChartData: function() {
+         const data =  [
+            ["Tag", "Tags count"],
+         ]
+
+         for (let i = 0; i < this.filteredTags.length; i++) {
+            const tag = this.filteredTags[i];
+            
+            if (i > 30) {
+               break;
+            }
+            
+            data.push([ tag.name, tag.count ]);
+            
+         }
+         
+         return data;
+      },
+      filteredTags: function() {
+
+         const tags = [];
+         
+         for (const job of this.filteredJobs) {
+            
+            for (const tag of job.tags) {
+               
+               let found = false;
+               
+               for (const tagObj of tags) {
+                  
+                  if (tagObj.name == tag) {
+                     tagObj.count += 1;
+                     found = true;
+                     break;
+                  }
+                  
+               }
+
+               if (!found) {
+                  tags.push({
+                     name: tag,
+                     count: 1
+                  })
+               }
+               
+               // const find = tags.findIndex(tag => tag.name == tag);
+               // if (find >= 0) {
+               //    tags[find].count += 1;
+               // } else {
+               //    tags.push({
+               //       name: tag,
+               //       count: 1
+               //    });
+               // }
+               
+            }
+            
+         }
+         
+         return tags.sort((a, b) => b.count - a.count);
+         
       }
    },
    methods: {
@@ -52,6 +114,7 @@ var app = new Vue({
                      jobs: 1
                   });
                }
+               
             }
 
             for (const company of companies) {

@@ -16,6 +16,8 @@
    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 
+   <script src="https://cdn.jsdelivr.net/npm/vue-google-charts@0.3.3/dist/vue-google-charts.browser.js"></script>
+
 </head>
 <body>
    
@@ -90,6 +92,28 @@
                      </tr>
                   </tbody>
                </table>
+               
+            </div>
+            <div class="col-12-mt-4">
+               
+               <h2>Tags</h2>
+               
+               <div style="height: 700px;">
+                  <g-chart
+                     style="height: 100%;"
+                     type="ColumnChart"
+                     :data="tagsChartData"
+                  />
+               </div>
+               
+               <!-- <table class="table table-bordered table-hover align-middle">
+                  <tbody>
+                     <tr v-for="tag in filteredTags">
+                        <td>{{ tag.name }}</td>
+                        <td>{{ tag.count }}</td>
+                     </tr>
+                  </tbody>
+               </table> -->
                
             </div>
          </div>
