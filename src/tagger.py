@@ -105,6 +105,7 @@ class Tagger:
       # UI
       Tag('Figma', [ 'FIGMA' ]),
       Tag('Illustrator', [ 'ILLUSTRATOR' ]),
+      Tag('Photoshop', [ 'PHOTOSHOP' ]),
       
    ]
 
