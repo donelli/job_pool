@@ -72,7 +72,7 @@ class Tagger:
       Tag('CI/CD', [ 'CI / CD', 'CI/CD' ]),
       Tag('Project management', [ 'GESTAO DE PROJETOS' ]),
       Tag('Product management', [ 'GESTAO DE PRODUTOS' ]),
-      Tag('Securiry', [ 'SEGURANCA' ]),
+      Tag('Security', [ 'SEGURANCA' ]),
       Tag('Requirements analysis', [ 'ANALISE DE REQUISITOS' ]),
       Tag('Quality analysis', [ 'ANALISTA DE QUALIDADE' ]),
       Tag('Dependence analysis', [ 'GERENCIAMENTO DE DEPENDÊNCIAS' ]),
