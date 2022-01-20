@@ -6,6 +6,7 @@ from typing import List
 from gupy import GupySearcher
 from greenhouse import GreenhouseSearcher
 from hotmart import HotmartSearcher
+from netflix import NetflixSearcher
 from repository import Repository
 from job import Job, Origin
 from spotify import SpotifySearcher
@@ -16,6 +17,7 @@ trakstarSearcher     = TrakstarSearcher()
 greenhouseSearcher   = GreenhouseSearcher()
 hotmartSearcher      = HotmartSearcher()
 spotifySearcher      = SpotifySearcher()
+netflixSearcher      = NetflixSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -78,13 +80,13 @@ hotmartSearcher.search()
 
 spotifySearcher.search()
 
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs
+netflixSearcher.search()
+
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
 # TODO google  -> https://careers.google.com/jobs/results/
-
-# TODO netflix -> https://jobs.netflix.com/search
 
 # TODO Uber ?
 
@@ -118,8 +120,6 @@ for index, currentJob in enumerate(allJobs):
 print("Processando empregos existentes...")
 
 availableJobsUrls = repo.getAllJobsUrls()
-
-print(availableJobsUrls)
 
 for index, url in enumerate(availableJobsUrls):
 

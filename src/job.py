@@ -8,6 +8,7 @@ class Origin(Enum):
    HOTMART = auto()
    SPOTIFY = auto()
    TRAKSTAR = auto()
+   NETFLIX = auto()
 
 class Job():
    

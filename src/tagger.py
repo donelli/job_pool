@@ -17,16 +17,18 @@ class Tagger:
       Tag('PHP', [ 'PHP' ]),
       Tag('HTML', [ 'HTML', 'HTML5' ]),
       Tag('CSS', [ 'CSS', 'CSS3' ]),
-      Tag('JS', [ 'JAVASCRIPT' ]),
-      Tag('TS', [ 'TYPESCRIPT' ]),
+      Tag('JS', [ 'JAVASCRIPT', 'JS' ]),
+      Tag('TS', [ 'TYPESCRIPT', 'TS' ]),
       
-      # Frameworks Web
+      # Web
       Tag('AngularJS', [ 'ANGULARJS' ]),
       Tag('Angular', [ 'ANGULAR' ]),
       Tag('ReactJS', [ 'REACT', 'REACTJS' ]),
       Tag('Ember', [ 'EMBER' ]),
       Tag('VueJS', [ 'VUE', 'VUEJS' ]),
-      Tag('NodeJs', [ 'NODE.JS', 'NODEJS' ]),
+      Tag('WebSockets', [ 'WEBSOCKETS' ]),
+      Tag('Next.js', [ 'NEXT.JS', 'NEXTJS' ]),
+      Tag('Express', [ 'EXPRESS' ]),
       
       # Apis
       Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs' ]),
@@ -35,14 +37,17 @@ class Tagger:
       
       # Mobile
       Tag('Flutter', [ 'FLUTTER' ]),
+      Tag('Ionic', [ 'IONIC' ]),
       Tag('Android', [ 'ANDROID' ]),
       Tag('Kotlin', [ 'KOTLIN' ]),
       Tag('PWA', [ 'PWA' ]),
       Tag('React Native', [ 'REACT NATIVE' ]),
       Tag('Swift', [ 'SWIFT' ]),
       Tag('Objective-C', [ 'OBJECTIVE-C', 'OBJECTIVE C' ]),
-      
-      # Desktop
+      Tag('Xamarin', [ 'XAMARIN' ]),
+
+      # Desktop / Scripts
+      Tag('C/C++', [ 'C++', 'C/C++' ]),
       Tag('Java', [ 'JAVA' ]),
       Tag('Gradle', [ 'GRADLE' ]),
       Tag('Maven', [ 'MAVEN' ]),
@@ -50,7 +55,18 @@ class Tagger:
       Tag('Scala', [ 'SCALA' ]),
       Tag('C# / .NET', [ 'C#', '.NET' ]),
       Tag('Golang', [ 'GO', 'GOLANG' ]),
-      
+      Tag('NodeJs', [ 'NODE.JS', 'NODEJS' ]),
+      Tag('Ruby', [ 'RUBY' ]),
+      Tag('Rust', [ 'RUST' ]),
+      Tag('Perl', [ 'PERL' ]),
+      Tag('Haskell', [ 'HASKELL' ]),
+      Tag('Lua', [ 'LUA' ]),
+      Tag('Clojure', [ 'CLOJURE' ]),
+      Tag('Elixir', [ 'ELIXIR' ]),
+      Tag('Erlang', [ 'ERLANG' ]),
+      Tag('Julia', [ 'JULIA' ]),
+      Tag('OCaml', [ 'OCAML' ]),
+            
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
 
@@ -62,6 +78,7 @@ class Tagger:
       Tag('Mongo', [ 'MONGODB', 'MONGO' ]),
       Tag('Oracle', [ 'ORACLE' ]),
       Tag('GraphQL', [ 'GRAPHQL' ]),
+      Tag('Big Data', [ 'BIG DATA' ]),
 
       # Containers
       Tag('Docker', [ 'DOCKER' ]),
