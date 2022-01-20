@@ -19,8 +19,7 @@ class Tagger:
       Tag('CSS', [ 'CSS', 'CSS3' ]),
       Tag('JS', [ 'JAVASCRIPT', 'JS' ]),
       Tag('TS', [ 'TYPESCRIPT', 'TS' ]),
-      
-      # Web
+      Tag('Eslint', [ 'ESLINT' ]),
       Tag('AngularJS', [ 'ANGULARJS' ]),
       Tag('Angular', [ 'ANGULAR' ]),
       Tag('ReactJS', [ 'REACT', 'REACTJS' ]),
@@ -31,7 +30,7 @@ class Tagger:
       Tag('Express', [ 'EXPRESS' ]),
       
       # Apis
-      Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs' ]),
+      Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs', "API's" ]),
       Tag('Webservice', [ 'WEB SERVICE', 'WEB SERVICES', 'WEBSERVICE', 'WEBSERVICES' ]),
       Tag('Postman', [ 'POSTMAN' ]),
       
@@ -73,7 +72,7 @@ class Tagger:
       # Databases
       Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'SQL' ]),
       Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
-      Tag('SqlServer', [ 'SQLSERVER' ]),
+      Tag('SqlServer', [ 'SQLSERVER', 'SQL SERVER' ]),
       Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL' ]),
       Tag('Mongo', [ 'MONGODB', 'MONGO' ]),
       Tag('Oracle', [ 'ORACLE' ]),
@@ -105,6 +104,7 @@ class Tagger:
       Tag('Cypress', [ 'CYPRESS' ]),
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
+      Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT' ]),
 
       # Security
       Tag('Pentests', [ 'PENETRATION TESTING', 'PENTESTS' ]),
@@ -113,7 +113,8 @@ class Tagger:
       # Others
       Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS' ]),
       Tag('Git', [ 'GIT', 'GITHUB' ]),
-      Tag('Bundlers', [ 'BUNDLERS', 'WEBPACK', 'BABEL' ]),
+      Tag('Webpack', [ 'WEBPACK' ]),
+      Tag('Babel', [ 'BABEL' ]),
       Tag('Front End', [ 'FRONT-END', 'FRONT END', 'FRONTEND' ]),
       Tag('Message broker', [ 'MENSAGERIAS', 'RABBITMQ', 'AZURESERVICEBUS' ]),
       Tag('Azure', [ 'AZURE' ]),
