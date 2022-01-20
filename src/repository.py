@@ -26,7 +26,8 @@ class Repository():
          remote TEXT,
          company TEXT,
          inclusionDate FLOAT,
-         tags TEXT
+         tags TEXT,
+         differential_tags TEXT
          )
       """)
 
@@ -64,6 +65,7 @@ class Repository():
       job.company = tuple[6]
       job.inclusionDate = tuple[7]
       job.tags = tuple[8].split("|")
+      job.differentialTags = tuple[9].split("|")
       
       return job
     
@@ -100,11 +102,12 @@ class Repository():
       cursor = self.conn.cursor()
       
       tagsStr =  "|".join(job.tags)
+      differTagsStr =  "|".join(job.differentialTags)
       
       cursor.execute("""
-         INSERT INTO job(url, name, type, workplace, department, remote, company, inclusionDate, tags)
-         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-         """, ( job.url, job.name, job.type, job.workplace, job.department, job.remote, job.company, time.time(), tagsStr ))
+         INSERT INTO job(url, name, type, workplace, department, remote, company, inclusionDate, tags, differential_tags)
+         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         """, ( job.url, job.name, job.type, job.workplace, job.department, job.remote, job.company, time.time(), tagsStr, differTagsStr ))
       
       self.conn.commit()
       cursor.close()

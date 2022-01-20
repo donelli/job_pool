@@ -19,6 +19,7 @@ class Job():
    department: str = ''
    remote: str = ''
    tags: List[str] = []
+   differentialTags: List[str] = []
    inclusionDate = ''
    origin: Origin
 
@@ -31,7 +32,8 @@ class Job():
          'department': self.department,
          'remote': self.remote,
          'company': self.company,
-         'tags': self.tags
+         'tags': self.tags,
+         'diferTags': self.differentialTags
       }
 
    def __str__(self):
@@ -42,4 +44,5 @@ class Job():
           ' - Department: ' + self.department + \
           ' - Remote: ' + self.remote + \
           ' - Company: ' + self.company + \
-          ' - Tags: ' + ", ".join(self.tags)
+          ' - Tags: ' + ", ".join(self.tags) + \
+         ' - Differential Tags: ' + ", ".join(self.differentialTags)

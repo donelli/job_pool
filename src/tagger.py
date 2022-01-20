@@ -34,7 +34,7 @@ class Tagger:
       Tag('Postman', [ 'POSTMAN' ]),
       
       # Mobile
-      Tag('Mobile', [ 'MOBILE', 'ANDROID', 'FLUTTER' ]),
+      Tag('Flutter', [ 'FLUTTER' ]),
       Tag('Android', [ 'ANDROID' ]),
       Tag('Kotlin', [ 'KOTLIN' ]),
       Tag('PWA', [ 'PWA' ]),
@@ -45,7 +45,9 @@ class Tagger:
       # Desktop
       Tag('Java', [ 'JAVA' ]),
       Tag('Gradle', [ 'GRADLE' ]),
+      Tag('Maven', [ 'MAVEN' ]),
       Tag('Python', [ 'PYTHON' ]),
+      Tag('Scala', [ 'SCALA' ]),
       Tag('C# / .NET', [ 'C#', '.NET' ]),
       Tag('Golang', [ 'GO', 'GOLANG' ]),
       
@@ -54,7 +56,7 @@ class Tagger:
 
       # Databases
       Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'SQL' ]),
-      Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL' ]),
+      Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
       Tag('SqlServer', [ 'SQLSERVER' ]),
       Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL' ]),
       Tag('Mongo', [ 'MONGODB', 'MONGO' ]),
@@ -66,14 +68,13 @@ class Tagger:
       Tag('Kubernetes', [ 'KUBERNETES' ]),
       
       # Teory
-      Tag('Agile Develop.', [ 'AGEIS', 'SCRUM', 'KANBAN' ]),
+      Tag('Agile Develop.', [ 'AGEIS', 'SCRUM', 'KANBAN', 'METODOLOGIA ÁGIL' ]),
       Tag('Design Patterns', [ 'DESIGN PATTERNS' ]),
       Tag('Clean Code', [ 'CLEAN CODE' ]),
       Tag('Data Structure', [ 'ESTRUTURAS DE DADOS' ]),
       Tag('CI/CD', [ 'CI / CD', 'CI/CD' ]),
       Tag('Project management', [ 'GESTAO DE PROJETOS' ]),
       Tag('Product management', [ 'GESTAO DE PRODUTOS' ]),
-      Tag('Security', [ 'SEGURANCA' ]),
       Tag('Requirements analysis', [ 'ANALISE DE REQUISITOS' ]),
       Tag('Quality analysis', [ 'ANALISTA DE QUALIDADE' ]),
       Tag('Dependence analysis', [ 'GERENCIAMENTO DE DEPENDÊNCIAS' ]),
@@ -87,6 +88,10 @@ class Tagger:
       Tag('Cypress', [ 'CYPRESS' ]),
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
+
+      # Security
+      Tag('Pentests', [ 'PENETRATION TESTING', 'PENTESTS' ]),
+      Tag('Segurança ofensiva', [ 'FERRAMENTAS OFENSIVAS', 'METASPLOIT FRAMEWORK', 'ETTERCAP', 'ACUNETIX', 'NEXPOSE', 'SQLMAP', 'AIRCRACK-NG' ]),
       
       # Others
       Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS' ]),
@@ -102,6 +107,7 @@ class Tagger:
       Tag('AWS', [ 'AWS' ]),
       Tag('ElasticSearch', [ 'ELASTICSEARCH' ]),
       Tag('Power BI', [ 'POWER BI' ]),
+      Tag('Open-source', [ 'OPEN-SOURCE' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),
