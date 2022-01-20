@@ -11,17 +11,17 @@ class GupySearcher():
    
    jobs: List[Job] = []
 
-   def getTags(self, url):
+   def loadTags(self, job: Job) -> None:
 
       helpers.waitRandom()
       
-      request = requests.get(url)
+      request = requests.get(job.url)
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
       description = soup.find('div', attrs={ "class": "description" })
       
-      return Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
+      job.tags = Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
    
    def search(self, companyName, baseUrl, departments = [], workplaces = []):
       
@@ -83,8 +83,6 @@ class GupySearcher():
             
             if not find:
                continue
-         
-         job.tags = self.getTags(job.url)
          
          self.jobs.append(job)
       

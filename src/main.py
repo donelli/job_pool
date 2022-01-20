@@ -86,8 +86,6 @@ allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearc
 
 # TODO netflix -> https://jobs.netflix.com/search
 
-# TODO spotify -> https://www.lifeatspotify.com/jobs
-
 # TODO Uber ?
 
 print("Conectando ao banco de dados...")
@@ -110,6 +108,10 @@ for index, currentJob in enumerate(allJobs):
          spotifySearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.GREENHOUSE:
          greenhouseSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.TRAKSTAR:
+         trakstarSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.GUPY:
+         gupySearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 

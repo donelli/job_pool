@@ -29,7 +29,7 @@ class GreenhouseSearcher():
          
          if jobDescription is None:
             print("Nao tem conteudo: " + job.url)
-            return []
+            return
          
          tags: List[str] = []
          differentialTags: List[str] = []

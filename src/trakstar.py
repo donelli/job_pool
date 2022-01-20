@@ -10,22 +10,21 @@ class TrakstarSearcher():
    
    jobs: List[Job] = []
    
-   def loadTags(self, url):
+   def loadTags(self, job: Job):
       
       helpers.waitRandom()
       
-      request = requests.get(url)
+      request = requests.get(job.url)
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
       jobDescription = soup.find('div', attrs={ 'class': 'jobdesciption' })
       
       if jobDescription is None:
-         print("Nao tem conteudo: " + url)
-         return []
+         print("Nao tem conteudo: " + job.url)
+         return
       
-      return Tagger().generateTags(helpers.removeHtmlTags(jobDescription.encode_contents().decode("utf-8")))
-      
+      job.tags = Tagger().generateTags(helpers.removeHtmlTags(jobDescription.encode_contents().decode("utf-8")))
    
    def search(self, companyName, baseUrl):
       
@@ -55,8 +54,6 @@ class TrakstarSearcher():
          job.type = ""
          job.origin = Origin.TRAKSTAR
          
-         job.tags = self.loadTags(job.url)
-
          self.jobs.append(job)
 
       helpers.waitRandom()
