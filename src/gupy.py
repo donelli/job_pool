@@ -2,7 +2,7 @@
 from typing import List
 from bs4 import BeautifulSoup
 import requests
-from job import Job
+from job import Job, Origin
 import helpers
 
 from tagger import Tagger
@@ -51,6 +51,7 @@ class GupySearcher():
          job.department = department
          job.remote = remote
          job.company = companyName
+         job.origin = Origin.GUPY
          
          if job.remote == 'true':
             job.remote = 'yes'

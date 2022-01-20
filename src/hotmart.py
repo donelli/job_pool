@@ -2,7 +2,7 @@
 from typing import List
 import requests
 import json
-from job import Job
+from job import Job, Origin
 from tagger import Tagger
 import helpers
 
@@ -35,6 +35,7 @@ class HotmartSearcher:
          job.url = 'https://www.hotmart.com/jobs/pt-BR/positions/' + hotmartJob['id']
          job.workplace = hotmartJob['office']['city'] + ' - ' + hotmartJob['office']['country']
          job.department = hotmartJob['area']['title']
+         job.origin = Origin.HOTMART
          
          job.tags = Tagger().generateTags(helpers.removeHtmlTags(hotmartJob['description']))
          

@@ -3,7 +3,7 @@ import json
 from traceback import print_tb
 from typing import List
 import requests
-from job import Job
+from job import Job, Origin
 import helpers
 from bs4 import BeautifulSoup
 
@@ -59,6 +59,7 @@ class SpotifySearcher():
          job.workplace = jobData['location']['location']
          job.type = jobData['job_type']['name']
          job.tags = []
+         job.origin = Origin.SPOTIFY
          
          self.jobs.append(job)
       

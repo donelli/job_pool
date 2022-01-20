@@ -1,7 +1,7 @@
 from typing import List
 from bs4 import BeautifulSoup
 import requests
-from job import Job
+from job import Job, Origin
 import helpers
 from tagger import Tagger
 
@@ -49,6 +49,7 @@ class GreenhouseSearcher():
          job.workplace = workplace
          job.url = link
          job.company = companyName
+         job.origin = Origin.GREENHOUSE
 
          job.tags = self.getTags(link)
          

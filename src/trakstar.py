@@ -2,7 +2,7 @@ from time import sleep
 from typing import List
 from bs4 import BeautifulSoup
 import requests
-from job import Job
+from job import Job, Origin
 import helpers
 from tagger import Tagger
 
@@ -53,6 +53,7 @@ class TrakstarSearcher():
          job.url = link
          job.workplace = workplace
          job.type = ""
+         job.origin = Origin.TRAKSTAR
          
          job.tags = self.loadTags(job.url)
 

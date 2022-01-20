@@ -1,5 +1,13 @@
 
+from enum import Enum, auto
 from typing import List
+
+class Origin(Enum):
+   GREENHOUSE = auto()
+   GUPY = auto()
+   HOTMART = auto()
+   SPOTIFY = auto()
+   TRAKSTAR = auto()
 
 class Job():
    
@@ -12,6 +20,7 @@ class Job():
    remote: str = ''
    tags: List[str] = []
    inclusionDate = ''
+   origin: Origin
 
    def toMap(self):
       return {

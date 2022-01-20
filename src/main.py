@@ -7,7 +7,7 @@ from gupy import GupySearcher
 from greenhouse import GreenhouseSearcher
 from hotmart import HotmartSearcher
 from repository import Repository
-from job import Job
+from job import Job, Origin
 from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
 
@@ -106,7 +106,7 @@ for index, currentJob in enumerate(allJobs):
    if not exists:
       print("Salvando novo emprego: " + currentJob.name + ' - ' + currentJob.company)
       
-      if currentJob.company == 'Spotify':
+      if currentJob.origin == Origin.SPOTIFY:
          spotifySearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
