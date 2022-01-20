@@ -1,5 +1,8 @@
+from ast import If
+from traceback import print_tb
 from typing import List
 from bs4 import BeautifulSoup
+import bs4
 import requests
 from job import Job, Origin
 import helpers
@@ -9,22 +12,69 @@ class GreenhouseSearcher():
    
    jobs: List[Job] = []
 
-   def getTags(self, url):
+   def loadTags(self, job: Job):
          
          helpers.waitRandom()
          
-         request = requests.get(url)
+         request = requests.get(job.url)
          html = request.content
          soup = BeautifulSoup(html, 'html.parser')
          
-         jobDescription = soup.find('div', { 'id': 'content' })
+         # TODO: Buscar corretamente as tags, na pagina tem todos as tecnologias utilizadas pela empresa, alterar para pegar somente o que importa.
+         # https://boards.greenhouse.io/amedigital/jobs/5117595002
 
+         # TODO boa oportunidade para buscar tags que são requisitos, e tags que são diferenciais
+         
+         jobDescription = soup.find('div', { 'id': 'content' })
+         
          if jobDescription is None:
-            print("Nao tem conteudo: " + url)
+            print("Nao tem conteudo: " + job.url)
             return []
          
-         return Tagger().generateTags(helpers.removeHtmlTags(jobDescription.encode_contents().decode("utf-8")))
-   
+         tags: List[str] = []
+         differentialTags: List[str] = []
+         foundRequirements = False
+         foundDifferentials = False
+         
+         for element in jobDescription:
+            
+            content = ""
+            
+            if type(element) is bs4.element.Tag:
+               content = element.get_text()
+            else:
+               content = str(element)
+
+            content = content.strip()
+
+            if content == "":
+               continue
+
+            if "e outros ;)" in content:
+               continue
+
+            if len(content) < 25 and "diferenciais" in content.lower():
+               foundDifferentials = True
+               continue
+
+            if foundDifferentials:
+               
+               if content == "Conhecimento/Experiência em:":
+                  continue
+               
+               differentialTags = Tagger().generateTags(helpers.removeHtmlTags(content))
+               foundDifferentials = False
+               continue
+            
+            newTags = Tagger().generateTags(helpers.removeHtmlTags(content))
+            
+            for tag in newTags:
+               if tag not in tags:
+                  tags.append(tag)
+
+         job.tags = tags
+         job.differentialTags = differentialTags
+
    def search(self, companyName, baseUrl):
       
       print("Buscando empregos da empresa " + companyName + " no Greenhouse...")
@@ -51,9 +101,16 @@ class GreenhouseSearcher():
          job.company = companyName
          job.origin = Origin.GREENHOUSE
 
-         job.tags = self.getTags(link)
-         
          self.jobs.append(job)
          
       helpers.waitRandom()
       
+
+if __name__ == "__main__":
+
+   g = GreenhouseSearcher()
+
+   job = Job()
+   job.url = "https://boards.greenhouse.io/amedigital/jobs/5117595002"
+   
+   print(g.loadTags(job))

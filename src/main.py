@@ -108,6 +108,8 @@ for index, currentJob in enumerate(allJobs):
       
       if currentJob.origin == Origin.SPOTIFY:
          spotifySearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.GREENHOUSE:
+         greenhouseSearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 
