@@ -94,6 +94,10 @@ allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearc
 
 # TODO Uber ?
 
+# Focco ERP: https://oportunidadesfocco.kretos.cc/
+
+# Paypal: https://jobsearch.paypal-corp.com/search?keywords=&facetcountry=br&location=&facetcategory=
+
 print("Conectando ao banco de dados...")
 
 repo = Repository()
