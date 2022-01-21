@@ -131,7 +131,7 @@
                      </tbody>
                   </table>
 
-                  <nav aria-label="Jobs navigation" v-if="currentView == 1">
+                  <nav aria-label="Jobs navigation" v-if="currentView == 1 && paggedJobs.length > 0">
                      <ul class="pagination justify-content-center">
                         
                         <li class="page-item" :class="{ 'disabled': currentPage == 1 }">
