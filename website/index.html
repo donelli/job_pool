@@ -32,35 +32,36 @@
            </button>
            <div class="collapse navbar-collapse" id="navbarText">
              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item">
-                 <a class="nav-link" :class="{ 'active': currentView == 0 }" href="#" @click="changeCurrentView(0)">Search</a>
+                
+               <li class="nav-item" v-for="(name, index) in views">
+                  <a class="nav-link" :class="{ 'active': currentView == index }" href="#" @click="changeCurrentView(index)">{{ name }}</a>
                </li>
-               <li class="nav-item">
-                 <a class="nav-link" :class="{ 'active': currentView == 1 }" href="#" @click="changeCurrentView(1)">Tags analysis</a>
-               </li>
+               
              </ul>
            </div>
          </div>
       </nav>
 
-         <div class="d-flex justify-content-center mt-5" v-if="isLoading || (!isLoading && jobs.length == 0) || error">
-            
-            <div class="spinner-border" role="status" v-if="isLoading">
-            <span class="visually-hidden">Loading...</span>
-            </div>
-
-            <div v-if="!isLoading && !error">
-               Não foram encontrados empregos...
-            </div>
-
-            <div class="text-danger fw-bold" v-if="!isLoading && error">
-               {{ error }}
-            </div>
-            
+      <div class="d-flex justify-content-center mt-5" v-if="isLoading || (!isLoading && jobs.length == 0) || error">
+         
+         <div class="spinner-border" role="status" v-if="isLoading">
+         <span class="visually-hidden">Loading...</span>
          </div>
 
-         <div v-if="!isLoading && jobs.length > 0" class="container-fluid mt-3">
-            <div class="row">
+         <div v-if="!isLoading && !error">
+            Não foram encontrados empregos...
+         </div>
+
+         <div class="text-danger fw-bold" v-if="!isLoading && error">
+            {{ error }}
+         </div>
+         
+      </div>
+
+      <div v-if="!isLoading && jobs.length > 0" class="container-fluid mt-3">
+         <div class="row">
+            <template v-if="currentView != 0">
+
                <div class="col-6">
                   
                   <label>Companies</label>
@@ -71,7 +72,10 @@
                <div class="col-6">
                   
                   <label for="filter">Filter job name and tags</label>
-                  <input type="text" id="filter" class="form-control" v-model="textFilter">
+                  <input type="text" id="filter" class="form-control" :class="{ 'is-invalid': textFilter.length == 1 }" v-model="textFilter" aria-describedby="validationFilterText">
+                  <div id="validationFilterText" class="invalid-feedback">
+                     Please provide a text with more than one character.
+                  </div>
 
                   <br>
 
@@ -80,87 +84,94 @@
                   </button>
                   
                </div>
-               <div class="col-12 mt-3 border-top pt-3">
+               
+               <div class="col-12 border-bottom pt-3"></div>
+               
+            </template>
 
-                  <div v-if="currentView == 0">
-         
-                     <table class="table table-bordered table-hover align-middle" v-if="!isLoading">
-                        <thead class="table-dark">
-                           <tr>
-                              <th style="position: sticky; top: 0">Name</th>
-                              <th style="position: sticky; top: 0">Workplace</th>
-                              <th style="position: sticky; top: 0">Remote</th>
-                              <th colspan="2" style="position: sticky; top: 0">Company</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr v-for="job in paggedJobs">
-                              <td>
-                                 {{ job.name }} {{ job.type ? ` (${job.type})` : '' }}
-                                 
-                                 <div class="mt-2"></div>
-                                 
-                                 <span class="badge bg-primary ms-1" v-for="(tag, index) in job.tags">{{ tag }}</span>
+            <div class="col-12 mt-3">
 
-                                 <div v-if="job.differentialTags && job.differentialTags.length > 0">
-                                    <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.differentialTags">{{ tag }}</span>
-                                 </div>
-                                 
-                              </td>
-                              <td>{{ job.workplace }}</td>
-                              <td>{{ job.remote }}</td>
-                              <td>{{ job.company }}</td>
-                              <td>
-                                 <a target="_blank" :href="job.url" class="btn btn-primary">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                 </a>
-                              </td>
-                           </tr>
-                        </tbody>
-                     </table>
+               <div v-if="currentView == 0" class="text-center">
+                  Comming soon!
+               </div>
 
-                     <nav aria-label="Jobs navigation">
-                        <ul class="pagination justify-content-center">
-                           
-                           <li class="page-item disabled">
-                              <button class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                 <i class="bi bi-arrow-left"></i>
-                              </button>
-                           </li>
-                           
-                           <li v-for="page in totalOfPages" class="page-item" :class="{ 'active': page == currentPage }">
-                              <button class="page-link" @click="currentPage = page">{{ page }}</button>
-                           </li>
+               <div v-if="currentView == 1">
+      
+                  <table class="table table-bordered table-hover align-middle" v-if="!isLoading">
+                     <thead class="table-dark">
+                        <tr>
+                           <th style="position: sticky; top: 0">Name</th>
+                           <th style="position: sticky; top: 0">Workplace</th>
+                           <th style="position: sticky; top: 0">Remote</th>
+                           <th colspan="2" style="position: sticky; top: 0">Company</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr v-for="job in paggedJobs">
+                           <td>
+                              {{ job.name }} {{ job.type ? ` (${job.type})` : '' }}
+                              
+                              <div class="mt-2"></div>
+                              
+                              <span class="badge bg-primary ms-1" v-for="(tag, index) in job.tags">{{ tag }}</span>
+
+                              <div v-if="job.differentialTags && job.differentialTags.length > 0">
+                                 <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.differentialTags">{{ tag }}</span>
+                              </div>
+                              
+                           </td>
+                           <td>{{ job.workplace }}</td>
+                           <td>{{ job.remote }}</td>
+                           <td>{{ job.company }}</td>
+                           <td>
+                              <a target="_blank" :href="job.url" class="btn btn-primary">
+                                 <i class="bi bi-box-arrow-right"></i>
+                              </a>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+
+                  <nav aria-label="Jobs navigation">
+                     <ul class="pagination justify-content-center">
                         
-                           <li class="page-item">
-                              <button class="page-link">
-                                 <i class="bi bi-arrow-right"></i>
-                              </button>
-                           </li>
-                           
-                        </ul>
-                     </nav>
+                        <li class="page-item" :class="{ 'disabled': currentPage == 1 }">
+                           <button class="page-link" @click="currentPage = currentPage - 1">
+                              <i class="bi bi-arrow-left"></i>
+                           </button>
+                        </li>
+                        
+                        <li v-for="page in paginationPages" class="page-item" :class="{ 'active': page == currentPage, 'disabled': page == '...' }">
+                           <button class="page-link" @click="currentPage = page">{{ page }}</button>
+                        </li>
+                        
+                        <li class="page-item" :class="{ 'disabled': currentPage == totalOfPages }">
+                           <button class="page-link" @click="currentPage = currentPage + 1">
+                              <i class="bi bi-arrow-right"></i>
+                           </button>
+                        </li>
+                        
+                     </ul>
+                  </nav>
 
-                  </div>
+               </div>
 
-                  <div v-if="currentView == 1">
-                     
-                     <div id="chart">
-                        <apexchart type="bar" height="600" :options="chartOptions" :series="chartSeries"></apexchart>
-                     </div>
-                     
+               <div v-if="currentView == 2">
+                  
+                  <div id="chart">
+                     <apexchart type="bar" height="500" :options="chartOptions" :series="chartSeries"></apexchart>
                   </div>
                   
                </div>
-               <div class="col-12-mt-4">
+               
+            </div>
+            <div class="col-12-mt-4">
 
-               </div>
             </div>
          </div>
+      </div>
 
    </div>
-      
-    </div>
    
    <script src="app.js"></script>
    

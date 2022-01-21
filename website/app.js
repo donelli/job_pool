@@ -16,7 +16,12 @@ var app = new Vue({
       currentPage: 1,
       totalOfPages: 0,
       itemsPerPage: 10,
-      currentView: 0
+      currentView: 0,
+      views: [
+         'New jobs',
+         'Search',
+         'Tags analysis'
+      ]
    },
    mounted: function () {
       this.loadJobs();
@@ -27,11 +32,11 @@ var app = new Vue({
          if (this.isLoading) {
             return [];
          }
-         
+
          const companyNames = this.selectedCompanies.map(company => company.name);
 
          return this.jobs.filter(job => {
-            return companyNames.includes(job.company) && (!this.textFilter || job.filters.includes(this.textFilter.toLowerCase()));
+            return companyNames.includes(job.company) && (this.textFilter.length < 2 || job.filters.includes(this.textFilter.toLowerCase()));
          });
       },
       paggedJobs: function () {
@@ -123,6 +128,55 @@ var app = new Vue({
 
          return tags.sort((a, b) => b.count - a.count);
 
+      },
+      paginationPages: function() {
+         
+         if (this.totalOfPages >= 10) {
+            
+            const totalOfPages = this.totalOfPages;
+            const currentPage = this.currentPage;
+            const pages = [];
+
+            const addPageIfValid = (page) => {
+               if (page <= totalOfPages && page >= 1) {
+                  pages.push(page);
+               }
+            }
+
+            if (currentPage - 4 > 0) {
+               if (currentPage - 4 == 1) {
+                  pages.push(1);
+               } else {
+                  pages.push(1);
+                  pages.push('...');
+               }
+            }
+            
+            addPageIfValid(currentPage - 3)
+            addPageIfValid(currentPage - 2)
+            addPageIfValid(currentPage - 1)
+
+            pages.push(currentPage);
+
+            addPageIfValid(currentPage + 1)
+            addPageIfValid(currentPage + 2)
+            addPageIfValid(currentPage + 3)
+            
+            if (currentPage + 4 <= totalOfPages) {
+               if (currentPage + 4 == totalOfPages) {
+                  pages.push(totalOfPages);
+               } else {
+                  pages.push('...');
+                  pages.push(totalOfPages);
+               }
+            }
+            
+            return pages
+            
+         }
+
+         return Array.from(Array(this.totalOfPages).keys()).map(v => v + 1);
+         
       }
    },
    methods: {
