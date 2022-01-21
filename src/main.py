@@ -86,7 +86,7 @@ netflixSearcher.search()
 
 nubankSearcher.search()
 
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs()
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
