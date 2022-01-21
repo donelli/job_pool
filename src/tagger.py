@@ -112,7 +112,7 @@ class Tagger:
       
       # Others
       Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS' ]),
-      Tag('Git', [ 'GIT', 'GITHUB' ]),
+      Tag('Git', [ 'GIT' ]),
       Tag('Webpack', [ 'WEBPACK' ]),
       Tag('Babel', [ 'BABEL' ]),
       Tag('Front End', [ 'FRONT-END', 'FRONT END', 'FRONTEND' ]),
