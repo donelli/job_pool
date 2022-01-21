@@ -16,7 +16,8 @@
    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 
-   <script src="https://cdn.jsdelivr.net/npm/vue-google-charts@0.3.3/dist/vue-google-charts.browser.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts@1.6.2/dist/vue-apexcharts.js"></script>
 
 </head>
 <body>
@@ -80,10 +81,9 @@
                            
                            <span class="badge bg-primary ms-1" v-for="(tag, index) in job.tags">{{ tag }}</span>
 
-                           <br v-if="job.differentialTags.length > 0">
-
-                           <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.differentialTags">{{ tag }}</span>
-
+                           <div v-if="job.differentialTags && job.differentialTags.length > 0">
+                              <span class="badge bg-secondary ms-1" v-for="(tag, index) in job.differentialTags">{{ tag }}</span>
+                           </div>
                            
                         </td>
                         <td>{{ job.workplace }}</td>
@@ -100,25 +100,14 @@
                
             </div>
             <div class="col-12-mt-4">
+
+               <hr>
                
-               <h2>Tags</h2>
+               <h2>More common tags</h2>
                
-               <div style="height: 700px;">
-                  <g-chart
-                     style="height: 100%;"
-                     type="ColumnChart"
-                     :data="tagsChartData"
-                  />
+               <div id="chart">
+                  <apexchart type="bar" height="600" :options="chartOptions" :series="chartSeries"></apexchart>
                </div>
-               
-               <!-- <table class="table table-bordered table-hover align-middle">
-                  <tbody>
-                     <tr v-for="tag in filteredTags">
-                        <td>{{ tag.name }}</td>
-                        <td>{{ tag.count }}</td>
-                     </tr>
-                  </tbody>
-               </table> -->
                
             </div>
          </div>

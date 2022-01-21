@@ -65,7 +65,7 @@ class Repository():
       job.company = tuple[6]
       job.inclusionDate = tuple[7]
       job.tags = tuple[8].split("|")
-      job.differentialTags = tuple[9].split("|")
+      job.differentialTags = tuple[9].split("|") if tuple[9] != "" else []
       
       return job
     
