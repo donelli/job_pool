@@ -91,19 +91,17 @@
 
             <div class="col-12 mt-3">
 
-               <div v-if="currentView == 0" class="text-center">
-                  Comming soon!
-               </div>
-
-               <div v-if="currentView == 1">
+               <div v-if="currentView <= 1">
       
                   <table class="table table-bordered table-hover align-middle" v-if="!isLoading">
                      <thead class="table-dark">
                         <tr>
                            <th style="position: sticky; top: 0">Name</th>
-                           <th style="position: sticky; top: 0">Workplace</th>
-                           <th style="position: sticky; top: 0">Remote</th>
-                           <th colspan="2" style="position: sticky; top: 0">Company</th>
+                           <th class="text-center" style="position: sticky; top: 0">Workplace</th>
+                           <th class="text-center" style="position: sticky; top: 0">Remote</th>
+                           <th class="text-center" style="position: sticky; top: 0">Company</th>
+                           <th class="text-center" style="position: sticky; top: 0">Inclusion</th>
+                           <th style="position: sticky; top: 0"></th>
                         </tr>
                      </thead>
                      <tbody>
@@ -120,10 +118,11 @@
                               </div>
                               
                            </td>
-                           <td>{{ job.workplace }}</td>
-                           <td>{{ job.remote }}</td>
-                           <td>{{ job.company }}</td>
-                           <td>
+                           <td class="text-center">{{ job.workplace }}</td>
+                           <td class="text-center">{{ job.remote }}</td>
+                           <td class="text-center">{{ job.company }}</td>
+                           <td class="text-center">{{ job.inclusionDateFormat }}</td>
+                           <td class="text-center">
                               <a target="_blank" :href="job.url" class="btn btn-primary">
                                  <i class="bi bi-box-arrow-right"></i>
                               </a>
@@ -132,7 +131,7 @@
                      </tbody>
                   </table>
 
-                  <nav aria-label="Jobs navigation">
+                  <nav aria-label="Jobs navigation" v-if="currentView == 1">
                      <ul class="pagination justify-content-center">
                         
                         <li class="page-item" :class="{ 'disabled': currentPage == 1 }">

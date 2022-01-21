@@ -12,6 +12,7 @@ var app = new Vue({
       error: '',
       companies: [],
       selectedCompanies: [],
+      recentJobs: [],
       textFilter: '',
       currentPage: 1,
       totalOfPages: 0,
@@ -33,6 +34,10 @@ var app = new Vue({
             return [];
          }
 
+         if (this.currentView == 0) {
+            return this.recentJobs;
+         }
+         
          const companyNames = this.selectedCompanies.map(company => company.name);
 
          return this.jobs.filter(job => {
@@ -40,7 +45,13 @@ var app = new Vue({
          });
       },
       paggedJobs: function () {
-         return this.filteredJobs.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+         
+         if (this.currentView == 0) {
+            return this.filteredJobs;
+         }
+         
+         const firstItem = (this.currentPage - 1) * this.itemsPerPage;
+         return this.filteredJobs.slice(firstItem, firstItem + this.itemsPerPage);
       },
       chartSeries: function() {
          return [{
@@ -180,11 +191,27 @@ var app = new Vue({
       }
    },
    methods: {
+      filterRecentJobs: function () {
+
+         this.recentJobs.splice(0, this.recentJobs.length);
+
+         const newJobsSeconds = Math.floor(Date.now() / 1000) - (1 * 24 * 60 * 60)
+         
+         for (const job of this.jobs) {
+            
+            if (job.inclusionDate > newJobsSeconds) {
+               this.recentJobs.push(job);
+            }
+            
+         }
+         
+      },
       loadJobs: function () {
 
+         
          axios.get('../data/jobs.json')
             .then(resp => {
-
+               
                let companies = [];
                for (const job of resp.data) {
 
@@ -193,6 +220,8 @@ var app = new Vue({
                   }
 
                   job.filters = job.name.toLowerCase() + ' ' + job.tags.join(" ").toLowerCase() + ' ' + job.differentialTags.join(" ").toLowerCase();
+
+                  job.inclusionDateFormat = new Date(job.inclusionDate * 1000).toLocaleString().substring(0, 16);
 
                   let found = false;
 
@@ -224,6 +253,8 @@ var app = new Vue({
                
                this.totalOfPages = Math.ceil(this.jobs.length / this.itemsPerPage);
 
+               this.filterRecentJobs();
+               
             })
             .catch(err => {
                this.error = 'Error loading jobs!';
