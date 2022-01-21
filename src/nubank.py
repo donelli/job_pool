@@ -44,7 +44,9 @@ class NubankSearcher():
       
       tags: List[str] = []
       
-      for element in jobDescription:
+      lisElem = jobDescription.find_all('li')
+      
+      for element in lisElem:
          
          content = ""
          
