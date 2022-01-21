@@ -35,6 +35,8 @@ class Tagger:
       Tag('Bootstrap', [ 'BOOTSTRAP' ]),
       Tag('Foundation', [ 'FOUNDATION', 'FOUNDATIONCSS' ]),
       Tag('Tailwind', [ 'TAILWIND' ]),
+      Tag('Django ', [ 'DJANGO ' ]),
+      Tag('Symfony', [ 'SYMFONY' ]),
       
       # Apis
       Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs', "API's" ]),
@@ -49,6 +51,7 @@ class Tagger:
       Tag('PWA', [ 'PWA' ]),
       Tag('React Native', [ 'REACT NATIVE' ]),
       Tag('Swift', [ 'SWIFT' ]),
+      Tag('SwiftUI', [ 'SWIFTUI' ]),
       Tag('Objective-C', [ 'OBJECTIVE-C', 'OBJECTIVE C' ]),
       Tag('Xamarin', [ 'XAMARIN' ]),
 
@@ -78,7 +81,7 @@ class Tagger:
       Tag('Linux', [ 'LINUX' ]),
 
       # Databases
-      Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL' ]),
+      Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL', 'RELATIONAL DATABASES' ]),
       Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
       Tag('SqlServer', [ 'SQLSERVER', 'SQL SERVER' ]),
       Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL' ]),
@@ -140,6 +143,8 @@ class Tagger:
       Tag('Kafka', [ 'KAFKA' ]),
       Tag('VB.NET', [ 'VB.NET' ]),
       Tag('RPA', [ 'RPA' ]),
+      Tag('ABAP', [ 'ABAP' ]),
+      Tag('OAUTH', [ 'OAUTH', 'OAUTH2' ]),
       Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
 
       # UI
