@@ -6,6 +6,7 @@ from typing import List
 from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
+from netflix import NetflixSearcher
 from repository import Repository
 from job import Job, Origin
 from spotify import SpotifySearcher
@@ -16,6 +17,7 @@ trakstarSearcher      = TrakstarSearcher()
 ameDigitalSearcher = AmeDigitalSearcher()
 hotmartSearcher       = HotmartSearcher()
 spotifySearcher       = SpotifySearcher()
+netflixSearcher       = NetflixSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -78,7 +80,9 @@ hotmartSearcher.search()
 
 spotifySearcher.search()
 
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs
+netflixSearcher.search()
+
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
@@ -104,7 +108,7 @@ for index, currentJob in enumerate(allJobs):
       
       if currentJob.origin == Origin.SPOTIFY:
          spotifySearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.GREENHOUSE:
+      elif currentJob.origin == Origin.AME_DIGITAL:
          ameDigitalSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.TRAKSTAR:
          trakstarSearcher.loadTags(currentJob)

@@ -3,12 +3,13 @@ from enum import Enum, auto
 from typing import List
 
 class Origin(Enum):
-   GREENHOUSE = auto()
+   AME_DIGITAL = auto()
    GUPY = auto()
    HOTMART = auto()
    SPOTIFY = auto()
    TRAKSTAR = auto()
    NETFLIX = auto()
+   NUBANK = auto()
 
 class Job():
    

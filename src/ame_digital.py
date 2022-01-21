@@ -96,7 +96,7 @@ class AmeDigitalSearcher():
          job.workplace = workplace
          job.url = link
          job.company = self.companyName
-         job.origin = Origin.GREENHOUSE
+         job.origin = Origin.AME_DIGITAL
 
          self.jobs.append(job)
          
