@@ -19,7 +19,7 @@ class NetflixSearcher():
    
    locations = [
       ('Remote, United States', 'yes'),
-      ('Alphaville, Brazil', 'no')
+      ('Alphaville, Brazil', '-')
    ]
    
    teams = [
