@@ -97,7 +97,7 @@ class Repository():
       self.conn.commit()
       cursor.close()
 
-   def getRecentJobs(self, days: int):
+   def getRecentJobs(self, days: int) -> List[Job]:
       
       seconds = days * 24 * 60 * 60
 
@@ -107,7 +107,9 @@ class Repository():
       response = [ self.tupleToJob(row) for row in res.fetchall() ]
       cursor.close()
 
-      return response.sort(key=lambda x: x.inclusionDate, reverse=True)
+      response.sort(key=lambda x: x.inclusionDate, reverse=True)
+      
+      return response
     
    def insertJob(self, job: Job) -> None:
       
