@@ -15,9 +15,12 @@ class Tagger:
       
       # Web
       Tag('PHP', [ 'PHP' ]),
+      Tag('Laravel', [ 'LARAVEL' ]),
       Tag('HTML', [ 'HTML', 'HTML5' ]),
       Tag('CSS', [ 'CSS', 'CSS3' ]),
+      Tag('SCSS/SASS', [ 'SCSS', 'SASS' ]),
       Tag('JS', [ 'JAVASCRIPT', 'JS' ]),
+      Tag('JSX', [ 'JSX' ]),
       Tag('TS', [ 'TYPESCRIPT', 'TS' ]),
       Tag('Eslint', [ 'ESLINT' ]),
       Tag('AngularJS', [ 'ANGULARJS' ]),
@@ -28,6 +31,10 @@ class Tagger:
       Tag('WebSockets', [ 'WEBSOCKETS' ]),
       Tag('Next.js', [ 'NEXT.JS', 'NEXTJS' ]),
       Tag('Express', [ 'EXPRESS' ]),
+      Tag('Svelte', [ 'SVELTE' ]),
+      Tag('Bootstrap', [ 'BOOTSTRAP' ]),
+      Tag('Foundation', [ 'FOUNDATION', 'FOUNDATIONCSS' ]),
+      Tag('Tailwind', [ 'TAILWIND' ]),
       
       # Apis
       Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs', "API's" ]),
@@ -81,6 +88,7 @@ class Tagger:
       Tag('Big Data', [ 'BIG DATA' ]),
       Tag('DynamoDB', [ 'DYNAMODB' ]),
       Tag('Datomic', [ 'DATOMIC' ]),
+      Tag('Redis', [ 'REDIS', 'REDISDB' ]),
 
       # Containers
       Tag('Docker', [ 'DOCKER' ]),
