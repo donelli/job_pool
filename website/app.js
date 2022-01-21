@@ -140,6 +140,9 @@ var app = new Vue({
          return tags.sort((a, b) => b.count - a.count);
 
       },
+      totalOfPages: function () {
+         return Math.ceil(this.filteredJobs.length / this.itemsPerPage);
+      },
       paginationPages: function() {
          
          if (this.totalOfPages >= 10) {
@@ -252,8 +255,6 @@ var app = new Vue({
                this.companies = companies;
                this.jobs = resp.data;
                
-               this.totalOfPages = Math.ceil(this.jobs.length / this.itemsPerPage);
-
                this.filterRecentJobs();
                
             })
