@@ -10,6 +10,7 @@ class Origin(Enum):
    TRAKSTAR = auto()
    NETFLIX = auto()
    NUBANK = auto()
+   SAP = auto()
 
 class Job():
    

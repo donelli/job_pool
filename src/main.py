@@ -10,6 +10,7 @@ from netflix import NetflixSearcher
 from nubank import NubankSearcher
 from repository import Repository
 from job import Job, Origin
+from sap import SapSearcher
 from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
 
@@ -20,6 +21,7 @@ hotmartSearcher    = HotmartSearcher()
 spotifySearcher    = SpotifySearcher()
 netflixSearcher    = NetflixSearcher()
 nubankSearcher     = NubankSearcher()
+sapSearcher        = SapSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -86,7 +88,11 @@ netflixSearcher.search()
 
 nubankSearcher.search()
 
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs
+sapSearcher.search()
+
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
+   hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
+   sapSearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
@@ -124,6 +130,8 @@ for index, currentJob in enumerate(allJobs):
          gupySearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.NUBANK:
          nubankSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.SAP:
+         sapSearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 
