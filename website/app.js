@@ -15,7 +15,8 @@ var app = new Vue({
       textFilter: '',
       currentPage: 1,
       totalOfPages: 0,
-      itemsPerPage: 10
+      itemsPerPage: 10,
+      currentView: 0
    },
    mounted: function () {
       this.loadJobs();
@@ -177,6 +178,9 @@ var app = new Vue({
       clearFilters: function () {
          this.selectedCompanies = [];
          this.textFilter = '';
+      },
+      changeCurrentView: function(view) {
+         this.currentView = view;
       }
    }
 })
