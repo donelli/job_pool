@@ -126,6 +126,7 @@ class Tagger:
       Tag('ElasticSearch', [ 'ELASTICSEARCH' ]),
       Tag('Power BI', [ 'POWER BI' ]),
       Tag('Open-source', [ 'OPEN-SOURCE' ]),
+      Tag('Kafka', [ 'KAFKA' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),
