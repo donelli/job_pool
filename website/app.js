@@ -20,7 +20,8 @@ var app = new Vue({
       views: [
          'New jobs',
          'Search',
-         'Tags analysis'
+         'Tags analysis',
+         'Skill Matcher'
       ]
    },
    mounted: function () {

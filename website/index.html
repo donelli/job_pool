@@ -60,7 +60,7 @@
 
       <div v-if="!isLoading && jobs.length > 0" class="container-fluid mt-3">
          <div class="row">
-            <template v-if="currentView != 0">
+            <template v-if="currentView == 1 || currentView == 2">
 
                <div class="col-6">
                   
@@ -161,6 +161,10 @@
                      <apexchart type="bar" height="500" :options="chartOptions" :series="chartSeries"></apexchart>
                   </div>
                   
+               </div>
+
+               <div v-if="currentView == 3" class="text-center">
+                  Coming soon...
                </div>
                
             </div>
