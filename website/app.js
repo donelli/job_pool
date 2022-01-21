@@ -40,7 +40,7 @@ var app = new Vue({
       chartSeries: function() {
          return [{
             name: 'Tag count',
-            data: this.filteredTags.slice(0, 30).map(t => t.count) // [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+            data: this.filteredTags.slice(0, 30).map(t => t.count)
          }] 
       },
       chartOptions: function () {
@@ -51,7 +51,7 @@ var app = new Vue({
             },
    
             xaxis: {
-               categories: this.filteredTags.slice(0, 30).map(t => t.name), // ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+               categories: this.filteredTags.slice(0, 30).map(t => t.name),
                position: 'bottom',
                axisBorder: {
                   show: false
@@ -94,6 +94,10 @@ var app = new Vue({
             
             for (const tag of [ ...job.tags, ...job.differentialTags ]) {
 
+               if (!tag) {
+                  continue;
+               }
+               
                let found = false;
 
                for (const tagObj of tags) {
