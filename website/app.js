@@ -15,7 +15,6 @@ var app = new Vue({
       recentJobs: [],
       textFilter: '',
       currentPage: 1,
-      totalOfPages: 0,
       itemsPerPage: 10,
       currentView: 0,
       views: [
