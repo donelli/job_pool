@@ -193,21 +193,22 @@ var app = new Vue({
    methods: {
       filterRecentJobs: function () {
 
-         this.recentJobs.splice(0, this.recentJobs.length);
-
+         const recentJobs = [];
+         
          const newJobsSeconds = Math.floor(Date.now() / 1000) - (1 * 24 * 60 * 60)
          
          for (const job of this.jobs) {
             
             if (job.inclusionDate > newJobsSeconds) {
-               this.recentJobs.push(job);
+               recentJobs.push(job);
             }
             
          }
+
+         this.recentJobs = recentJobs.reverse();
          
       },
       loadJobs: function () {
-
          
          axios.get('../data/jobs.json')
             .then(resp => {
