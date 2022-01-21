@@ -149,4 +149,13 @@ jsonData = json.dumps(jobs, indent=2, default=vars)
 with open("./data/jobs.json", "w") as f:
    f.write(jsonData)
 
+print("Gerando JSON de novos empregos para o website...")
+
+recentJobs = repo.getRecentJobs(days = 1)
+
+jsonData = json.dumps(recentJobs, indent=2, default=vars)
+
+with open("./data/recent_jobs.json", "w") as f:
+   f.write(jsonData)
+
 repo.closeDb()

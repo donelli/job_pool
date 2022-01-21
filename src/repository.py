@@ -96,6 +96,18 @@ class Repository():
       cursor.execute('DELETE FROM job WHERE url = :url', { "url": jobUrl })
       self.conn.commit()
       cursor.close()
+
+   def getRecentJobs(self, days: int):
+      
+      seconds = days * 24 * 60 * 60
+
+      cursor = self.conn.cursor()
+      res = cursor.execute("SELECT * FROM job WHERE inclusionDate > ?", [ time.time() - seconds ])
+      
+      response = [ self.tupleToJob(row) for row in res.fetchall() ]
+      cursor.close()
+
+      return response.sort(key=lambda x: x.inclusionDate, reverse=True)
     
    def insertJob(self, job: Job) -> None:
       
