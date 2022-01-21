@@ -65,12 +65,13 @@ class Tagger:
       Tag('Erlang', [ 'ERLANG' ]),
       Tag('Julia', [ 'JULIA' ]),
       Tag('OCaml', [ 'OCAML' ]),
-            
+      Tag('R lang', [ 'R' ]),
+      
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
 
       # Databases
-      Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'SQL' ]),
+      Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL' ]),
       Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
       Tag('SqlServer', [ 'SQLSERVER', 'SQL SERVER' ]),
       Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL' ]),
@@ -78,6 +79,8 @@ class Tagger:
       Tag('Oracle', [ 'ORACLE' ]),
       Tag('GraphQL', [ 'GRAPHQL' ]),
       Tag('Big Data', [ 'BIG DATA' ]),
+      Tag('DynamoDB', [ 'DYNAMODB' ]),
+      Tag('Datomic', [ 'DATOMIC' ]),
 
       # Containers
       Tag('Docker', [ 'DOCKER' ]),
@@ -127,6 +130,9 @@ class Tagger:
       Tag('Power BI', [ 'POWER BI' ]),
       Tag('Open-source', [ 'OPEN-SOURCE' ]),
       Tag('Kafka', [ 'KAFKA' ]),
+      Tag('VB.NET', [ 'VB.NET' ]),
+      Tag('RPA', [ 'RPA' ]),
+      Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),
@@ -139,6 +145,9 @@ class Tagger:
       self.wordRe = re.compile('\\w')
    
    def generateTags(self, text: str) -> List[str]:
+      
+      # TODO KAFKA tag not found
+      # https://boards.greenhouse.io/nubank/jobs/2569175
       
       text = unidecode(text.upper())
       
