@@ -4,20 +4,18 @@ from time import sleep, time
 from traceback import print_tb
 from typing import List
 from gupy import GupySearcher
-from greenhouse import GreenhouseSearcher
+from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
-from netflix import NetflixSearcher
 from repository import Repository
 from job import Job, Origin
 from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
 
-gupySearcher         = GupySearcher()
-trakstarSearcher     = TrakstarSearcher()
-greenhouseSearcher   = GreenhouseSearcher()
-hotmartSearcher      = HotmartSearcher()
-spotifySearcher      = SpotifySearcher()
-netflixSearcher      = NetflixSearcher()
+gupySearcher          = GupySearcher()
+trakstarSearcher      = TrakstarSearcher()
+ameDigitalSearcher = AmeDigitalSearcher()
+hotmartSearcher       = HotmartSearcher()
+spotifySearcher       = SpotifySearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -74,15 +72,13 @@ gupySearcher.search(
 
 trakstarSearcher.search('Globo', 'https://vempraglobo.hire.trakstar.com/?q=&limit=1000')
 
-greenhouseSearcher.search('Ame Digital', 'https://boards.greenhouse.io/amedigital')
+ameDigitalSearcher.search()
 
 hotmartSearcher.search()
 
 spotifySearcher.search()
 
-netflixSearcher.search()
-
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + greenhouseSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs
+allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + hotmartSearcher.jobs + spotifySearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
@@ -109,7 +105,7 @@ for index, currentJob in enumerate(allJobs):
       if currentJob.origin == Origin.SPOTIFY:
          spotifySearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.GREENHOUSE:
-         greenhouseSearcher.loadTags(currentJob)
+         ameDigitalSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.TRAKSTAR:
          trakstarSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.GUPY:

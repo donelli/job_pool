@@ -8,9 +8,12 @@ from job import Job, Origin
 import helpers
 from tagger import Tagger
 
-class GreenhouseSearcher():
+class AmeDigitalSearcher():
    
    jobs: List[Job] = []
+
+   companyName = 'Ame Digital'
+   baseUrl     = 'https://boards.greenhouse.io/amedigital'
 
    def loadTags(self, job: Job):
          
@@ -20,11 +23,6 @@ class GreenhouseSearcher():
          html = request.content
          soup = BeautifulSoup(html, 'html.parser')
          
-         # TODO: Buscar corretamente as tags, na pagina tem todos as tecnologias utilizadas pela empresa, alterar para pegar somente o que importa.
-         # https://boards.greenhouse.io/amedigital/jobs/5117595002
-
-         # TODO boa oportunidade para buscar tags que são requisitos, e tags que são diferenciais
-         
          jobDescription = soup.find('div', { 'id': 'content' })
          
          if jobDescription is None:
@@ -33,7 +31,6 @@ class GreenhouseSearcher():
          
          tags: List[str] = []
          differentialTags: List[str] = []
-         foundRequirements = False
          foundDifferentials = False
          
          for element in jobDescription:
@@ -75,11 +72,11 @@ class GreenhouseSearcher():
          job.tags = tags
          job.differentialTags = differentialTags
 
-   def search(self, companyName, baseUrl):
+   def search(self):
       
-      print("Buscando empregos da empresa " + companyName + " no Greenhouse...")
+      print("Buscando empregos da empresa " + self.companyName + " no Greenhouse...")
       
-      request = requests.get(baseUrl)
+      request = requests.get(self.baseUrl)
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -90,7 +87,7 @@ class GreenhouseSearcher():
          jobUrl = jobDiv.find('a')['href']
          barPos = jobUrl.index('/', 1)
          
-         link = baseUrl + jobUrl[barPos:]
+         link = self.baseUrl + jobUrl[barPos:]
          workplace = jobDiv.find('span', attrs={ 'class': 'location' }).encode_contents().decode("utf-8")
          name = jobDiv.find('a').encode_contents().decode("utf-8")
          
@@ -98,19 +95,10 @@ class GreenhouseSearcher():
          job.name = name
          job.workplace = workplace
          job.url = link
-         job.company = companyName
+         job.company = self.companyName
          job.origin = Origin.GREENHOUSE
 
          self.jobs.append(job)
          
       helpers.waitRandom()
       
-
-if __name__ == "__main__":
-
-   g = GreenhouseSearcher()
-
-   job = Job()
-   job.url = "https://boards.greenhouse.io/amedigital/jobs/5117595002"
-   
-   print(g.loadTags(job))
