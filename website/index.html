@@ -73,7 +73,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr v-for="job in filteredJobs">
+                     <tr v-for="job in paggedJobs">
                         <td>
                            {{ job.name }} {{ job.type ? ` (${job.type})` : '' }}
                            
@@ -97,6 +97,28 @@
                      </tr>
                   </tbody>
                </table>
+
+               <nav aria-label="Jobs navigation">
+                  <ul class="pagination justify-content-center">
+                     
+                     <li class="page-item disabled">
+                        <button class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                           <i class="bi bi-arrow-left"></i>
+                        </button>
+                     </li>
+                     
+                     <li v-for="page in totalOfPages" class="page-item" :class="{ 'active': page == currentPage }">
+                        <button class="page-link" @click="currentPage = page">{{ page }}</button>
+                     </li>
+                  
+                     <li class="page-item">
+                        <button class="page-link">
+                           <i class="bi bi-arrow-right"></i>
+                        </button>
+                     </li>
+                     
+                  </ul>
+               </nav>
                
             </div>
             <div class="col-12-mt-4">

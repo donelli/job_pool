@@ -13,6 +13,9 @@ var app = new Vue({
       companies: [],
       selectedCompanies: [],
       textFilter: '',
+      currentPage: 1,
+      totalOfPages: 0,
+      itemsPerPage: 10
    },
    mounted: function () {
       this.loadJobs();
@@ -29,6 +32,9 @@ var app = new Vue({
          return this.jobs.filter(job => {
             return companyNames.includes(job.company) && (!this.textFilter || job.filters.includes(this.textFilter.toLowerCase()));
          });
+      },
+      paggedJobs: function () {
+         return this.filteredJobs.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
       },
       chartSeries: function() {
          return [{
@@ -156,6 +162,9 @@ var app = new Vue({
 
                this.companies = companies;
                this.jobs = resp.data;
+               
+               this.totalOfPages = Math.ceil(this.jobs.length / this.itemsPerPage);
+
             })
             .catch(err => {
                this.error = 'Error loading jobs!';
