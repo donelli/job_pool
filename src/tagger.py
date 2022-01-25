@@ -76,6 +76,8 @@ class Tagger:
       Tag('Julia', [ 'JULIA' ]),
       Tag('OCaml', [ 'OCAML' ]),
       Tag('R lang', [ 'R' ]),
+      Tag('Fiori', [ 'FIORI' ]),
+      Tag('ABAP', [ 'ABAP' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
@@ -102,14 +104,14 @@ class Tagger:
       Tag('Design Patterns', [ 'DESIGN PATTERNS' ]),
       Tag('Clean Code', [ 'CLEAN CODE' ]),
       Tag('Data Structure', [ 'ESTRUTURAS DE DADOS' ]),
-      Tag('CI/CD', [ 'CI / CD', 'CI/CD' ]),
+      Tag('CI/CD', [ 'CI / CD', 'CI/CD', 'CD / I' ]),
       Tag('Project management', [ 'GESTAO DE PROJETOS' ]),
       Tag('Product management', [ 'GESTAO DE PRODUTOS' ]),
       Tag('Requirements analysis', [ 'ANALISE DE REQUISITOS' ]),
       Tag('Quality analysis', [ 'ANALISTA DE QUALIDADE' ]),
       Tag('Dependence analysis', [ 'GERENCIAMENTO DE DEPENDÊNCIAS' ]),
       Tag('Distributed systems', [ 'SISTEMAS DISTRIBUÍDOS' ]),
-      Tag('Microservices', [ 'MICROSSERVIÇOS', 'MICRO SERVIÇOS' ]),
+      Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS' ]),
       
       # Tests
       Tag('Unit testing', [ 'TESTES UNITARIOS' ]),
@@ -118,7 +120,7 @@ class Tagger:
       Tag('Cypress', [ 'CYPRESS' ]),
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
-      Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT' ]),
+      Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT', 'DESENVOLVIMENTO ORIENTADO A TESTES' ]),
 
       # Security
       Tag('Pentests', [ 'PENETRATION TESTING', 'PENTESTS' ]),
@@ -137,6 +139,8 @@ class Tagger:
       Tag('Pipelines', [ 'PIPELINES' ]),
       Tag('Azure Datafactory', [ 'AZURE DATAFACTORY' ]),
       Tag('AWS', [ 'AWS' ]),
+      Tag('GCP', [ 'GCP', 'GOOGLE CLOUD' ]),
+      Tag('GCP', [ 'i18n', 'I18N' ]),
       Tag('ElasticSearch', [ 'ELASTICSEARCH' ]),
       Tag('Power BI', [ 'POWER BI' ]),
       Tag('Open-source', [ 'OPEN-SOURCE' ]),
