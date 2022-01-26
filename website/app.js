@@ -198,7 +198,8 @@ var app = new Vue({
 
          const recentJobs = [];
          
-         const newJobsSeconds = Math.floor(Date.now() / 1000) - (1 * 24 * 60 * 60)
+         // 3 days
+         const newJobsSeconds = Math.floor(Date.now() / 1000) - (3 * 24 * 60 * 60)
          
          for (const job of this.jobs) {
             
