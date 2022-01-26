@@ -150,7 +150,7 @@ availableJobsUrls = repo.getAllJobsUrls()
 
 for index, url in enumerate(availableJobsUrls):
 
-   print(" Processando " + str(index) + " de " + str(len(allJobs)))
+   print(" Processando " + str(index) + " de " + str(len(availableJobsUrls)))
    
    isAvailable = False
 
