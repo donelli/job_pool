@@ -12,6 +12,7 @@ class Origin(Enum):
    NUBANK = auto()
    SAP = auto()
    PAYPAL = auto()
+   WHATSAPP = auto()
 
 class Job():
    

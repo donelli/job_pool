@@ -14,6 +14,7 @@ from sap import SapSearcher
 from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
 from paypal import PaypalSearcher
+from whatsapp import WhatsAppSearcher
 
 gupySearcher       = GupySearcher()
 trakstarSearcher   = TrakstarSearcher()
@@ -24,6 +25,7 @@ netflixSearcher    = NetflixSearcher()
 nubankSearcher     = NubankSearcher()
 sapSearcher        = SapSearcher()
 paypalSearcher     = PaypalSearcher()
+whatsAppSearcher   = WhatsAppSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -95,9 +97,11 @@ sapSearcher.search()
 
 paypalSearcher.search()
 
+whatsAppSearcher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs + paypalSearcher.jobs
+   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -108,6 +112,8 @@ todayAvailableJobsUrl: List[str] = []
 # TODO Uber ?
 
 # Focco ERP: https://oportunidadesfocco.kretos.cc/
+
+# https://tractian.com/carreiras/vagas
 
 print("Conectando ao banco de dados...")
 
@@ -141,6 +147,8 @@ for index, currentJob in enumerate(allJobs):
          sapSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.PAYPAL:
          paypalSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.WHATSAPP:
+         whatsAppSearcher.loadDetais(currentJob)
 
       repo.insertJob(currentJob)
 
