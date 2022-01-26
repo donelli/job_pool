@@ -37,11 +37,13 @@ class Tagger:
       Tag('Tailwind', [ 'TAILWIND' ]),
       Tag('Django ', [ 'DJANGO ' ]),
       Tag('Symfony', [ 'SYMFONY' ]),
+      Tag('Webhooks', [ 'WEBHOOKS' ]),
       
       # Apis
       Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs', "API's" ]),
       Tag('Webservice', [ 'WEB SERVICE', 'WEB SERVICES', 'WEBSERVICE', 'WEBSERVICES' ]),
       Tag('Postman', [ 'POSTMAN' ]),
+      Tag('SOAP', [ 'SOAP' ]),
       
       # Mobile
       Tag('Flutter', [ 'FLUTTER' ]),
