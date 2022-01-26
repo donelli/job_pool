@@ -13,6 +13,7 @@ from job import Job, Origin
 from sap import SapSearcher
 from spotify import SpotifySearcher
 from trakstar import TrakstarSearcher
+from paypal import PaypalSearcher
 
 gupySearcher       = GupySearcher()
 trakstarSearcher   = TrakstarSearcher()
@@ -22,6 +23,7 @@ spotifySearcher    = SpotifySearcher()
 netflixSearcher    = NetflixSearcher()
 nubankSearcher     = NubankSearcher()
 sapSearcher        = SapSearcher()
+paypalSearcher     = PaypalSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -90,9 +92,11 @@ nubankSearcher.search()
 
 sapSearcher.search()
 
+paypalSearcher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs
+   sapSearcher.jobs + paypalSearcher.jobs
 
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
@@ -101,8 +105,6 @@ allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearc
 # TODO Uber ?
 
 # Focco ERP: https://oportunidadesfocco.kretos.cc/
-
-# Paypal: https://jobsearch.paypal-corp.com/search?keywords=&facetcountry=br&location=&facetcategory=
 
 print("Conectando ao banco de dados...")
 
@@ -132,6 +134,8 @@ for index, currentJob in enumerate(allJobs):
          nubankSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.SAP:
          sapSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.PAYPAL:
+         paypalSearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 

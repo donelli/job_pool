@@ -11,6 +11,7 @@ class Origin(Enum):
    NETFLIX = auto()
    NUBANK = auto()
    SAP = auto()
+   PAYPAL = auto()
 
 class Job():
    
