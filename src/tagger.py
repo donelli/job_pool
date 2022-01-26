@@ -80,6 +80,7 @@ class Tagger:
       Tag('R lang', [ 'R' ]),
       Tag('Fiori', [ 'FIORI' ]),
       Tag('ABAP', [ 'ABAP' ]),
+      Tag('Shell', [ 'SHELL', 'SH' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
@@ -169,6 +170,11 @@ class Tagger:
       # https://boards.greenhouse.io/nubank/jobs/2569175
       
       text = unidecode(text.upper())
+
+      # Remove some terms that messes up the search of the Go tag
+      text = text.replace('GO WRONG', '')
+      text = text.replace('GO TO MARKET', '')
+      text = text.replace('GO-TO-MARKET', '')
       
       tags: List[str] = []
       
