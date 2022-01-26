@@ -99,6 +99,8 @@ allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearc
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
    sapSearcher.jobs + paypalSearcher.jobs
 
+todayAvailableJobsUrl: List[str] = []
+
 # TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
 
 # TODO google  -> https://careers.google.com/jobs/results/
@@ -117,6 +119,8 @@ print("Processando novos empregos...")
 for index, currentJob in enumerate(allJobs):
    
    print(" Processando " + str(index) + " de " + str(len(allJobs)))
+   
+   todayAvailableJobsUrl.append(currentJob.url)
    
    exists = repo.jobUrlExists(currentJob.url)
 
@@ -150,7 +154,7 @@ for index, url in enumerate(availableJobsUrls):
    
    isAvailable = False
 
-   if url in availableJobsUrls:
+   if url in todayAvailableJobsUrl:
       isAvailable = True
 
    if not isAvailable:
