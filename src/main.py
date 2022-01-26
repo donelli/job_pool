@@ -16,6 +16,35 @@ from trakstar import TrakstarSearcher
 from paypal import PaypalSearcher
 from whatsapp import WhatsAppSearcher
 
+
+def isValidJob(job: Job) -> bool:
+
+   if len(job.tags) > 0:
+      return True
+   
+   if "Engineer" in job.name or "Software" in job.name or "Analyst" in job.name or "Engenh" in job.name or "Desenvolvedor" in job.name or "SAC" in job.name:
+      return True
+   
+   if "Law " in job.name:
+      return False
+   
+   if "Market Specialist" in job.name:
+      return False
+
+   if "Marketing " in job.name:
+      return False
+
+   if "Intern " in job.name:
+      return False
+
+   if "Estagiário" in job.name or "Estágio" in job.name:
+      return False
+
+   if "Talent" in job.name:
+      return False
+
+   return True
+
 gupySearcher       = GupySearcher()
 trakstarSearcher   = TrakstarSearcher()
 ameDigitalSearcher = AmeDigitalSearcher()
@@ -125,6 +154,10 @@ print("Processando novos empregos...")
 for index, currentJob in enumerate(allJobs):
    
    print(" Processando " + str(index) + " de " + str(len(allJobs)))
+
+   if not isValidJob(currentJob):
+      print(" ---> Ignorado")
+      continue
    
    todayAvailableJobsUrl.append(currentJob.url)
    
