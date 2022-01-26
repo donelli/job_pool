@@ -34,13 +34,16 @@ def isValidJob(job: Job) -> bool:
    if "Marketing " in job.name:
       return False
 
-   if "Intern " in job.name:
+   if "Intern " in job.name or job.name.endswith(" Intern"):
       return False
 
    if "Estagiário" in job.name or "Estágio" in job.name:
       return False
 
    if "Talent" in job.name:
+      return False
+
+   if "Atendimento" in job.name or "SAC" in job.name or "CRM" in job.name:
       return False
 
    return True
