@@ -47,7 +47,8 @@ gupySearcher.search(
 
 gupySearcher.search(
    'TOTVS',
-   'https://totvs.gupy.io/'
+   'https://totvs.gupy.io/',
+   [ 'Tech | Frame, Engenharia e  Desenvolvimento', 'Tech | Segmentos, Financial e Digital', 'Tech | TI' ]
 )
 
 gupySearcher.search(
