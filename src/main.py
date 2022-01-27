@@ -22,7 +22,7 @@ def isValidJob(job: Job) -> bool:
    if len(job.tags) > 0:
       return True
    
-   if "Engineer" in job.name or "Software" in job.name or "Analyst" in job.name or "Engenh" in job.name or "Desenvolvedor" in job.name or "SAC" in job.name:
+   if "Engineer" in job.name or "Software" in job.name or "Analyst" in job.name or "Engenh" in job.name or "Desenvolvedor" in job.name:
       return True
    
    if "Law " in job.name:
