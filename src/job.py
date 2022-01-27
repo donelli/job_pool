@@ -13,6 +13,7 @@ class Origin(Enum):
    SAP = auto()
    PAYPAL = auto()
    WHATSAPP = auto()
+   TRACTIAN = auto()
 
 class Job():
    

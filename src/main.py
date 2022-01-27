@@ -1,7 +1,5 @@
 
 import json
-from time import sleep, time
-from traceback import print_tb
 from typing import List
 from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
@@ -12,6 +10,7 @@ from repository import Repository
 from job import Job, Origin
 from sap import SapSearcher
 from spotify import SpotifySearcher
+from tractian import TractianSearcher
 from trakstar import TrakstarSearcher
 from paypal import PaypalSearcher
 from whatsapp import WhatsAppSearcher
@@ -58,6 +57,7 @@ nubankSearcher     = NubankSearcher()
 sapSearcher        = SapSearcher()
 paypalSearcher     = PaypalSearcher()
 whatsAppSearcher   = WhatsAppSearcher()
+tractianSearcher   = TractianSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -131,9 +131,11 @@ paypalSearcher.search()
 
 whatsAppSearcher.search()
 
+tractianSearcher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs
+   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -144,8 +146,6 @@ todayAvailableJobsUrl: List[str] = []
 # TODO Uber ?
 
 # Focco ERP: https://oportunidadesfocco.kretos.cc/
-
-# https://tractian.com/carreiras/vagas
 
 print("Conectando ao banco de dados...")
 
