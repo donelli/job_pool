@@ -82,6 +82,7 @@ class Tagger:
       Tag('Fiori', [ 'FIORI' ]),
       Tag('ABAP', [ 'ABAP' ]),
       Tag('Shell', [ 'SHELL', 'SH' ]),
+      Tag('Springboot', [ 'SPRINGBOOT', 'SPRING BOOT' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
