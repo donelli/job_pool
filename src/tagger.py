@@ -178,6 +178,7 @@ class Tagger:
       text = text.replace('GO WRONG', '')
       text = text.replace('GO TO MARKET', '')
       text = text.replace('GO-TO-MARKET', '')
+      text = text.replace('GO THROUGH', '')
       
       tags: List[str] = []
       
