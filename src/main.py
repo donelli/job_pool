@@ -4,6 +4,7 @@ from typing import List
 from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
+from ibm import IbmSearcher
 from netflix import NetflixSearcher
 from nubank import NubankSearcher
 from repository import Repository
@@ -58,6 +59,7 @@ sapSearcher        = SapSearcher()
 paypalSearcher     = PaypalSearcher()
 whatsAppSearcher   = WhatsAppSearcher()
 tractianSearcher   = TractianSearcher()
+ibmSearcher        = IbmSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -133,9 +135,11 @@ whatsAppSearcher.search()
 
 tractianSearcher.search()
 
+ibmSearcher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs
+   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -185,6 +189,8 @@ for index, currentJob in enumerate(allJobs):
          paypalSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.WHATSAPP:
          whatsAppSearcher.loadDetais(currentJob)
+      elif currentJob.origin == Origin.IBM:
+         ibmSearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 
