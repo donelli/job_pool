@@ -46,7 +46,9 @@ class IbmSearcher():
       if not description:
          return
       
-      job.tags = Tagger().generateTags(description.get_text())
+      content = helpers.removeSpacesAndNewLines(helpers.removeHtmlTags(" ".join(str(tag) for tag in description.contents)))
+      
+      job.tags = Tagger().generateTags(content)
       
       helpers.waitRandom()
    
@@ -115,3 +117,15 @@ class IbmSearcher():
             categories[result['primary_category']] += 1
 
       helpers.waitRandom()
+
+
+if __name__ == "__main__":
+   searcher = IbmSearcher()
+   
+   job = Job()
+   job.url = 'https://careers.ibm.com/job/14133393/application-developer-experience-back-end-s-o-paulo-br/?codes=IBM_CareerWebSite'
+
+   searcher.loadTags(job)
+
+   print(job)
+   
