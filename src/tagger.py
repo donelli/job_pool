@@ -134,6 +134,7 @@ class Tagger:
       Tag('Tests', [ 'PLANO DE TESTES', 'CENARIOS DE TESTE' ]),
       Tag('Cypress', [ 'CYPRESS' ]),
       Tag('Puppet', [ 'PUPPET' ]),
+      Tag('Selenium', [ 'SELENIUM' ]),
       Tag('Ansible', [ 'ANSIBLE' ]),
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
