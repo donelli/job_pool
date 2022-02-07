@@ -5,6 +5,9 @@ import unicodedata
 import datetime
 import re
 import pyuser_agent
+import shlex
+import json
+import subprocess
 
 CLEANR = re.compile('<.*?>') 
 SPACESR = re.compile("\s{2,}")
@@ -40,3 +43,19 @@ def getRandomRequestHeaders():
   }
 
   return headers
+
+def performGetCurl(url: str):
+  
+  # Make sure that cURL has Silent mode (--silent) activated
+  # otherwise we receive progress data inside err message later
+  cURL = r"""curl """ + url
+
+  lCmd = shlex.split(cURL) # Splits cURL into an array
+
+  p = subprocess.Popen(lCmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  out, err = p.communicate() # Get the output and the err message
+
+  json_data = out.decode("utf-8")
+
+  return json_data
+
