@@ -14,7 +14,7 @@ class TrakstarSearcher():
       
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -30,7 +30,7 @@ class TrakstarSearcher():
       
       print("Buscando empregos da empresa " + companyName + " no Trakstar...")
       
-      request = requests.get(baseUrl)
+      request = requests.get(baseUrl, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
 

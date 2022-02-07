@@ -20,7 +20,7 @@ class HotmartSearcher:
    
    def search(self):
       
-      resp = requests.get(self.apiUrl)
+      resp = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
       data = json.loads(resp.content)
 

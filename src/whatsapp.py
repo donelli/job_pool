@@ -14,7 +14,7 @@ class WhatsAppSearcher():
 
       print("Carregando detalhes de um emprego do WhatsApp: " + job.name)
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
 
@@ -42,7 +42,7 @@ class WhatsAppSearcher():
       
       print("Buscando empregos da empresa WhatsApp...")
 
-      request = requests.get(self.url + '/join')
+      request = requests.get(self.url + '/join', headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
 
@@ -81,7 +81,7 @@ class WhatsAppSearcher():
 
       for depUrl, depName in departments:
          
-         request = requests.get(depUrl)
+         request = requests.get(depUrl, headers=helpers.getRandomRequestHeaders())
          html = request.content
          soup = BeautifulSoup(html, 'html.parser')
 

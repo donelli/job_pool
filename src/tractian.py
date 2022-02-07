@@ -19,7 +19,7 @@ class TractianSearcher():
       
       print("Buscando empregos da empresa Tractian...")
 
-      request = requests.get(self.url)
+      request = requests.get(self.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
 

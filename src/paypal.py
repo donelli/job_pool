@@ -23,7 +23,7 @@ class PaypalSearcher():
          
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -62,7 +62,7 @@ class PaypalSearcher():
          
          url = self.baseUrl + category
          
-         request = requests.get(url)
+         request = requests.get(url, headers=helpers.getRandomRequestHeaders())
          html = request.content
          soup = BeautifulSoup(html, 'html.parser')
 

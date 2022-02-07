@@ -37,7 +37,7 @@ class IbmSearcher():
       
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -57,7 +57,7 @@ class IbmSearcher():
       
       print("Buscando empregos da empresa IBM...")
       
-      request = requests.get(self.apiUrl)
+      request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
       data = json.loads(request.content)
       
       categories = {}

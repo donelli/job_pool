@@ -15,7 +15,7 @@ class GupySearcher():
 
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -27,7 +27,7 @@ class GupySearcher():
       
       print("Buscando empregos da empresa " + companyName + " no Gupy...")
       
-      request = requests.get(baseUrl)
+      request = requests.get(baseUrl, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       

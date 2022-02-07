@@ -32,7 +32,7 @@ class NubankSearcher():
          
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -72,7 +72,7 @@ class NubankSearcher():
       
       print("Buscando empregos da empresa " + self.companyName + " no Greenhouse...")
       
-      request = requests.get(self.baseUrl)
+      request = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       

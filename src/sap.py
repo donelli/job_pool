@@ -27,7 +27,7 @@ class SapSearcher():
       
       helpers.waitRandom()
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
@@ -98,7 +98,7 @@ class SapSearcher():
 
          url = self.baseUrl + department
          
-         request = requests.get(url)
+         request = requests.get(url, headers=helpers.getRandomRequestHeaders())
          soup = BeautifulSoup(request.content, 'html.parser')
 
          for tr in soup.find_all('tr', attrs={ 'class': 'data-row clickable' }):

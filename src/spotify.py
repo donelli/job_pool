@@ -23,7 +23,7 @@ class SpotifySearcher():
       
       print("Carregando TAGS de um emprego do Spotify: " + job.name)
       
-      request = requests.get(job.url)
+      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       soup = BeautifulSoup(request.content, 'html.parser')
       
       tagger = Tagger()
@@ -44,7 +44,7 @@ class SpotifySearcher():
       
       print("Buscando empregos da empresa Spotify...")
       
-      request = requests.get(self.apiUrl)
+      request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
       data = json.loads(request.content)
 

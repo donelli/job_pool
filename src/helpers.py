@@ -4,6 +4,7 @@ import regex
 import unicodedata
 import datetime
 import re
+import pyuser_agent
 
 CLEANR = re.compile('<.*?>') 
 SPACESR = re.compile("\s{2,}")
@@ -29,3 +30,13 @@ def removeParamsFromLink(link: str):
 
 def waitRandom():
   time.sleep(random.randint(1, 5))
+
+def getRandomRequestHeaders():
+  
+  ua = pyuser_agent.UA()
+
+  headers = {
+    "User-Agent" : ua.random
+  }
+
+  return headers

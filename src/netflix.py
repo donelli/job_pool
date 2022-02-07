@@ -67,7 +67,7 @@ class NetflixSearcher():
             
             print(" -> " + url)
             
-            response = requests.get(url)
+            response = requests.get(url, headers=helpers.getRandomRequestHeaders())
             
             data = json.loads(response.content)
 
