@@ -65,7 +65,7 @@ class NetflixSearcher():
             
             url = self.apiUrl + '?location=' + location[0] + '&page=' + str(page)
             
-            print(" -> " + url)
+            # print(" -> " + url)
             
             response = requests.get(url, headers=helpers.getRandomRequestHeaders())
             
@@ -93,7 +93,7 @@ class NetflixSearcher():
                
                self.loadedIds.append(jobData['external_id'])
 
-               print(' - ' + jobData['external_id'] + ', ' + jobData['text'])
+               # print(' - ' + jobData['external_id'] + ', ' + jobData['text'])
                
                job = Job()
                job.company = 'Netflix'
