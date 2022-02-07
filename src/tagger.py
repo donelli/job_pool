@@ -25,7 +25,7 @@ class Tagger:
       Tag('Eslint', [ 'ESLINT' ]),
       Tag('AngularJS', [ 'ANGULARJS' ]),
       Tag('Angular', [ 'ANGULAR' ]),
-      Tag('ReactJS', [ 'REACT', 'REACTJS' ]),
+      Tag('ReactJS', [ 'REACT', 'REACTJS', 'REACT.JS' ]),
       Tag('Ember', [ 'EMBER' ]),
       Tag('VueJS', [ 'VUE', 'VUEJS', 'VUE.JS' ]),
       Tag('WebSockets', [ 'WEBSOCKETS' ]),
@@ -175,6 +175,7 @@ class Tagger:
       Tag('VMware', [ 'VMWARE' ]),
       Tag('Hyper-V', [ 'HYPER-V' ]),
       Tag('Oracle VM', [ 'ORACLE VM' ]),
+      Tag('JWT', [ 'JSON WEB TOKEN', 'JWT' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),
