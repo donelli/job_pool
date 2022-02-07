@@ -72,21 +72,21 @@
          <div class="row">
             <template v-if="currentView == 1 || currentView == 2">
 
-               <div class="col-12 mt-3 mt-md-0">
+               <div class="col-12 mt-2">
                   
                   <label>Companies</label>
                   
                   <treeselect v-model="selectedCompanies" :multiple="true" :options="companies" />
                   
                </div>
-               <div class="col-md-4 mt-3 mt-md-0">
+               <div class="col-md-4 mt-2">
                   
                   <label>Remote</label>
                   
                   <treeselect v-model="selectedRemoteFilters" :multiple="true" :options="remoteOptions" />
                   
                </div>
-               <div class="col-md-4 mt-3 mt-md-0">
+               <div class="col-md-4 mt-2">
                   
                   <label for="filter">Filter job name and tags</label>
                   <input type="text" id="filter" class="form-control" :class="{ 'is-invalid': textFilter.length == 1 }" v-model="textFilter" aria-describedby="validationFilterText">
