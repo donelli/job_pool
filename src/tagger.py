@@ -33,7 +33,6 @@ class Tagger:
       Tag('Express', [ 'EXPRESS' ]),
       Tag('Svelte', [ 'SVELTE' ]),
       Tag('Bootstrap', [ 'BOOTSTRAP' ]),
-      Tag('Foundation', [ 'FOUNDATION', 'FOUNDATIONCSS' ]),
       Tag('Tailwind', [ 'TAILWIND' ]),
       Tag('Django ', [ 'DJANGO ' ]),
       Tag('Symfony', [ 'SYMFONY' ]),
@@ -169,6 +168,7 @@ class Tagger:
       Tag('OpenShift', [ 'OPENSHIFT' ]),
       Tag('OAUTH', [ 'OAUTH', 'OAUTH2' ]),
       Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
+      Tag('VMware', [ 'VMWARE' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),

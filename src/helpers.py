@@ -20,7 +20,7 @@ def removeSpacesAndNewLines(s: str):
   return s.replace('\n', '').strip()
 
 def removeHtmlTags(s: str):
-  return re.sub(CLEANR, '', s)
+  return re.sub(CLEANR, ' ', s)
 
 def toOneLineString(s: str):
   return re.sub(SPACESR, ' ', s.replace('\n', ' '))

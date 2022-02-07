@@ -15,6 +15,7 @@ class Origin(Enum):
    WHATSAPP = auto()
    TRACTIAN = auto()
    IBM = auto()
+   DELL = auto()
 
 class Job():
    

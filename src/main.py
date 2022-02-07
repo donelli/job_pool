@@ -1,6 +1,7 @@
 
 import json
 from typing import List
+from dell import DellSeacher
 from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
@@ -60,6 +61,7 @@ paypalSearcher     = PaypalSearcher()
 whatsAppSearcher   = WhatsAppSearcher()
 tractianSearcher   = TractianSearcher()
 ibmSearcher        = IbmSearcher()
+dellSeacher        = DellSeacher()
 
 gupySearcher.search(
    'Ambev',
@@ -137,9 +139,12 @@ tractianSearcher.search()
 
 ibmSearcher.search()
 
+dellSeacher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs
+   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs + \
+   dellSeacher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -191,6 +196,8 @@ for index, currentJob in enumerate(allJobs):
          whatsAppSearcher.loadDetais(currentJob)
       elif currentJob.origin == Origin.IBM:
          ibmSearcher.loadTags(currentJob)
+      elif currentJob.origin == Origin.DELL:
+         dellSeacher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 
