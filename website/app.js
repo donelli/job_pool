@@ -1,6 +1,8 @@
 
-Vue.component('vue-multiselect', window.VueMultiselect.default)
+// Vue.component('vue-multiselect', window.VueMultiselect.default)
 Vue.use(VueApexCharts)
+
+Vue.component('treeselect', VueTreeselect.Treeselect)
 
 Vue.component('apexchart', VueApexCharts)
 
@@ -22,9 +24,16 @@ var app = new Vue({
          'Search',
          'Tags analysis',
          'Skill Matcher'
-      ]
+      ],
+      remoteOptions: [
+         { id: 'yes', label: 'Yes', },
+         { id: 'no', label: 'No', },
+         { id: '-', label: 'Unknown', }
+      ],
+      selectedRemoteFilters: []
    },
    mounted: function () {
+      this.selectedRemoteFilters = this.remoteOptions.map(option => option.id);
       this.loadJobs();
    },
    computed: {
@@ -37,11 +46,16 @@ var app = new Vue({
          if (this.currentView == 0) {
             return this.recentJobs;
          }
-         
-         const companyNames = this.selectedCompanies.map(company => company.name);
 
+         this.currentPage = 1;
+         
          return this.jobs.filter(job => {
-            return companyNames.includes(job.company) && (this.textFilter.length < 2 || job.filters.includes(this.textFilter.toLowerCase()));
+            
+            let remote = job.remote.split(" ")[0];
+         
+            return this.selectedCompanies.includes(job.company) &&
+                  (this.textFilter.length < 2 || job.filters.includes(this.textFilter.toLowerCase())) &&
+                  this.selectedRemoteFilters.includes(remote);
          });
       },
       paggedJobs: function () {
@@ -231,7 +245,7 @@ var app = new Vue({
                   let found = false;
 
                   for (const comp of companies) {
-                     if (comp.name == job.company) {
+                     if (comp.id == job.company) {
                         found = true;
                         comp.jobs += 1;
                         break;
@@ -240,7 +254,7 @@ var app = new Vue({
 
                   if (!found) {
                      companies.push({
-                        name: job.company,
+                        id: job.company,
                         jobs: 1
                      });
                   }
@@ -248,12 +262,13 @@ var app = new Vue({
                }
 
                for (const company of companies) {
-                  company.nameWithCount = company.name + ' (' + company.jobs + ')';
+                  company.label = company.id + ' (' + company.jobs + ')';
                }
 
-               this.selectedCompanies = [...companies.filter(c => c.name !== 'TOTVS')];
+               this.selectedCompanies = [...companies.filter(c => c.name !== 'TOTVS').map(c => c.id)];
 
                this.companies = companies;
+               
                this.jobs = resp.data;
                
                this.filterRecentJobs();
