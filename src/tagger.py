@@ -91,6 +91,7 @@ class Tagger:
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
+      Tag('AIX', [ 'AIX' ]),
 
       # Databases
       Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL', 'RELATIONAL DATABASES' ]),
@@ -132,6 +133,8 @@ class Tagger:
       Tag('Automated testing', [ 'TESTES AUTOMATIZADOS', 'AUTOMACAO DE TESTES' ]),
       Tag('Tests', [ 'PLANO DE TESTES', 'CENARIOS DE TESTE' ]),
       Tag('Cypress', [ 'CYPRESS' ]),
+      Tag('Puppet', [ 'PUPPET' ]),
+      Tag('Ansible', [ 'ANSIBLE' ]),
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
       Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT', 'DESENVOLVIMENTO ORIENTADO A TESTES' ]),
@@ -169,6 +172,8 @@ class Tagger:
       Tag('OAUTH', [ 'OAUTH', 'OAUTH2' ]),
       Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
       Tag('VMware', [ 'VMWARE' ]),
+      Tag('Hyper-V', [ 'HYPER-V' ]),
+      Tag('Oracle VM', [ 'ORACLE VM' ]),
 
       # UI
       Tag('Figma', [ 'FIGMA' ]),
