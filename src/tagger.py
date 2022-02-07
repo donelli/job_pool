@@ -62,7 +62,7 @@ class Tagger:
       Tag('Java', [ 'JAVA' ]),
       Tag('Gradle', [ 'GRADLE' ]),
       Tag('Maven', [ 'MAVEN' ]),
-      Tag('Python', [ 'PYTHON' ]),
+      Tag('Python', [ 'PYTHON', 'PHYTON' ]),
       Tag('PySpark', [ 'PYSPARK' ]),
       Tag('Scala', [ 'SCALA' ]),
       Tag('C# / .NET', [ 'C#', '.NET' ]),
@@ -87,6 +87,7 @@ class Tagger:
       Tag('Spring MVC', [ 'SPRING MVC' ]),
       Tag('Quarkus', [ 'QUARKUS' ]),
       Tag('gRPC', [ 'GRPC' ]),
+      Tag('Progress', [ 'PROGRESS' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
@@ -124,7 +125,7 @@ class Tagger:
       Tag('Quality analysis', [ 'ANALISTA DE QUALIDADE' ]),
       Tag('Dependence analysis', [ 'GERENCIAMENTO DE DEPENDÊNCIAS' ]),
       Tag('Distributed systems', [ 'SISTEMAS DISTRIBUÍDOS' ]),
-      Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS' ]),
+      Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS', 'MICRO-SERVIÇOS' ]),
       
       # Tests
       Tag('Unit testing', [ 'TESTES UNITARIOS' ]),
@@ -140,7 +141,7 @@ class Tagger:
       Tag('Segurança ofensiva', [ 'FERRAMENTAS OFENSIVAS', 'METASPLOIT FRAMEWORK', 'ETTERCAP', 'ACUNETIX', 'NEXPOSE', 'SQLMAP', 'AIRCRACK-NG' ]),
       
       # Others
-      Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS' ]),
+      Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS', 'ETL' ]),
       Tag('Git', [ 'GIT' ]),
       Tag('Webpack', [ 'WEBPACK' ]),
       Tag('Babel', [ 'BABEL' ]),
@@ -170,6 +171,13 @@ class Tagger:
       Tag('Figma', [ 'FIGMA' ]),
       Tag('Illustrator', [ 'ILLUSTRATOR' ]),
       Tag('Photoshop', [ 'PHOTOSHOP' ]),
+
+      # Big data
+      Tag('Big Data', [ 'BIG DATA' ]),
+      Tag('Spark', [ 'SPARK' ]),
+      Tag('Hive', [ 'HIVE' ]),
+      Tag('Tableau', [ 'TABLEAU' ]),
+      Tag('Hadoop', [ 'HADOOP' ]),
       
    ]
 
