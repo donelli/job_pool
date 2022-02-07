@@ -143,10 +143,12 @@ class Tagger:
       
       # Others
       Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS', 'ETL' ]),
-      Tag('Git', [ 'GIT' ]),
+      Tag('Git', [ 'GIT', 'GITHUB', 'GITLAB' ]),
       Tag('Webpack', [ 'WEBPACK' ]),
       Tag('Babel', [ 'BABEL' ]),
       Tag('Front End', [ 'FRONT-END', 'FRONT END', 'FRONTEND' ]),
+      Tag('Back End', [ 'BACK-END', 'BACK END', 'BACKEND' ]),
+      Tag('Full Stack', [ 'FULL STACK', 'FULL-STACK' ]),
       Tag('Message broker', [ 'MENSAGERIAS', 'RABBITMQ', 'AZURESERVICEBUS' ]),
       Tag('Azure', [ 'AZURE' ]),
       Tag('SAP', [ 'SAP' ]),
