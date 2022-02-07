@@ -40,7 +40,7 @@ class Tagger:
       Tag('Webhooks', [ 'WEBHOOKS' ]),
       
       # Apis
-      Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIs', "API's" ]),
+      Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIS', "API'S" ]),
       Tag('Webservice', [ 'WEB SERVICE', 'WEB SERVICES', 'WEBSERVICE', 'WEBSERVICES' ]),
       Tag('Postman', [ 'POSTMAN' ]),
       Tag('SOAP', [ 'SOAP' ]),
@@ -88,6 +88,7 @@ class Tagger:
       Tag('Quarkus', [ 'QUARKUS' ]),
       Tag('gRPC', [ 'GRPC' ]),
       Tag('Progress', [ 'PROGRESS' ]),
+      Tag('Cobol', [ 'COBOL' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),
