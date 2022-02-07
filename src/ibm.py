@@ -44,6 +44,7 @@ class IbmSearcher():
       description = soup.find('div', {'class': 'jd-description'})
       
       if not description:
+         print("Não encontrou a descrição")
          return
       
       content = helpers.removeSpacesAndNewLines(helpers.removeHtmlTags(" ".join(str(tag) for tag in description.contents)))
@@ -123,7 +124,7 @@ if __name__ == "__main__":
    searcher = IbmSearcher()
    
    job = Job()
-   job.url = 'https://careers.ibm.com/job/14133393/application-developer-experience-back-end-s-o-paulo-br/?codes=IBM_CareerWebSite'
+   job.url = 'https://careers.ibm.com/job/14950066/data-engineer-bi-hortol-ndia-br/?codes=IBM_CareerWebSite'
 
    searcher.loadTags(job)
 
