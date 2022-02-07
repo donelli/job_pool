@@ -116,13 +116,12 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <tr ng-if="paggedJobs.length == 0">
+                        <tr v-if="paggedJobs.length == 0">
                            <td colspan="100%" class="text-center py-4">
                               
                               <span v-if="jobs.length == 0">There are no jobs at the moment!</span>
                               <span v-else-if="selectedCompanies.length == 0">Please select at least one company!</span>
                               <span v-else-if="selectedRemoteFilters.length == 0">Please select at least one remote option!</span>
-                              
                               <span v-else-if="currentView == 0">There are no new jobs!</span>
                               <span v-else-if="currentView == 1">No jobs fit the selected filters!</span>
                               
