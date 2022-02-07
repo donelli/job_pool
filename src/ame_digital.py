@@ -98,6 +98,10 @@ class AmeDigitalSearcher():
          job.company = self.companyName
          job.origin = Origin.AME_DIGITAL
 
+         job.remote = 'no'
+         if "remote" in workplace.lower() or "remoto" in workplace.lower() or "remota" in workplace.lower():
+            job.remote = 'yes'
+
          self.jobs.append(job)
          
       helpers.waitRandom()

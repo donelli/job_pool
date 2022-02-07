@@ -196,7 +196,7 @@ class Tagger:
 
       # Remove some terms that messes up the search of the Go tag
       text = text.replace('GO WRONG', '')
-      text = text.replace('GO TO MARKET', '')
+      text = text.replace('GO TO', '')
       text = text.replace('GO-TO-MARKET', '')
       text = text.replace('GO THROUGH', '')
       

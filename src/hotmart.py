@@ -36,6 +36,9 @@ class HotmartSearcher:
          job.workplace = hotmartJob['office']['city'] + ' - ' + hotmartJob['office']['country']
          job.department = hotmartJob['area']['title']
          job.origin = Origin.HOTMART
+
+         # Pelo que foi observado no site: https://www.hotmart.com/jobs/pt-BR, a empresa da a liberdade para modificar o ambiente de trabalho.
+         job.remote = 'yes'
          
          job.tags = Tagger().generateTags(helpers.removeHtmlTags(hotmartJob['description']))
          

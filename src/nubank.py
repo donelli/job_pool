@@ -102,6 +102,7 @@ class NubankSearcher():
             job.url = link
             job.company = self.companyName
             job.origin = Origin.NUBANK
+            job.remote = '-'
 
             self.jobs.append(job)
          

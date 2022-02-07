@@ -113,6 +113,7 @@ class SapSearcher():
             job.url = "https://jobs.sap.com" + aElement['href']
             job.company = self.companyName
             job.origin = Origin.SAP
+            job.remote = 'yes'
             
             self.jobs.append(job)
          

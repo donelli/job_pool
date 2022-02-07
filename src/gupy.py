@@ -57,6 +57,8 @@ class GupySearcher():
             job.remote = 'yes'
          elif job.remote == 'false':
             job.remote = 'no'
+         else:
+            job.remote = '-'
          
          if len(departments) > 0:
       
