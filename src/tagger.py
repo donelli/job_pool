@@ -44,6 +44,9 @@ class Tagger:
       Tag('Cobol', [ 'COBOL' ]),
       Tag('VBA', [ 'VBA', 'Visual Basic' ]),
       Tag('VB.NET', [ 'VB.NET' ]),
+      Tag('Recital', [ 'RECITAL' ]),
+      Tag('FoxPro', [ 'FOXPRO' ]),
+      Tag('Clipper', [ 'CLIPPER' ]),
       
       # Frameworks
       Tag('Laravel', [ 'LARAVEL' ]),
@@ -56,7 +59,7 @@ class Tagger:
       Tag('Next.js', [ 'NEXT.JS', 'NEXTJS' ]),
       Tag('Express', [ 'EXPRESS' ]),
       Tag('Svelte', [ 'SVELTE' ]),
-      Tag('Bootstrap', [ 'BOOTSTRAP' ]),
+      Tag('Bootstrap', [ 'BOOTSTRAP', 'BOODSTRAP' ]),
       Tag('Tailwind', [ 'TAILWIND' ]),
       Tag('Django ', [ 'DJANGO ' ]),
       Tag('Symfony', [ 'SYMFONY' ]),
@@ -68,6 +71,7 @@ class Tagger:
       Tag('Springboot', [ 'SPRINGBOOT', 'SPRING BOOT' ]),
       Tag('Spring MVC', [ 'SPRING MVC' ]),
       Tag('Quarkus', [ 'QUARKUS' ]),
+      Tag('stencil', [ 'STENCIL' ]),
       
       # Preprocessors
       Tag('SCSS/SASS', [ 'SCSS', 'SASS' ]),
@@ -92,6 +96,8 @@ class Tagger:
       Tag('Babel', [ 'BABEL' ]),
       Tag('CI/CD', [ 'CI / CD', 'CI/CD', 'CD / I', 'CONTINUOUS DELIVERY' ]),
       Tag('SAP', [ 'SAP' ]),
+      Tag('Jenkins', [ 'JENKINS' ]),
+      Tag('Travis', [ 'TRAVIS' ]),
       
       # Tecnologies
       Tag('WebSockets', [ 'WEBSOCKETS' ]),
@@ -138,6 +144,9 @@ class Tagger:
       # Library
       Tag('SwiftUI', [ 'SWIFTUI' ]),
       Tag('PySpark', [ 'PYSPARK' ]),
+      Tag('RxJS', [ 'RXJS' ]),
+      Tag('Redux', [ 'REDUX' ]),
+      Tag('Ngxs', [ 'NGXS' ]),
 
       # Tests
       Tag('Pentests', [ 'PENETRATION TESTING', 'PENTESTS' ]),
@@ -152,6 +161,12 @@ class Tagger:
       Tag('Web tests', [ 'TESTES WEB' ]),
       Tag('API tests', [ 'TESTES DE API' ]),
       Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT', 'DESENVOLVIMENTO ORIENTADO A TESTES' ]),
+      Tag('jUnit', [ 'JUNIT' ]),
+      Tag('Mocha', [ 'MOCHA' ]),
+      Tag('Chai', [ 'CHAI' ]),
+      Tag('Jasmine', [ 'JASMINE' ]),
+      Tag('Jest', [ 'JEST' ]),
+      Tag('Qtest', [ 'QTEST' ]),
 
       # Databases
       Tag('SqlServer', [ 'SQLSERVER', 'SQL SERVER' ]),
@@ -165,6 +180,8 @@ class Tagger:
       Tag('Redis', [ 'REDIS', 'REDISDB' ]),
       Tag('Teradata', [ 'TERADATA' ]),
       Tag('Cassandra', [ 'CASSANDRA' ]),
+      Tag('CouchDB', [ 'COUCHDB' ]),
+      Tag('DB2', [ 'DB2' ]),
 
       # Products
       Tag('Azure', [ 'AZURE' ]),
