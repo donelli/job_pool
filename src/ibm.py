@@ -47,7 +47,7 @@ class IbmSearcher():
          print("Não encontrou a descrição")
          return
       
-      content = helpers.removeSpacesAndNewLines(helpers.removeHtmlTags(" ".join(str(tag) for tag in description.contents)))
+      content = helpers.removeHtmlTags(" ".join(str(tag) for tag in description.contents))
       
       job.tags = Tagger().generateTags(content)
       
