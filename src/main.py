@@ -142,6 +142,11 @@ gupySearcher.search(
    'https://sidi.gupy.io/',
 )
 
+gupySearcher.search(
+   'eSales',
+   'https://esales.gupy.io/',
+)
+
 trakstarSearcher.search('Globo', 'https://vempraglobo.hire.trakstar.com/?q=&limit=1000')
 
 ameDigitalSearcher.search()
