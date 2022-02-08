@@ -169,12 +169,17 @@ allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearc
 
 todayAvailableJobsUrl: List[str] = []
 
-# TODO magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
-
-# TODO google  -> https://careers.google.com/jobs/results/
-
-# TODO Uber ?
-
+# ------- TODO Companies -------
+# Oracle
+# Amazon
+# Mercado livre
+# ebay
+# shopify
+# microsoft
+# adobe
+# magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
+# google  -> https://careers.google.com/jobs/results/
+# Uber
 # Focco ERP: https://oportunidadesfocco.kretos.cc/
 
 print("Conectando ao banco de dados...")
