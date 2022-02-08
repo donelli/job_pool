@@ -47,6 +47,7 @@ class Tagger:
       Tag('Recital', [ 'RECITAL' ]),
       Tag('FoxPro', [ 'FOXPRO' ]),
       Tag('Clipper', [ 'CLIPPER' ]),
+      Tag('ActionScript', [ 'ACTIONSCRIPT' ]),
       
       # Frameworks
       Tag('Laravel', [ 'LARAVEL' ]),

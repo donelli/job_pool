@@ -1,6 +1,7 @@
 
 import json
 from typing import List
+from amazon import AmazonSearcher
 from dell import DellSeacher
 from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
@@ -92,6 +93,7 @@ ibmSearcher        = IbmSearcher()
 dellSeacher        = DellSeacher()
 nextBankSeacher    = NextBankSeacher()
 iFoodSearcher      = IFoodSearcher()
+amazonSearcher     = AmazonSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -179,6 +181,8 @@ dellSeacher.search()
 nextBankSeacher.search()
 
 iFoodSearcher.search()
+
+amazonSearcher.search()
 
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \

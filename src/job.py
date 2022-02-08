@@ -18,6 +18,7 @@ class Origin(Enum):
    DELL = auto()
    NEXT = auto()
    IFOOD = auto()
+   AMAZON = auto()
 
 class Job():
    
