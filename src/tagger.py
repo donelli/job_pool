@@ -187,6 +187,7 @@ class Tagger:
       Tag('Cassandra', [ 'CASSANDRA' ]),
       Tag('CouchDB', [ 'COUCHDB' ]),
       Tag('DB2', [ 'DB2' ]),
+      Tag('Firebase', [ 'FIREBASE' ]),
 
       # Products
       Tag('Azure', [ 'AZURE' ]),
