@@ -23,7 +23,7 @@ class AmazonSearcher():
       
       print("Buscando empregos da empresa Amazon...")
 
-      offset = 600
+      offset = 0
       tagger = Tagger()
 
       while True:
