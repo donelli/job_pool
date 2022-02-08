@@ -37,6 +37,13 @@ class AmazonSearcher():
          }
          
          request = requests.get(url, headers=headers)
+
+         if request.status_code != 200:
+            helpers.reportGenerationError([
+               "Erro ao buscar detalhes do emprego da Amazon. Status code: " + str(request.status_code),
+               "Url: " + url,
+               "Content: " + request.content
+            ], fatal=True)
          
          data = json.loads(request.content)
          
