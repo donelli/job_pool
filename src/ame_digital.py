@@ -1,5 +1,3 @@
-from ast import If
-from traceback import print_tb
 from typing import List
 from bs4 import BeautifulSoup
 import bs4

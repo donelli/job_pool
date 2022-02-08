@@ -1,10 +1,8 @@
 
 
 import json
-from traceback import print_tb
 from typing import List
 from bs4 import BeautifulSoup
-
 import helpers
 import requests
 from job import Job, Origin

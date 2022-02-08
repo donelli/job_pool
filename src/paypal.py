@@ -1,12 +1,9 @@
 
-from traceback import print_tb
 from typing import List
-
 from job import Job, Origin
 import requests
 import helpers
 from bs4 import BeautifulSoup
-
 from tagger import Tagger
 
 class PaypalSearcher():

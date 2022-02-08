@@ -1,7 +1,5 @@
-from os import path
 import sqlite3
 from sqlite3 import Connection
-from traceback import print_tb
 from typing import List
 from job import Job
 import time

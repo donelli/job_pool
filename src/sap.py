@@ -1,5 +1,4 @@
 
-from traceback import print_tb
 from typing import List
 import helpers
 import requests

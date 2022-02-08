@@ -1,12 +1,10 @@
 
 import json
-from traceback import print_tb
 from typing import List
 import requests
 from job import Job, Origin
 import helpers
 from bs4 import BeautifulSoup
-
 from tagger import Tagger
 
 # Filters:

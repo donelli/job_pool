@@ -6,7 +6,6 @@ import datetime
 import re
 import pyuser_agent
 import shlex
-import json
 import subprocess
 
 CLEANR = re.compile('<.*?>') 

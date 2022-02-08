@@ -2,7 +2,6 @@
 import json
 from typing import List
 from bs4 import BeautifulSoup
-import bs4
 import requests
 from job import Job, Origin
 import helpers
