@@ -16,6 +16,7 @@ class Origin(Enum):
    TRACTIAN = auto()
    IBM = auto()
    DELL = auto()
+   NEXT = auto()
 
 class Job():
    

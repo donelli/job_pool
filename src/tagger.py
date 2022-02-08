@@ -63,6 +63,7 @@ class Tagger:
       Tag('Maven', [ 'MAVEN' ]),
       Tag('Python', [ 'PYTHON', 'PHYTON' ]),
       Tag('PySpark', [ 'PYSPARK' ]),
+      Tag('Flask', [ 'FLASK' ]),
       Tag('Scala', [ 'SCALA' ]),
       Tag('C# / .NET', [ 'C#', '.NET' ]),
       Tag('Golang', [ 'GO', 'GOLANG' ]),
@@ -88,6 +89,7 @@ class Tagger:
       Tag('gRPC', [ 'GRPC' ]),
       Tag('Progress', [ 'PROGRESS' ]),
       Tag('Cobol', [ 'COBOL' ]),
+      Tag('VBA', [ 'VBA', 'Visual Basic' ]),
       
       # Operating Systems
       Tag('Linux', [ 'LINUX' ]),

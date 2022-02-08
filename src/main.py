@@ -7,6 +7,7 @@ from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
 from ibm import IbmSearcher
 from netflix import NetflixSearcher
+from next_bank import NextBankSeacher
 from nubank import NubankSearcher
 from repository import Repository
 from job import Job, Origin
@@ -17,34 +18,39 @@ from trakstar import TrakstarSearcher
 from paypal import PaypalSearcher
 from whatsapp import WhatsAppSearcher
 
-
 def isValidJob(job: Job) -> bool:
+
+   jobName = job.name.upper()
 
    if len(job.tags) > 0:
       return True
    
-   if "Engineer" in job.name or "Software" in job.name or "Analyst" in job.name or "Engenh" in job.name or "Desenvolvedor" in job.name:
+   if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ANALYST" in jobName or "ENGENH" in jobName or "DESENVOLVEDOR" in jobName:
       return True
    
-   if "Law " in job.name:
+   if "LAW " in jobName:
       return False
    
-   if "Market Specialist" in job.name:
+   if "MARKET SPECIALIST" in jobName:
       return False
 
-   if "Marketing " in job.name:
+   if "MARKETING " in jobName:
       return False
 
-   if "Intern " in job.name or job.name.endswith(" Intern"):
+   if "INTERN " in jobName or jobName.endswith(" INTERN"):
       return False
 
-   if "Estagiário" in job.name or "Estágio" in job.name:
+   if "ESTAGIÁRIO" in jobName or "ESTÁGIO" in jobName:
       return False
 
-   if "Talent" in job.name:
+   if "TALENT" in jobName:
       return False
 
-   if "Atendimento" in job.name or "SAC" in job.name or "CRM" in job.name:
+   if "ATENDIMENTO" in jobName or "SAC" in jobName or "CRM" in jobName:
+      return False
+
+   if "COMUNICAÇÃO INTERNA" in jobName or "SEGUROS DIGITAIS" in jobName or \
+      "PARCERIAS COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
       return False
 
    return True
@@ -62,6 +68,7 @@ whatsAppSearcher   = WhatsAppSearcher()
 tractianSearcher   = TractianSearcher()
 ibmSearcher        = IbmSearcher()
 dellSeacher        = DellSeacher()
+nextBankSeacher    = NextBankSeacher()
 
 gupySearcher.search(
    'Ambev',
@@ -141,10 +148,12 @@ ibmSearcher.search()
 
 dellSeacher.search()
 
+nextBankSeacher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
    sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs + \
-   dellSeacher.jobs
+   dellSeacher.jobs + nextBankSeacher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -198,6 +207,8 @@ for index, currentJob in enumerate(allJobs):
          ibmSearcher.loadTags(currentJob)
       elif currentJob.origin == Origin.DELL:
          dellSeacher.loadTags(currentJob)
+      elif currentJob.origin == Origin.NEXT:
+         nextBankSeacher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 
