@@ -49,6 +49,18 @@ def isValidJob(job: Job) -> bool:
    if "ATENDIMENTO" in jobName or "SAC" in jobName or "CRM" in jobName:
       return False
 
+   if "ADMINISTRATIVO" in jobName:
+      return False
+
+   if "ANALISTA COMERCIAL" in jobName:
+      return False
+
+   if "INCLUSÃO DE PESSOAS" in jobName:
+      return False
+
+   if "ANALISTA DE NEGÓCIOS" in jobName:
+      return False
+
    if "COMUNICAÇÃO INTERNA" in jobName or "SEGUROS DIGITAIS" in jobName or \
       "PARCERIAS COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
       return False
