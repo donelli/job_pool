@@ -6,6 +6,7 @@ from gupy import GupySearcher
 from ame_digital import AmeDigitalSearcher
 from hotmart import HotmartSearcher
 from ibm import IbmSearcher
+from ifood import IFoodSearcher
 from netflix import NetflixSearcher
 from next_bank import NextBankSeacher
 from nubank import NubankSearcher
@@ -21,7 +22,10 @@ from whatsapp import WhatsAppSearcher
 def isValidJob(job: Job) -> bool:
 
    jobName = job.name.upper()
-
+   
+   if job.origin == Origin.IFOOD and job.department == "" and len(job.tags) == 0:
+      return False
+   
    if len(job.tags) > 0:
       return True
    
@@ -67,8 +71,8 @@ def isValidJob(job: Job) -> bool:
    if 'ASSISTENTE TÉCNICO' in jobName:
       return False
 
-   if "COMUNICAÇÃO INTERNA" in jobName or "SEGUROS DIGITAIS" in jobName or \
-      "PARCERIAS COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
+   if "COMUNICAÇÃO" in jobName or "SEGUROS DIGITAIS" in jobName or \
+      "COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
       return False
 
    return True
@@ -87,6 +91,7 @@ tractianSearcher   = TractianSearcher()
 ibmSearcher        = IbmSearcher()
 dellSeacher        = DellSeacher()
 nextBankSeacher    = NextBankSeacher()
+iFoodSearcher      = IFoodSearcher()
 
 gupySearcher.search(
    'Ambev',
@@ -173,10 +178,12 @@ dellSeacher.search()
 
 nextBankSeacher.search()
 
+iFoodSearcher.search()
+
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
    sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs + \
-   dellSeacher.jobs + nextBankSeacher.jobs
+   dellSeacher.jobs + nextBankSeacher.jobs + iFoodSearcher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
@@ -237,6 +244,8 @@ for index, currentJob in enumerate(allJobs):
          dellSeacher.loadTags(currentJob)
       elif currentJob.origin == Origin.NEXT:
          nextBankSeacher.loadTags(currentJob)
+      elif currentJob.origin == Origin.IFOOD:
+         iFoodSearcher.loadTags(currentJob)
 
       repo.insertJob(currentJob)
 

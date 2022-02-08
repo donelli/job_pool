@@ -17,6 +17,7 @@ class Origin(Enum):
    IBM = auto()
    DELL = auto()
    NEXT = auto()
+   IFOOD = auto()
 
 class Job():
    

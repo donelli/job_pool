@@ -137,7 +137,7 @@ class Tagger:
       Tag('Requirements analysis', [ 'ANALISE DE REQUISITOS' ]),
       Tag('Quality analysis', [ 'ANALISTA DE QUALIDADE' ]),
       Tag('Dependence analysis', [ 'GERENCIAMENTO DE DEPENDÊNCIAS' ]),
-      Tag('Distributed systems', [ 'SISTEMAS DISTRIBUÍDOS' ]),
+      Tag('Distributed systems', [ 'SISTEMAS DISTRIBUÍDOS', 'DISTRIBUTED ARCHITECTURE' ]),
       Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS', 'MICRO-SERVIÇOS' ]),
       Tag('Open-source', [ 'OPEN-SOURCE' ]),
 
