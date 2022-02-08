@@ -65,14 +65,8 @@ class AmazonSearcher():
                if tag not in job.tags:
                   job.differentialTags.append(tag)
             
-            print(job)
-            print('-----------------------------')
             self.jobs.append(job)
          
          offset += 100
          helpers.waitRandom()
       
-
-if __name__ == "__main__":
-   amazon = AmazonSearcher()
-   amazon.search()
