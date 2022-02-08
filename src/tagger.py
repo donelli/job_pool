@@ -71,7 +71,12 @@ class Tagger:
       Tag('Springboot', [ 'SPRINGBOOT', 'SPRING BOOT' ]),
       Tag('Spring MVC', [ 'SPRING MVC' ]),
       Tag('Quarkus', [ 'QUARKUS' ]),
-      Tag('stencil', [ 'STENCIL' ]),
+      Tag('Stencil', [ 'STENCIL' ]),
+      Tag('WordPress', [ 'WORDPRESS' ]),
+      Tag('Handlebars', [ 'HANDLEBARS' ]),
+      Tag('RequireJS', [ 'REQUIREJS' ]),
+      Tag('Backbone.js', [ 'BACKBONE.JS' ]),
+      Tag('jQuery', [ 'JQUERY' ]),
       
       # Preprocessors
       Tag('SCSS/SASS', [ 'SCSS', 'SASS' ]),
