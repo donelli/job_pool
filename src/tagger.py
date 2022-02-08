@@ -145,6 +145,7 @@ class Tagger:
       Tag('Android', [ 'ANDROID' ]),
       Tag('Linux', [ 'LINUX' ]),
       Tag('AIX', [ 'AIX' ]),
+      Tag('iOS', [ 'IOS' ]),
       
       # Library
       Tag('SwiftUI', [ 'SWIFTUI' ]),
