@@ -61,6 +61,12 @@ def isValidJob(job: Job) -> bool:
    if "ANALISTA DE NEGÓCIOS" in jobName:
       return False
 
+   if "POLICY" in jobName:
+      return False
+
+   if 'ASSISTENTE TÉCNICO' in jobName:
+      return False
+
    if "COMUNICAÇÃO INTERNA" in jobName or "SEGUROS DIGITAIS" in jobName or \
       "PARCERIAS COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
       return False
@@ -237,12 +243,7 @@ for index, url in enumerate(availableJobsUrls):
 
    print(" Processando " + str(index) + " de " + str(len(availableJobsUrls)))
    
-   isAvailable = False
-
-   if url in todayAvailableJobsUrl:
-      isAvailable = True
-
-   if not isAvailable:
+   if url not in todayAvailableJobsUrl:
       print("Removendo emprego: " + url)
       repo.removeJobByUrl(url)
 
