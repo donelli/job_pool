@@ -92,7 +92,7 @@ class NextBankSeacher():
                workplace += loc['country']
          
          job = Job()
-         job.name = jobData['displayJobTitle']
+         job.name = helpers.capitalizeWords(jobData['displayJobTitle'])
          job.workplace = workplace
          job.url = 'https://bradesco.csod.com/ux/ats/careersite/10/home/requisition/' + str(jobData['requisitionId']) + '?c=bradesco'
          job.company = 'Banco Next'

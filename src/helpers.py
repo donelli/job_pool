@@ -59,3 +59,15 @@ def performGetCurl(url: str):
 
   return json_data
 
+
+def capitalizeWords(string: str) -> str:
+  list_of_words = string.split(" ")
+
+  for index, word in enumerate(list_of_words):
+    
+    if word == 'e' or word == 'a':
+      list_of_words[index] = word
+    else:
+      list_of_words[index] = word.capitalize()
+
+  return " ".join(list_of_words)
