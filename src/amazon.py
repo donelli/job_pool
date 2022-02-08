@@ -1,7 +1,5 @@
 import json
 from typing import List
-from bs4 import BeautifulSoup
-import bs4
 import requests
 from job import Job, Origin
 import helpers
@@ -25,7 +23,7 @@ class AmazonSearcher():
       
       print("Buscando empregos da empresa Amazon...")
 
-      offset = 0
+      offset = 600
       tagger = Tagger()
 
       while True:
@@ -34,7 +32,11 @@ class AmazonSearcher():
          
          url = self.baseUrl + str(offset)
          
-         request = requests.get(url, headers=helpers.getRandomRequestHeaders())
+         headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36'
+         }
+         
+         request = requests.get(url, headers=headers)
          
          data = json.loads(request.content)
          
