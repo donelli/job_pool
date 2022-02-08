@@ -217,10 +217,7 @@ class Tagger:
    
    def generateTags(self, text: str) -> List[str]:
       
-      # TODO KAFKA tag not found
-      # https://boards.greenhouse.io/nubank/jobs/2569175
-      
-      text = unidecode(text.upper())
+      text = '|' + unidecode(text.upper()) + '|'
 
       # Remove some terms that messes up the search of the Go tag
       text = text.replace('GO WRONG', '')
