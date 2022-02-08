@@ -187,7 +187,7 @@ amazonSearcher.search()
 allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
    hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
    sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs + \
-   dellSeacher.jobs + nextBankSeacher.jobs + iFoodSearcher.jobs
+   dellSeacher.jobs + nextBankSeacher.jobs + iFoodSearcher.jobs + amazonSearcher.jobs
 
 todayAvailableJobsUrl: List[str] = []
 
