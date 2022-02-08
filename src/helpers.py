@@ -1,5 +1,7 @@
 import random
+import sys
 import time
+from typing import List
 import regex
 import unicodedata
 import datetime
@@ -58,7 +60,6 @@ def performGetCurl(url: str):
 
   return json_data
 
-
 def capitalizeWords(string: str) -> str:
   list_of_words = string.split(" ")
 
@@ -70,3 +71,10 @@ def capitalizeWords(string: str) -> str:
       list_of_words[index] = word.capitalize()
 
   return " ".join(list_of_words)
+
+def reportGenerationError(message: List[str], fatal: bool = False):
+  
+  print("\n".join(message))
+  
+  if fatal:
+    sys.exit(1)
