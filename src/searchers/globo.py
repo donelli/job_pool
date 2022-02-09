@@ -59,11 +59,19 @@ class GloboSearcher(Searcher):
          job.company = self.companyName
          job.department = helpers.removeSpacesAndNewLines(department)
          job.name = name
-         job.remote = helpers.removeSpacesAndNewLines(remote)
          job.url = link
          job.workplace = workplace
          job.type = ""
          job.origin = Origin.TRAKSTAR
+         
+         # job.remote = helpers.removeSpacesAndNewLines(remote)
+
+         remoteDescritpion = helpers.removeSpacesAndNewLines(remote)
+
+         if "remote" in remoteDescritpion.lower():
+            job.remote = 'yes - ' + remoteDescritpion
+         else: 
+            job.remote = 'no - ' + remoteDescritpion
          
          jobs.append(job)
 
