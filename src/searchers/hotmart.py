@@ -3,12 +3,13 @@ from typing import List
 import requests
 import json
 from job import Job, Origin
+from searcher import Searcher
 from tagger import Tagger
 import helpers
 
-class HotmartSearcher:
-   
-   jobs: List[Job] = []
+class HotmartSearcher(Searcher):
+
+   companyName = 'Hotmart'
    
    areas = [
       'data-science',
@@ -17,12 +18,19 @@ class HotmartSearcher:
    ]
 
    apiUrl = "https://api-hotmart-jobs.hotmart.com/positions"
+
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
+      return
    
-   def search(self):
+   def search(self) -> List[Job]:
       
       resp = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
       data = json.loads(resp.content)
+      jobs = []
 
       for hotmartJob in data['data']:
          
@@ -30,7 +38,7 @@ class HotmartSearcher:
             continue
          
          job = Job()
-         job.company = 'Hotmart'
+         job.company = self.companyName
          job.name = hotmartJob['title']
          job.url = 'https://www.hotmart.com/jobs/pt-BR/positions/' + hotmartJob['id']
          job.workplace = hotmartJob['office']['city'] + ' - ' + hotmartJob['office']['country']
@@ -42,5 +50,6 @@ class HotmartSearcher:
          
          job.tags = Tagger().generateTags(helpers.removeHtmlTags(hotmartJob['description']))
          
-         self.jobs.append(job)
-
+         jobs.append(job)
+   
+      return jobs

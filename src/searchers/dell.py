@@ -5,22 +5,24 @@ from bs4 import BeautifulSoup
 import bs4
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 
 from tagger import Tagger
 
-class DellSeacher():
+class DellSearcher(Searcher):
 
    # Por algum motivo o servidor da Dell não responde corratamente de vez em quando
    # quando utilizado a biblioteca requests, então fiz um workaround utilizando o comando 'curl'
    
-   jobs: List[Job] = []
-   headers = {}
+   companyName = 'Dell'
+   headers: dict = {}
    
    apiUrl = 'https://carreiras.dell.com/search-jobs/results?ActiveFacetID=66002&CurrentPage=1&RecordsPerPage=15&Distance=50&RadiusUnitType=0&Keywords=&Location=&ShowRadius=False&IsPagination=False&CustomFacetName=&FacetTerm=&FacetType=0&FacetFilters%5B0%5D.ID=71833&FacetFilters%5B0%5D.FacetType=1&FacetFilters%5B0%5D.Count=1&FacetFilters%5B0%5D.Display=Digital&FacetFilters%5B0%5D.IsApplied=true&FacetFilters%5B0%5D.FieldName=&FacetFilters%5B1%5D.ID=65998&FacetFilters%5B1%5D.FacetType=1&FacetFilters%5B1%5D.Count=68&FacetFilters%5B1%5D.Display=Engenharia&FacetFilters%5B1%5D.IsApplied=true&FacetFilters%5B1%5D.FieldName=&FacetFilters%5B2%5D.ID=79470&FacetFilters%5B2%5D.FacetType=1&FacetFilters%5B2%5D.Count=9&FacetFilters%5B2%5D.Display=Software+Engineering&FacetFilters%5B2%5D.IsApplied=true&FacetFilters%5B2%5D.FieldName=&FacetFilters%5B3%5D.ID=70861&FacetFilters%5B3%5D.FacetType=1&FacetFilters%5B3%5D.Count=4&FacetFilters%5B3%5D.Display=SRO&FacetFilters%5B3%5D.IsApplied=true&FacetFilters%5B3%5D.FieldName=&FacetFilters%5B4%5D.ID=66002&FacetFilters%5B4%5D.FacetType=1&FacetFilters%5B4%5D.Count=5&FacetFilters%5B4%5D.Display=Tecnologia+da+informa%C3%A7%C3%A3o+-+TI&FacetFilters%5B4%5D.IsApplied=true&FacetFilters%5B4%5D.FieldName=&FacetFilters%5B5%5D.ID=3469034&FacetFilters%5B5%5D.FacetType=2&FacetFilters%5B5%5D.Count=73&FacetFilters%5B5%5D.Display=Brasil&FacetFilters%5B5%5D.IsApplied=true&FacetFilters%5B5%5D.FieldName=&SearchResultsModuleName=Search+Results&SearchFiltersModuleName=Search+Filters&SortCriteria=0&SortDirection=0&SearchType=5&PostalCode=&fc=&fl=&fcf=&afc=&afl=&afcf='
 
-   def loadTags(self, job: Job):
-      
-      helpers.waitRandom()
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
       
       html = helpers.performGetCurl(job.url)
       soup = BeautifulSoup(html, 'html.parser')
@@ -63,7 +65,7 @@ class DellSeacher():
       
    def search(self):
       
-      print("Buscando empregos da empresa Dell...")
+      jobs = []
       
       self.headers = helpers.getRandomRequestHeaders()
       
@@ -85,7 +87,7 @@ class DellSeacher():
          workPlace = helpers.removeSpacesAndNewLines(jobLoc.get_text())
          
          job = Job()
-         job.company = 'Dell'
+         job.company = self.companyName
          job.department = ''
          job.name = helpers.removeSpacesAndNewLines(jobName.get_text())
          job.remote = "yes" if "remote" in workPlace.lower() else "no"
@@ -95,15 +97,6 @@ class DellSeacher():
          job.tags = []
          job.origin = Origin.DELL
          
-         self.jobs.append(job)
+         jobs.append(job)
       
-
-if __name__ == '__main__':
-   
-   searcher = DellSeacher()
-   searcher.search()
-
-   for job in searcher.jobs:
-      searcher.loadTags(job)
-      print(job)
-      print('--------------------------')
+      return jobs

@@ -4,28 +4,29 @@ from job import Job, Origin
 import requests
 import helpers
 from bs4 import BeautifulSoup
+from searcher import Searcher
 from tagger import Tagger
 
-class PaypalSearcher():
+class PaypalSearcher(Searcher):
 
-   jobs: List[Job] = []
    baseUrl = 'https://jobsearch.paypal-corp.com/en-US/search?facetcountry=br&facetcategory='
    categories = [
       'solutions engineering',
       'integration engineering',
       'technical support engineering'
    ]
+
+   companyName = 'PayPal'
+
+   def getCompanyName(self) -> str:
+      return self.companyName
    
-   def loadTags(self, job: Job):
+   def loadDetails(self, job: Job):
          
-      helpers.waitRandom()
-      
       request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
       
-      # jdp-job-description
-
       jobDescription = soup.find('div', { 'class': 'jdp-job-description-card' })
       
       if jobDescription is None:
@@ -52,10 +53,12 @@ class PaypalSearcher():
       job.tags = tags
       
    def search(self):
+
+      jobs = []
       
       for category in self.categories:
 
-         print("Buscando empregos da empresa PayPal - categoria: " + category + "...")
+         print("-> category: " + category + "...")
          
          url = self.baseUrl + category
          
@@ -68,7 +71,7 @@ class PaypalSearcher():
             aElem = jobTr.find('a')
             
             job = Job()
-            job.company = 'PayPal'
+            job.company = self.companyName
             job.department = category
             job.name = helpers.removeSpacesAndNewLines(aElem.get_text())
             job.remote = '-'
@@ -78,7 +81,8 @@ class PaypalSearcher():
             job.tags = []
             job.origin = Origin.PAYPAL
             
-            self.jobs.append(job)
+            jobs.append(job)
          
          helpers.waitRandom()
          
+      return jobs

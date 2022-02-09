@@ -2,20 +2,21 @@ from typing import List
 from bs4 import BeautifulSoup
 import bs4
 import requests
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 from tagger import Tagger
 
-class AmeDigitalSearcher():
+class AmeDigitalSearcher(Searcher):
    
-   jobs: List[Job] = []
-
    companyName = 'Ame Digital'
    baseUrl     = 'https://boards.greenhouse.io/amedigital'
 
-   def loadTags(self, job: Job):
-         
-         helpers.waitRandom()
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
          
          request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
          html = request.content
@@ -70,12 +71,15 @@ class AmeDigitalSearcher():
          job.tags = tags
          job.differentialTags = differentialTags
 
-   def search(self):
+   def search(self) -> List[Job]:
       
-      print("Buscando empregos da empresa " + self.companyName + " no Greenhouse...")
+      jobs = []
+      response = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
+
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
       
-      request = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       divs = soup.find_all('div', attrs={ 'class': 'opening' })
@@ -100,7 +104,6 @@ class AmeDigitalSearcher():
          if "remote" in workplace.lower() or "remoto" in workplace.lower() or "remota" in workplace.lower():
             job.remote = 'yes'
 
-         self.jobs.append(job)
+         jobs.append(job)
          
-      helpers.waitRandom()
-      
+      return jobs

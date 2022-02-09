@@ -6,11 +6,12 @@ from bs4 import BeautifulSoup
 import helpers
 import requests
 from job import Job, Origin
+from searcher import Searcher
 from tagger import Tagger
 
-class NetflixSearcher():
+class NetflixSearcher(Searcher):
 
-   jobs: List[Job] = []
+   companyName = 'Netflix'
    
    loadedIds: List[str] = []
    apiUrl = "https://jobs.netflix.com/api/search"
@@ -34,6 +35,12 @@ class NetflixSearcher():
       "Product Management"
    ]
 
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
+      pass
+
    def loadTags(self, html) -> List[str]:
       
       soup = BeautifulSoup(html, 'html.parser')
@@ -49,9 +56,9 @@ class NetflixSearcher():
       
       return jobTags
    
-   def search(self):
+   def search(self) -> List[Job]:
       
-      print("Buscando empregos da empresa Netflix...")
+      jobs = []
       
       for location in self.locations:
       
@@ -91,10 +98,8 @@ class NetflixSearcher():
                
                self.loadedIds.append(jobData['external_id'])
 
-               # print(' - ' + jobData['external_id'] + ', ' + jobData['text'])
-               
                job = Job()
-               job.company = 'Netflix'
+               job.company = self.companyName
                job.name = jobData['text']
                job.department = jobData['lever_team']
                job.remote = location[1]
@@ -104,6 +109,8 @@ class NetflixSearcher():
                
                job.tags = self.loadTags(jobData['description'])
                
-               self.jobs.append(job)
+               jobs.append(job)
             
             page += 1
+      
+      return jobs

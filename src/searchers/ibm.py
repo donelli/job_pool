@@ -7,13 +7,13 @@ from job import Job, Origin
 import requests
 import helpers
 from bs4 import BeautifulSoup
+from searcher import Searcher
 from tagger import Tagger
 
-class IbmSearcher():
+class IbmSearcher(Searcher):
 
-   jobs: List[Job] = []
    apiUrl = 'https://jobsapi-internal.m-cloud.io/api/stjobbulk?organization=2242&limitkey=4A8B5EF8-AA98-4A8B-907D-C21723FE4C6B&facet=publish_to_cws:true&fields=title,primary_city,primary_state,primary_country,primary_category,url,level'
-   
+      
    categoriesToIgnore = [
       'Consultant',
       'Project Management',
@@ -33,7 +33,10 @@ class IbmSearcher():
       'Enterprise Operations'
    ]
 
-   def loadTags(self, job: Job):
+   def getCompanyName(self) -> str:
+      return 'IBM'
+
+   def loadDetails(self, job: Job):
       
       helpers.waitRandom()
       
@@ -53,9 +56,9 @@ class IbmSearcher():
       
       helpers.waitRandom()
    
-   def search(self):
-      
-      print("Buscando empregos da empresa IBM...")
+   def search(self) -> List[Job]:
+
+      jobs = []
       
       request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
       data = json.loads(request.content)
@@ -110,23 +113,12 @@ class IbmSearcher():
          job.tags = []
          job.origin = Origin.IBM
          
-         self.jobs.append(job)
+         jobs.append(job)
 
          if result['primary_category'] not in categories:
             categories[result['primary_category']] = 1
          else:
             categories[result['primary_category']] += 1
 
-      helpers.waitRandom()
+      return jobs
 
-
-if __name__ == "__main__":
-   searcher = IbmSearcher()
-   
-   job = Job()
-   job.url = 'https://careers.ibm.com/job/14950066/data-engineer-bi-hortol-ndia-br/?codes=IBM_CareerWebSite'
-
-   searcher.loadTags(job)
-
-   print(job)
-   

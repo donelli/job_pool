@@ -4,12 +4,11 @@ import bs4
 import requests
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 from tagger import Tagger
 
-class NubankSearcher():
+class NubankSearcher(Searcher):
    
-   jobs: List[Job] = []
-
    companyName = 'Nubank'
    baseUrl     = 'https://boards.greenhouse.io/nubank'
 
@@ -28,10 +27,11 @@ class NubankSearcher():
       'Xpeer'
    ]
 
-   def loadTags(self, job: Job):
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
          
-      helpers.waitRandom()
-      
       request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -68,9 +68,9 @@ class NubankSearcher():
 
       job.tags = tags
 
-   def search(self):
-      
-      print("Buscando empregos da empresa " + self.companyName + " no Greenhouse...")
+   def search(self) -> List[Job]:
+
+      jobs = []
       
       request = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
       html = request.content
@@ -104,7 +104,6 @@ class NubankSearcher():
             job.origin = Origin.NUBANK
             job.remote = '-'
 
-            self.jobs.append(job)
-         
-      helpers.waitRandom()
-   
+            jobs.append(job)
+
+      return jobs

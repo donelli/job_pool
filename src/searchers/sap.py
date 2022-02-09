@@ -6,12 +6,11 @@ from bs4 import BeautifulSoup
 import bs4
 
 from job import Job, Origin
+from searcher import Searcher
 from tagger import Tagger
 
-class SapSearcher():
+class SapSearcher(Searcher):
 
-   jobs: List[Job] = []
-   
    companyName = 'SAP Brasil'
 
    departments = [
@@ -22,7 +21,10 @@ class SapSearcher():
 
    baseUrl = 'https://jobs.sap.com/search/?optionsFacetsDD_country=BR&optionsFacetsDD_department='
 
-   def loadTags(self, job: Job) -> None:
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
       
       helpers.waitRandom()
       
@@ -87,10 +89,10 @@ class SapSearcher():
 
       job.tags = tags
 
-   def search(self) -> None:
+   def search(self) -> List[Job]:
 
-      print("Buscando empregos da empresa " + self.companyName + "...")
-      
+      jobs = []
+
       for department in self.departments:
 
          print(" - Departamento: " + department)
@@ -114,6 +116,8 @@ class SapSearcher():
             job.origin = Origin.SAP
             job.remote = 'yes'
             
-            self.jobs.append(job)
+            jobs.append(job)
          
          helpers.waitRandom()
+
+      return jobs

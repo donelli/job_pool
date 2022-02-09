@@ -1,30 +1,30 @@
 
-import os
-import sys
 from typing import List
 from bs4 import BeautifulSoup
 import requests
+from exceptions.element_not_found import ElementNotFoundException
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 
 from tagger import Tagger
 
-class GupySearcher():
+class GupySearcher(Searcher):
    
    jobs: List[Job] = []
 
-   def loadTags(self, job: Job) -> None:
+   def getCompanyName(self) -> str:
+      return 'Gupy'
+
+   def loadDetails(self, job: Job) -> None:
 
       helpers.waitRandom()
       
       response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       
       if response.status_code != 200:
-         helpers.reportGenerationError([
-            "Erro ao buscar detalhes do emprego da Gupy. Status code: " + str(response.status_code),
-            "Job: " + str(job),
-            "Content: " + response.content
-         ], fatal=True)
+         raise UnexpectedStatusCodeException(response)
       
       html = response.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -32,25 +32,19 @@ class GupySearcher():
       description = soup.find('div', attrs={ "class": "description" })
 
       if description is None:
-         helpers.reportGenerationError([
-            "Não encontrou a div com a classe 'description'",
-            "Content: " + response.content
-         ], fatal=True)
+         raise ElementNotFoundException('div', class_='description')
 
       job.tags = Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
    
-   def search(self, companyName, baseUrl, departments = [], workplaces = []):
-      
-      print("Buscando empregos da empresa " + companyName + " no Gupy...")
+   def search(self):
+      pass
+
+   def searchWithParams(self, companyName, baseUrl, departments = [], workplaces = []) -> None:
       
       response = requests.get(baseUrl, headers=helpers.getRandomRequestHeaders())
       
       if response.status_code != 200:
-         helpers.reportGenerationError([
-            "Erro ao buscar empregos da empresa " + companyName + " no Gupy. Status code: " + str(response.status_code),
-            "URL: " + baseUrl,
-            "Content: " + response.content
-         ], fatal=True)
+         raise UnexpectedStatusCodeException(response)
          
       html = response.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -58,29 +52,33 @@ class GupySearcher():
       divs = soup.find('div', attrs={ "class": "job-list" })
       
       if divs is None:
-         helpers.reportGenerationError([
-            "Não encontrou a div com a classe 'job-list'",
-            "Content: " + response.content
-         ], fatal=True)
+         raise ElementNotFoundException('div', class_='job-list')
       
       trs = divs.find_all("tr")
 
       if len(trs) == 0:
-         print(" -> Não encontrou nenhum emprego")
          return
       
       for tr in trs:
          
-         href = tr.find_all("a", attrs={ "class": "job-list__item" })[0]['href'].strip()
-         title = tr.find_all("span", attrs={ "class": "title" })[0].getText().strip()
+         hrefElem = tr.find("a", attrs={ "class": "job-list__item" })
+         
+         if not hrefElem:
+            raise ElementNotFoundException('a', class_='job-list__item')
+         
+         titleElem = tr.find("span", attrs={ "class": "title" })
+         
+         if not titleElem:
+            raise ElementNotFoundException('span', class_='title')
+         
          type = tr['data-type'].strip()
          workplace = tr['data-workplace'].strip()
          department = tr['data-department'].strip()
          remote = tr['data-remote'].strip()
          
          job = Job()
-         job.name = title
-         job.url = baseUrl + href
+         job.name = titleElem.getText().strip()
+         job.url = baseUrl + hrefElem['href'].strip()
          job.type = type
          job.workplace = workplace
          job.department = department
@@ -122,5 +120,3 @@ class GupySearcher():
                continue
          
          self.jobs.append(job)
-      
-      helpers.waitRandom()

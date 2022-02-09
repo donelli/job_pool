@@ -4,17 +4,19 @@ from job import Job, Origin
 import requests
 import helpers
 from bs4 import BeautifulSoup
+from searcher import Searcher
 from tagger import Tagger
 
-class IFoodSearcher():
+class IFoodSearcher(Searcher):
 
    pageUrl = 'https://carreiras.ifood.com.br/jobs'
-   jobs: List[Job] = []
-   
-   def loadTags(self, job: Job):
-      
-      helpers.waitRandom()
+   companyName = 'iFood'
 
+   def getCompanyName(self) -> str:
+      return self.companyName
+   
+   def loadDetails(self, job: Job):
+      
       request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -30,9 +32,9 @@ class IFoodSearcher():
                   job.tags.append(tag)
 
    def search(self):
-   
-      print("Buscando empregos da empresa iFood...")
 
+      jobs = []
+   
       request = requests.get(self.pageUrl, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -70,7 +72,7 @@ class IFoodSearcher():
             location = h5.get_text()
          
          job = Job()
-         job.company = 'iFood'
+         job.company = self.companyName
          job.department = department
          job.name = helpers.removeSpacesAndNewLines(aElem['title'])
          job.remote = 'yes'
@@ -80,5 +82,6 @@ class IFoodSearcher():
          job.tags = []
          job.origin = Origin.IFOOD
          
-         self.jobs.append(job)
+         jobs.append(job)
 
+      return jobs

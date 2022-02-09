@@ -1,24 +1,27 @@
 
 import json
-from typing import List
-from amazon import AmazonSearcher
-from dell import DellSeacher
-from gupy import GupySearcher
-from ame_digital import AmeDigitalSearcher
-from hotmart import HotmartSearcher
-from ibm import IbmSearcher
-from ifood import IFoodSearcher
-from netflix import NetflixSearcher
-from next_bank import NextBankSeacher
-from nubank import NubankSearcher
+from typing import Any, List
+import helpers
 from repository import Repository
 from job import Job, Origin
-from sap import SapSearcher
-from spotify import SpotifySearcher
-from tractian import TractianSearcher
-from trakstar import TrakstarSearcher
-from paypal import PaypalSearcher
-from whatsapp import WhatsAppSearcher
+from searcher import Searcher
+
+from searchers.amazon import AmazonSearcher
+from searchers.dell import DellSearcher
+from searchers.gupy import GupySearcher
+from searchers.ame_digital import AmeDigitalSearcher
+from searchers.hotmart import HotmartSearcher
+from searchers.ibm import IbmSearcher
+from searchers.ifood import IFoodSearcher
+from searchers.netflix import NetflixSearcher
+from searchers.next_bank import NextBankSearcher
+from searchers.nubank import NubankSearcher
+from searchers.sap import SapSearcher
+from searchers.spotify import SpotifySearcher
+from searchers.tractian import TractianSearcher
+from searchers.globo import GloboSearcher
+from searchers.paypal import PaypalSearcher
+from searchers.whatsapp import WhatsAppSearcher
 
 def isValidJob(job: Job) -> bool:
 
@@ -78,200 +81,167 @@ def isValidJob(job: Job) -> bool:
 
    return True
 
-gupySearcher       = GupySearcher()
-trakstarSearcher   = TrakstarSearcher()
-ameDigitalSearcher = AmeDigitalSearcher()
-hotmartSearcher    = HotmartSearcher()
-spotifySearcher    = SpotifySearcher()
-netflixSearcher    = NetflixSearcher()
-nubankSearcher     = NubankSearcher()
-sapSearcher        = SapSearcher()
-paypalSearcher     = PaypalSearcher()
-whatsAppSearcher   = WhatsAppSearcher()
-tractianSearcher   = TractianSearcher()
-ibmSearcher        = IbmSearcher()
-dellSeacher        = DellSeacher()
-nextBankSeacher    = NextBankSeacher()
-iFoodSearcher      = IFoodSearcher()
-amazonSearcher     = AmazonSearcher()
-
-gupySearcher.search(
-   'Ambev',
-   'https://ambevtech.gupy.io/'
-)
-
-for job in gupySearcher.jobs:
-   if not job.workplace:
-      job.workplace = 'Remote Work'
-
-gupySearcher.search(
-   'Sicredi',
-   'https://sicredi.gupy.io/',
-   [ "Arquitetura Corporativa de TI", "Infraestrutura e operações TI", "Sistemas de TI" ]
-)
-
-gupySearcher.search(
-   'Randon Digital',
-   'https://randondigital.gupy.io/'
-)
-
-gupySearcher.search(
-   'TOTVS',
-   'https://totvs.gupy.io/',
-   [ 'Tech | Frame, Engenharia e  Desenvolvimento', 'Tech | Segmentos, Financial e Digital', 'Tech | TI' ]
-)
-
-gupySearcher.search(
-   'Promob',
-   'https://promob.gupy.io/'
-)
-
-gupySearcher.search(
-   'Picpay',
-   'https://picpay.gupy.io/',
-   [ 'Tecnologia' ]
-)
-
-gupySearcher.search(
-   'Grupo Alura',
-   'https://grupoalura.gupy.io/',
-   [ 'Tecnologia' ]
-)
-
-gupySearcher.search(
-   'B2W - Americanas',
-   'https://b2w.gupy.io/',
-   [ 'Dados', 'Desenvolvimento', 'Experiência do Usuário', 'Infraestrutura', 'Segurança da Informação', 'Suporte' ]
-)
-
-gupySearcher.search(
-   'SiDi',
-   'https://sidi.gupy.io/',
-)
-
-gupySearcher.search(
-   'eSales',
-   'https://esales.gupy.io/',
-)
-
-trakstarSearcher.search('Globo', 'https://vempraglobo.hire.trakstar.com/?q=&limit=1000')
-
-ameDigitalSearcher.search()
-
-hotmartSearcher.search()
-
-spotifySearcher.search()
-
-netflixSearcher.search()
-
-nubankSearcher.search()
-
-sapSearcher.search()
-
-paypalSearcher.search()
-
-whatsAppSearcher.search()
-
-tractianSearcher.search()
-
-ibmSearcher.search()
-
-dellSeacher.search()
-
-nextBankSeacher.search()
-
-iFoodSearcher.search()
-
-amazonSearcher.search()
-
-allJobs: List[Job] = gupySearcher.jobs + trakstarSearcher.jobs + ameDigitalSearcher.jobs + \
-   hotmartSearcher.jobs + spotifySearcher.jobs + netflixSearcher.jobs + nubankSearcher.jobs + \
-   sapSearcher.jobs + paypalSearcher.jobs + whatsAppSearcher.jobs + tractianSearcher.jobs + ibmSearcher.jobs + \
-   dellSeacher.jobs + nextBankSeacher.jobs + iFoodSearcher.jobs + amazonSearcher.jobs
-
-todayAvailableJobsUrl: List[str] = []
-
-# ------- TODO Companies -------
-# Oracle
-# Amazon
-# Mercado livre
-# ebay
-# shopify
-# microsoft
-# adobe
-# magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
-# google  -> https://careers.google.com/jobs/results/
-# Uber
-# Focco ERP: https://oportunidadesfocco.kretos.cc/
-
-print("Conectando ao banco de dados...")
-
-repo = Repository()
-repo.connectToDb()
-
-print("Processando novos empregos...")
-
-for index, currentJob in enumerate(allJobs):
+def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: Repository):
    
-   print(" Processando " + str(index) + " de " + str(len(allJobs)))
-
-   if not isValidJob(currentJob):
-      print(" ---> Ignorado")
-      continue
+   jobs = [ job for job in allJobs if isValidJob(job) ]
    
-   todayAvailableJobsUrl.append(currentJob.url)
+   print("Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
+   helpers.waitRandom()
    
-   exists = repo.jobUrlExists(currentJob.url)
-
-   if not exists:
-      print("Salvando novo emprego: " + currentJob.name + ' - ' + currentJob.company)
+   availableJobsUrl = []
+   jobsToInsert = []
+   
+   for currentJob in jobs:
       
-      if currentJob.origin == Origin.SPOTIFY:
-         spotifySearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.AME_DIGITAL:
-         ameDigitalSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.TRAKSTAR:
-         trakstarSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.GUPY:
-         gupySearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.NUBANK:
-         nubankSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.SAP:
-         sapSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.PAYPAL:
-         paypalSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.WHATSAPP:
-         whatsAppSearcher.loadDetais(currentJob)
-      elif currentJob.origin == Origin.IBM:
-         ibmSearcher.loadTags(currentJob)
-      elif currentJob.origin == Origin.DELL:
-         dellSeacher.loadTags(currentJob)
-      elif currentJob.origin == Origin.NEXT:
-         nextBankSeacher.loadTags(currentJob)
-      elif currentJob.origin == Origin.IFOOD:
-         iFoodSearcher.loadTags(currentJob)
+      availableJobsUrl.append(currentJob.url)
+      
+      if repo.jobUrlExists(currentJob.url):
+         continue
 
-      repo.insertJob(currentJob)
+      try:
+         print("Loading tags for job: " + currentJob.name)
+         searcher.loadDetails(currentJob)
+         helpers.waitRandom()
+      except Exception as e:
+         print("Error: " + str(e))
+         return
 
-print("Processando empregos existentes...")
-
-availableJobsUrls = repo.getAllJobsUrls()
-
-for index, url in enumerate(availableJobsUrls):
-
-   print(" Processando " + str(index) + " de " + str(len(availableJobsUrls)))
+      jobsToInsert.append(currentJob)
+      
+   print("Inserting " + str(len(jobsToInsert)) + " new jobs")
    
-   if url not in todayAvailableJobsUrl:
-      print("Removendo emprego: " + url)
-      repo.removeJobByUrl(url)
+   for job in jobsToInsert:
+      repo.insertJob(job)
 
-print("Gerando JSON para o website...")
+   jobUrlsInDb = [ job.url for job in repo.getAllJobsByCompany(companyName) ]
 
-jobs = repo.getAllJobs()
+   print("Deleting old jobs")
+   
+   for jobUrl in jobUrlsInDb:
 
-jsonData = json.dumps(jobs, indent=2, default=vars)
+      if jobUrl in availableJobsUrl:
+         continue
 
-with open("./data/jobs.json", "w") as f:
-   f.write(jsonData)
+      print("Removing job: " + currentJob.name)
+      repo.removeJobByUrl(jobUrl)
 
-repo.closeDb()
+
+def loadGupyJobs(repo: Repository):
+
+   gupyCompanies: List[List[Any]] = [
+      [ 'Ambev', 'https://ambevtech.gupy.io/', 'Remote Work' ],
+      [ 'Sicredi', 'https://sicredi.gupy.io/', None, [ "Arquitetura Corporativa de TI", "Infraestrutura e operações TI", "Sistemas de TI" ] ],
+      [ 'Randon Digital', 'https://randondigital.gupy.io/' ],
+      [ 'TOTVS', 'https://totvs.gupy.io/', None, [ 'Tech | Frame, Engenharia e  Desenvolvimento', 'Tech | Segmentos, Financial e Digital', 'Tech | TI' ] ],
+      [ 'Promob', 'https://promob.gupy.io/' ],
+      [ 'Picpay', 'https://picpay.gupy.io/', None, [ 'Tecnologia' ] ],
+      [ 'Grupo Alura', 'https://grupoalura.gupy.io/', None, [ 'Tecnologia' ] ],
+      [ 'B2W - Americanas', 'https://b2w.gupy.io/', None, [ 'Dados', 'Desenvolvimento', 'Experiência do Usuário', 'Infraestrutura', 'Segurança da Informação', 'Suporte' ] ],
+      [ 'SiDi', 'https://sidi.gupy.io/' ],
+      [ 'eSales', 'https://esales.gupy.io/' ],
+   ]
+
+   for comp in gupyCompanies:
+      
+      companyName       = comp[0]
+      companyUrl        = comp[1]
+      defaultWorkplace  = comp[2] if len(comp) > 2 else None
+      departments       = comp[3] if len(comp) > 3 else []
+      workplaces        = comp[4] if len(comp) > 4 else []
+      
+      print("Loading jobs from Gupy: " + companyName + ' - ' + companyUrl)
+      
+      searcher = GupySearcher()
+      
+      try:
+         searcher.searchWithParams(companyName, companyUrl, departments, workplaces)
+      except Exception as e:
+         print("Error: " + str(e))
+         continue
+
+      if defaultWorkplace is not None:
+         for job in searcher.jobs:
+            if not job.workplace:
+               job.workplace = defaultWorkplace
+      
+      processJobs(companyName, searcher.jobs, searcher, repo)
+      
+
+def loadOtherJobs(repo: Repository):
+
+   searchers: List[Searcher] = [
+      AmazonSearcher(),
+      GloboSearcher(),
+      AmeDigitalSearcher(),
+      HotmartSearcher(),
+      SpotifySearcher(),
+      NetflixSearcher(),
+      NubankSearcher(),
+      SapSearcher(),
+      PaypalSearcher(),
+      WhatsAppSearcher(),
+      TractianSearcher(),
+      IbmSearcher(),
+      DellSearcher(),
+      NextBankSearcher(),
+      IFoodSearcher(),
+   ]
+
+   return
+
+   for searcher in searchers:
+
+      companyName = searcher.getCompanyName()
+      
+      print("Loading jobs from " + companyName)
+      
+      try:
+         allJobs = searcher.search()
+      except Exception as e:
+         print("Error: " + str(e))
+         continue
+
+      processJobs(companyName, allJobs, searcher, repo)
+      
+
+def generateJson(repo: Repository):
+
+   print("Gerando JSON para o website...")
+
+   jobs = repo.getAllJobs()
+
+   jsonData = json.dumps(jobs, indent=2, default=vars)
+
+   with open("./data/jobs.json", "w") as f:
+      f.write(jsonData)
+
+
+def main():
+
+   # ------- TODO Companies -------
+   # Oracle
+   # Mercado livre
+   # ebay
+   # shopify
+   # microsoft
+   # adobe
+   # magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
+   # google  -> https://careers.google.com/jobs/results/
+   # Uber
+   # Focco ERP: https://oportunidadesfocco.kretos.cc/
+
+   print("Connection to database...")
+   repo = Repository()
+   repo.connectToDb()
+
+   # loadGupyJobs(repo)
+   
+   loadOtherJobs(repo)
+
+   # generateJson(repo)
+
+   repo.closeDb()
+   
+
+if __name__ == "__main__":
+   main()

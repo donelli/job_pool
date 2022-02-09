@@ -5,6 +5,7 @@ import requests
 from job import Job, Origin
 import helpers
 from bs4 import BeautifulSoup
+from searcher import Searcher
 from tagger import Tagger
 
 # Filters:
@@ -12,14 +13,15 @@ from tagger import Tagger
 # - Categories: Engineering, Data Science, Developer Tools & Infrastructure, UX Writing
 # - Type: all
 
-class SpotifySearcher():
+class SpotifySearcher(Searcher):
    
    apiUrl = 'https://api-dot-new-spotifyjobs-com.nw.r.appspot.com/wp-json/animal/v1/job/search?l=remote&c=engineering%2Cdata-research-insights'
-   jobs: List[Job] = []
+   companyName = 'Spotify'
 
-   def loadTags(self, job: Job):
-      
-      print("Carregando TAGS de um emprego do Spotify: " + job.name)
+   def getCompanyName(self) -> str:
+      return self.companyName
+
+   def loadDetails(self, job: Job):
       
       request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       soup = BeautifulSoup(request.content, 'html.parser')
@@ -35,21 +37,18 @@ class SpotifySearcher():
             for tag in tags:
                if tag not in job.tags:
                   job.tags.append(tag)
-   
-      helpers.waitRandom()
       
-   def search(self) -> None:
-      
-      print("Buscando empregos da empresa Spotify...")
+   def search(self) -> List[Job]:
       
       request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
       data = json.loads(request.content)
+      jobs = []
 
       for jobData in data['result']:
 
          job = Job()
-         job.company = 'Spotify'
+         job.company = self.companyName
          job.department = jobData['main_category']['name']
          job.name = jobData['text']
          job.remote = ('yes' if jobData['is_remote'] else 'no') + ((' (' + jobData['remote_name']['name'] + ')') if jobData['is_remote'] else '')
@@ -59,6 +58,7 @@ class SpotifySearcher():
          job.tags = []
          job.origin = Origin.SPOTIFY
          
-         self.jobs.append(job)
+         jobs.append(job)
+
+      return jobs
       
-      helpers.waitRandom()

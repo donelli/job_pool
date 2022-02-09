@@ -3,17 +3,20 @@ from bs4 import BeautifulSoup
 import requests
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 from tagger import Tagger
 
-class WhatsAppSearcher():
+class WhatsAppSearcher(Searcher):
 
    jobs: List[Job] = []
    url = 'https://www.whatsapp.com'
+   companyName = 'WhatsApp'
 
-   def loadDetais(self, job: Job):
+   def getCompanyName(self) -> str:
+      return self.companyName
 
-      print("Carregando detalhes de um emprego do WhatsApp: " + job.name)
-      
+   def loadDetails(self, job: Job):
+
       request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
       soup = BeautifulSoup(html, 'html.parser')
@@ -36,11 +39,7 @@ class WhatsAppSearcher():
       
       job.tags = tags
 
-      helpers.waitRandom()
-
    def search(self):
-      
-      print("Buscando empregos da empresa WhatsApp...")
 
       request = requests.get(self.url + '/join', headers=helpers.getRandomRequestHeaders())
       html = request.content
@@ -93,7 +92,7 @@ class WhatsAppSearcher():
                continue
 
             job = Job()
-            job.company = 'WhatsApp'
+            job.company = self.companyName
             job.department = depName
             job.name = helpers.removeSpacesAndNewLines(aElem.get_text())
             job.remote = '-'

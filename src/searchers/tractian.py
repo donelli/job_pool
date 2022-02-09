@@ -4,20 +4,27 @@ from bs4 import BeautifulSoup
 import requests
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 from tagger import Tagger
 
-class TractianSearcher():
+class TractianSearcher(Searcher):
 
-   jobs: List[Job] = []
    url = 'https://tractian.com/carreiras/vagas'
+   companyName = 'Tractian'
 
    departmentsToIgnore = [
       'People', 'Sales', 'Finance', 'Customer', 'Marketing', 'Hardware'
    ]
+
+   def loadDetails(self, job: Job) -> None:
+      pass
+
+   def getCompanyName(self) -> str:
+      return self.companyName
    
-   def search(self):
-      
-      print("Buscando empregos da empresa Tractian...")
+   def search(self) -> List[Job]:
+
+      jobs = []
 
       request = requests.get(self.url, headers=helpers.getRandomRequestHeaders())
       html = request.content
@@ -41,7 +48,7 @@ class TractianSearcher():
             workplace = jobData['fields']['place']
 
             job = Job()
-            job.company = 'Tractian'
+            job.company = self.companyName
             job.department = departName
             job.name = jobData['fields']['name']
             job.remote = "yes" if "REMOTE" in workplace.upper() else "no"
@@ -53,7 +60,6 @@ class TractianSearcher():
             job.tags = tagger.generateTags(jobData['fields']['requirements'])
             job.differentialTags = tagger.generateTags(jobData['fields']['extra'])
             
-            self.jobs.append(job)
+            jobs.append(job)
 
-      helpers.waitRandom()
-         
+      return jobs

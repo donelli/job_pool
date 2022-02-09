@@ -2,3 +2,4 @@ jobs.db
 jobs.json
 **.pyc
 __pycache__
+.mypy_cache

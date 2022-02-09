@@ -76,6 +76,16 @@ class Repository():
       cursor.close()
 
       return response
+
+   def getAllJobsByCompany(self, company: str) -> List[Job]:
+      
+      cursor = self.conn.cursor()
+      res = cursor.execute("SELECT * FROM job where company = ?", [ company ])
+      
+      response = [ self.tupleToJob(row) for row in res.fetchall() ]
+      cursor.close()
+
+      return response
     
    def getAllJobsUrls(self) -> List[str]:
       

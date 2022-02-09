@@ -3,12 +3,13 @@ from typing import List
 import requests
 from job import Job, Origin
 import helpers
+from searcher import Searcher
 from tagger import Tagger
 
-class AmazonSearcher():
-   
-   jobs: List[Job] = []
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 
+class AmazonSearcher(Searcher):
+   
    baseUrl = 'https://www.amazon.jobs/pt/search.json?facets%5B%5D=location&facets%5B%5D=business_category&facets%5B%5D=category&facets%5B%5D=employee_class&facets%5B%5D=normalized_location&sort=relevant&latitude&longitude&loc_group_id&loc_query=Brasil&base_query&city&country=BRA&region&county&query_options&result_limit=100&offset='
 
    categoriesToProcess = [
@@ -18,13 +19,18 @@ class AmazonSearcher():
       'Operations, IT, & Support Engineering',
       'Systems, Quality, & Security Engineering'
    ]
-   
-   def search(self):
-      
-      print("Buscando empregos da empresa Amazon...")
 
+   def getCompanyName(self) -> str:
+      return 'Amazon'
+
+   def loadDetails(self, job: Job) -> None:
+      return
+   
+   def search(self) -> List[Job]:
+      
       offset = 0
       tagger = Tagger()
+      jobs = []
 
       while True:
          
@@ -36,16 +42,12 @@ class AmazonSearcher():
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36'
          }
          
-         request = requests.get(url, headers=headers)
+         response = requests.get(url, headers=headers)
 
-         if request.status_code != 200:
-            helpers.reportGenerationError([
-               "Erro ao buscar detalhes do emprego da Amazon. Status code: " + str(request.status_code),
-               "Url: " + url,
-               "Content: " + request.content
-            ], fatal=True)
+         if response.status_code != 200:
+            raise UnexpectedStatusCodeException(response)
          
-         data = json.loads(request.content)
+         data = json.loads(response.content)
          
          if len(data['jobs']) == 0:
             break
@@ -67,15 +69,14 @@ class AmazonSearcher():
             
             job.tags = tagger.generateTags(jobData['basic_qualifications'])
             
-            # job.differentialTags = tagger.generateTags(jobData['preferred_qualifications'])
-            
             job.differentialTags = []
             for tag in tagger.generateTags(jobData['preferred_qualifications']):
                if tag not in job.tags:
                   job.differentialTags.append(tag)
             
-            self.jobs.append(job)
+            jobs.append(job)
          
          offset += 100
          helpers.waitRandom()
-      
+         
+      return jobs

@@ -6,10 +6,11 @@ import requests
 from job import Job, Origin
 import helpers
 import re
+from searcher import Searcher
 
 from tagger import Tagger
 
-class NextBankSeacher():
+class NextBankSearcher(Searcher):
 
    apiUrl = 'https://us.api.csod.com/rec-job-search/external/jobs'
    apiBody = {
@@ -28,11 +29,13 @@ class NextBankSeacher():
       "customFieldDropdowns": [],
       "customFieldRadios": []
    }
-   
    tokenPageUrl = 'https://bradesco.csod.com/ux/ats/careersite/10/home?c=bradesco'
-   jobs: List[Job] = []
+   companyName = 'Banco Next'
+
+   def getCompanyName(self) -> str:
+      return self.companyName
    
-   def loadTags(self, job: Job):
+   def loadDetails(self, job: Job):
       
       helpers.waitRandom()
       
@@ -54,8 +57,8 @@ class NextBankSeacher():
 
    def search(self):
       
-      print("Buscando empregos da empresa Dell...")
-      
+      jobs = []
+
       self.headers = helpers.getRandomRequestHeaders()
       
       request = requests.get(self.tokenPageUrl, headers=self.headers)
@@ -94,8 +97,10 @@ class NextBankSeacher():
          job.name = helpers.capitalizeWords(jobData['displayJobTitle'])
          job.workplace = workplace
          job.url = 'https://bradesco.csod.com/ux/ats/careersite/10/home/requisition/' + str(jobData['requisitionId']) + '?c=bradesco'
-         job.company = 'Banco Next'
+         job.company = self.companyName
          job.origin = Origin.NEXT
          job.remote = '-'
 
-         self.jobs.append(job)
+         jobs.append(job)
+
+      return jobs
