@@ -100,7 +100,7 @@ class SapSearcher(Searcher):
 
       for department in self.departments:
 
-         print(" - Departamento: " + department)
+         print(" - Department: " + department)
 
          url = self.baseUrl + department
          
