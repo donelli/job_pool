@@ -33,7 +33,7 @@ def removeParamsFromLink(link: str):
   return link.split("?")[0] if link.index("?") >= 0 else link
 
 def waitRandom():
-  time.sleep(random.randint(5, 15))
+  time.sleep(random.randint(10, 25))
 
 def getRandomRequestHeaders():
   
