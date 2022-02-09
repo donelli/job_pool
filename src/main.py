@@ -85,7 +85,7 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
    
    jobs = [ job for job in allJobs if isValidJob(job) ]
    
-   print("Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
+   print("- Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
    helpers.waitRandom()
    
    availableJobsUrl = []
@@ -108,23 +108,29 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
 
       jobsToInsert.append(currentJob)
       
-   print("Inserting " + str(len(jobsToInsert)) + " new jobs")
+   if len(jobsToInsert) == 0:
+      print("- No new jobs")
+   else:
+      print("- Inserting " + str(len(jobsToInsert)) + " new jobs")
    
    for job in jobsToInsert:
       repo.insertJob(job)
 
    jobUrlsInDb = [ job.url for job in repo.getAllJobsByCompany(companyName) ]
 
-   print("Deleting old jobs")
+   print("- Checking and deleting jobs that are not available anymore")
+   deletedCount = 0
    
    for jobUrl in jobUrlsInDb:
 
       if jobUrl in availableJobsUrl:
          continue
 
-      print("Removing job: " + currentJob.name)
+      deletedCount += 1
       repo.removeJobByUrl(jobUrl)
 
+   if deletedCount > 0:
+      print("- Deleted " + str(deletedCount) + " jobs")
 
 def loadGupyJobs(repo: Repository):
 
@@ -149,6 +155,7 @@ def loadGupyJobs(repo: Repository):
       departments       = comp[3] if len(comp) > 3 else []
       workplaces        = comp[4] if len(comp) > 4 else []
       
+      print()
       print("Loading jobs from Gupy: " + companyName + ' - ' + companyUrl)
       
       searcher = GupySearcher()
@@ -191,6 +198,7 @@ def loadOtherJobs(repo: Repository):
 
       companyName = searcher.getCompanyName()
       
+      print()
       print("Loading jobs from " + companyName)
       
       try:
