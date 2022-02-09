@@ -147,6 +147,8 @@ def loadGupyJobs(repo: Repository):
       [ 'eSales', 'https://esales.gupy.io/' ],
    ]
 
+   searcher = GupySearcher()
+   
    for comp in gupyCompanies:
       
       companyName       = comp[0]
@@ -157,21 +159,19 @@ def loadGupyJobs(repo: Repository):
       
       print()
       print("Loading jobs from Gupy: " + companyName + ' - ' + companyUrl)
-      
-      searcher = GupySearcher()
-      
+
       try:
-         searcher.searchWithParams(companyName, companyUrl, departments, workplaces)
+         jobs = searcher.searchWithParams(companyName, companyUrl, departments, workplaces)
       except Exception as e:
          print("Error: " + str(e))
          continue
 
       if defaultWorkplace is not None:
-         for job in searcher.jobs:
+         for job in jobs:
             if not job.workplace:
                job.workplace = defaultWorkplace
       
-      processJobs(companyName, searcher.jobs, searcher, repo)
+      processJobs(companyName, jobs, searcher, repo)
       
 
 def loadOtherJobs(repo: Repository):

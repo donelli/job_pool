@@ -12,8 +12,6 @@ from tagger import Tagger
 
 class GupySearcher(Searcher):
    
-   jobs: List[Job] = []
-
    def getCompanyName(self) -> str:
       return 'Gupy'
 
@@ -39,8 +37,9 @@ class GupySearcher(Searcher):
    def search(self):
       pass
 
-   def searchWithParams(self, companyName, baseUrl, departments = [], workplaces = []) -> None:
+   def searchWithParams(self, companyName, baseUrl, departments = [], workplaces = []) -> List[Job]:
       
+      jobs = []
       response = requests.get(baseUrl, headers=helpers.getRandomRequestHeaders())
       
       if response.status_code != 200:
@@ -57,7 +56,7 @@ class GupySearcher(Searcher):
       trs = divs.find_all("tr")
 
       if len(trs) == 0:
-         return
+         return []
       
       for tr in trs:
          
@@ -119,4 +118,6 @@ class GupySearcher(Searcher):
             if not find:
                continue
          
-         self.jobs.append(job)
+         jobs.append(job)
+      
+      return jobs
