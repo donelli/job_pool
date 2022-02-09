@@ -100,8 +100,8 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
 
       try:
          print("Loading tags for job: " + currentJob.name)
-         # searcher.loadDetails(currentJob)
-         # helpers.waitRandom()
+         searcher.loadDetails(currentJob)
+         helpers.waitRandom()
       except Exception as e:
          print("Error: " + str(e))
          return
