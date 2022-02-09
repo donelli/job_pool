@@ -9,7 +9,6 @@ from tagger import Tagger
 
 class WhatsAppSearcher(Searcher):
 
-   jobs: List[Job] = []
    url = 'https://www.whatsapp.com'
    companyName = 'WhatsApp'
 
@@ -46,6 +45,7 @@ class WhatsAppSearcher(Searcher):
 
    def search(self):
 
+      jobs = []
       response = requests.get(self.url + '/join', headers=helpers.getRandomRequestHeaders())
       
       if response.status_code != 200:
@@ -69,7 +69,7 @@ class WhatsAppSearcher(Searcher):
          departUrl  = self.url + href
          departName = elem.get_text()
 
-         if departName in [ 'Business Development & Partnerships', 'Communications & Public Policy', 'Legal, Finance, Facilities & Admin', 'Research', 'Sales & Marketing', 'Messenger' ]:
+         if departName in [ 'Business Development & Partnerships', 'Communications & Public Policy', 'Legal, Finance, Facilities & Admin', 'Research', 'Sales & Marketing', 'Messenger', 'People & Recruiting' ]:
             continue
          
          alreadyAdded = False
@@ -88,9 +88,15 @@ class WhatsAppSearcher(Searcher):
       helpers.waitRandom()
 
       for depUrl, depName in departments:
+
+         print(" - Department: " + depName)
          
-         request = requests.get(depUrl, headers=helpers.getRandomRequestHeaders())
-         html = request.content
+         response = requests.get(depUrl, headers=helpers.getRandomRequestHeaders())
+         
+         if response.status_code != 200:
+            raise UnexpectedStatusCodeException(response)
+         
+         html = response.content
          soup = BeautifulSoup(html, 'html.parser')
 
          content = soup.find('div', {'class': '_wauiJobDepartment__content'})
@@ -111,7 +117,8 @@ class WhatsAppSearcher(Searcher):
             job.tags = []
             job.origin = Origin.WHATSAPP
             
-            self.jobs.append(job)
+            jobs.append(job)
 
          helpers.waitRandom()
          
+      return jobs
