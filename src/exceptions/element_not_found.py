@@ -11,4 +11,10 @@ class ElementNotFoundException(Exception):
       self.id = id
 
    def __str__(self):
+      
+      if self.class_ != "":
+         return "Element '{}' with class '{}' not found.".format(self.element_name, self.class_)
+      elif self.id != "":
+         return "Element '{}' with id '{}' not found.".format(self.element_name, self.id)
+      
       return "Element '{}' not found.".format(self.element_name)
