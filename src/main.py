@@ -100,8 +100,8 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
 
       try:
          print("Loading tags for job: " + currentJob.name)
-         searcher.loadDetails(currentJob)
-         helpers.waitRandom()
+         # searcher.loadDetails(currentJob)
+         # helpers.waitRandom()
       except Exception as e:
          print("Error: " + str(e))
          return
@@ -186,9 +186,7 @@ def loadOtherJobs(repo: Repository):
       NextBankSearcher(),
       IFoodSearcher(),
    ]
-
-   return
-
+   
    for searcher in searchers:
 
       companyName = searcher.getCompanyName()
@@ -234,11 +232,11 @@ def main():
    repo = Repository()
    repo.connectToDb()
 
-   # loadGupyJobs(repo)
+   loadGupyJobs(repo)
    
    loadOtherJobs(repo)
 
-   # generateJson(repo)
+   generateJson(repo)
 
    repo.closeDb()
    
