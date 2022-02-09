@@ -17,7 +17,7 @@ class WhatsAppSearcher(Searcher):
 
    def loadDetails(self, job: Job):
 
-      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      response = requests.get(job.url)
       
       if response.status_code != 200:
          raise UnexpectedStatusCodeException(response)
@@ -46,7 +46,7 @@ class WhatsAppSearcher(Searcher):
    def search(self):
 
       jobs = []
-      response = requests.get(self.url + '/join', headers=helpers.getRandomRequestHeaders())
+      response = requests.get(self.url + '/join')
       
       if response.status_code != 200:
          raise UnexpectedStatusCodeException(response)
@@ -91,7 +91,7 @@ class WhatsAppSearcher(Searcher):
 
          print(" - Department: " + depName)
          
-         response = requests.get(depUrl, headers=helpers.getRandomRequestHeaders())
+         response = requests.get(depUrl)
          
          if response.status_code != 200:
             raise UnexpectedStatusCodeException(response)
