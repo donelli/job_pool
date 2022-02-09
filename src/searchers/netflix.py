@@ -3,6 +3,7 @@
 import json
 from typing import List
 from bs4 import BeautifulSoup
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 import helpers
 import requests
 from job import Job, Origin
@@ -70,9 +71,10 @@ class NetflixSearcher(Searcher):
             
             url = self.apiUrl + '?location=' + location[0] + '&page=' + str(page)
             
-            # print(" -> " + url)
-            
             response = requests.get(url, headers=helpers.getRandomRequestHeaders())
+            
+            if response.status_code != 200:
+               raise UnexpectedStatusCodeException(response)
             
             data = json.loads(response.content)
 

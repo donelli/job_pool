@@ -1,5 +1,6 @@
 
 from typing import List
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import requests
 import helpers
@@ -23,8 +24,12 @@ class PaypalSearcher(Searcher):
    
    def loadDetails(self, job: Job):
          
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       jobDescription = soup.find('div', { 'class': 'jdp-job-description-card' })
@@ -62,8 +67,12 @@ class PaypalSearcher(Searcher):
          
          url = self.baseUrl + category
          
-         request = requests.get(url, headers=helpers.getRandomRequestHeaders())
-         html = request.content
+         response = requests.get(url, headers=helpers.getRandomRequestHeaders())
+         
+         if response.status_code != 200:
+            raise UnexpectedStatusCodeException(response)
+         
+         html = response.content
          soup = BeautifulSoup(html, 'html.parser')
 
          for jobTr in soup.find_all('tr', class_="job-result"):

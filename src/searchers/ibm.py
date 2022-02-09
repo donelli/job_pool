@@ -3,6 +3,7 @@
 
 import json
 from typing import List
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import requests
 import helpers
@@ -40,14 +41,17 @@ class IbmSearcher(Searcher):
       
       helpers.waitRandom()
       
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       description = soup.find('div', {'class': 'jd-description'})
       
       if not description:
-         print("Não encontrou a descrição")
          return
       
       content = helpers.removeHtmlTags(" ".join(str(tag) for tag in description.contents))
@@ -60,8 +64,12 @@ class IbmSearcher(Searcher):
 
       jobs = []
       
-      request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
-      data = json.loads(request.content)
+      response = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
+
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+
+      data = json.loads(response.content)
       
       categories = {}
       

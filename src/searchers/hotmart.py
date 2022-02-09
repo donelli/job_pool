@@ -2,6 +2,7 @@
 from typing import List
 import requests
 import json
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 from searcher import Searcher
 from tagger import Tagger
@@ -27,9 +28,12 @@ class HotmartSearcher(Searcher):
    
    def search(self) -> List[Job]:
       
-      resp = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
+      response = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
-      data = json.loads(resp.content)
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+
+      data = json.loads(response.content)
       jobs = []
 
       for hotmartJob in data['data']:

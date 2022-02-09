@@ -1,5 +1,6 @@
 
 from typing import List
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import requests
 import helpers
@@ -17,8 +18,12 @@ class IFoodSearcher(Searcher):
    
    def loadDetails(self, job: Job):
       
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
 
       for ul in soup.find_all('ul'):
@@ -35,8 +40,12 @@ class IFoodSearcher(Searcher):
 
       jobs = []
    
-      request = requests.get(self.pageUrl, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(self.pageUrl, headers=helpers.getRandomRequestHeaders())
+
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       for li in soup.find_all('li'):

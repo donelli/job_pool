@@ -2,6 +2,7 @@
 import json
 from typing import List
 import requests
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
 from bs4 import BeautifulSoup
@@ -23,8 +24,12 @@ class SpotifySearcher(Searcher):
 
    def loadDetails(self, job: Job):
       
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      soup = BeautifulSoup(request.content, 'html.parser')
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      soup = BeautifulSoup(response.content, 'html.parser')
       
       tagger = Tagger()
       
@@ -40,9 +45,12 @@ class SpotifySearcher(Searcher):
       
    def search(self) -> List[Job]:
       
-      request = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
+      response = requests.get(self.apiUrl, headers=helpers.getRandomRequestHeaders())
 
-      data = json.loads(request.content)
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      data = json.loads(response.content)
       jobs = []
 
       for jobData in data['result']:

@@ -1,5 +1,6 @@
 
 from typing import List
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 import helpers
 import requests
 from bs4 import BeautifulSoup
@@ -28,8 +29,12 @@ class SapSearcher(Searcher):
       
       helpers.waitRandom()
       
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       jobDescription = soup.find('span', attrs={ "class": "jobdescription" })
@@ -99,8 +104,12 @@ class SapSearcher(Searcher):
 
          url = self.baseUrl + department
          
-         request = requests.get(url, headers=helpers.getRandomRequestHeaders())
-         soup = BeautifulSoup(request.content, 'html.parser')
+         response = requests.get(url, headers=helpers.getRandomRequestHeaders())
+         
+         if response.status_code != 200:
+            raise UnexpectedStatusCodeException(response)
+         
+         soup = BeautifulSoup(response.content, 'html.parser')
 
          for tr in soup.find_all('tr', attrs={ 'class': 'data-row clickable' }):
             

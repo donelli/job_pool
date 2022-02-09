@@ -2,6 +2,7 @@ import json
 from typing import List
 from bs4 import BeautifulSoup
 import requests
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
 from searcher import Searcher
@@ -26,8 +27,12 @@ class TractianSearcher(Searcher):
 
       jobs = []
 
-      request = requests.get(self.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(self.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
 
       nextDataStr = soup.find('script', id="__NEXT_DATA__").decode_contents()

@@ -2,6 +2,7 @@ from typing import List
 from bs4 import BeautifulSoup
 import bs4
 import requests
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
 from searcher import Searcher
@@ -32,8 +33,12 @@ class NubankSearcher(Searcher):
 
    def loadDetails(self, job: Job):
          
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       jobDescription = soup.find('div', { 'id': 'content' })
@@ -72,8 +77,12 @@ class NubankSearcher(Searcher):
 
       jobs = []
       
-      request = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
-      html = request.content
+      response = requests.get(self.baseUrl, headers=helpers.getRandomRequestHeaders())
+      
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
       
       categoryDivs = soup.find_all('section', attrs={ 'class': 'level-0' })

@@ -3,6 +3,7 @@ import json
 from typing import List
 from bs4 import BeautifulSoup
 import bs4
+from exceptions.element_not_found import ElementNotFoundException
 from job import Job, Origin
 import helpers
 from searcher import Searcher
@@ -74,6 +75,9 @@ class DellSearcher(Searcher):
       jobsHtml = BeautifulSoup(data['results'], 'html.parser')
 
       results = jobsHtml.find('section', attrs={ 'id': 'search-results-list' })
+
+      if not results:
+         raise ElementNotFoundException("section", id="search-results-list")
 
       for jobLi in results.find_all('li'):
          

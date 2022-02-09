@@ -18,14 +18,17 @@ class AmeDigitalSearcher(Searcher):
 
    def loadDetails(self, job: Job):
          
-         request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-         html = request.content
+         response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+
+         if response.status_code != 200:
+            raise UnexpectedStatusCodeException(response)
+
+         html = response.content
          soup = BeautifulSoup(html, 'html.parser')
          
          jobDescription = soup.find('div', { 'id': 'content' })
          
          if jobDescription is None:
-            print("Nao tem conteudo: " + job.url)
             return
          
          tags: List[str] = []

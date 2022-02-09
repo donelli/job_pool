@@ -3,6 +3,7 @@ import json
 from typing import List
 from bs4 import BeautifulSoup
 import requests
+from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 from job import Job, Origin
 import helpers
 import re
@@ -39,9 +40,12 @@ class NextBankSearcher(Searcher):
       
       helpers.waitRandom()
       
-      request = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
       
-      html = request.content
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      html = response.content
       soup = BeautifulSoup(html, 'html.parser')
 
       jsonData = soup.find("script", type="application/ld+json")
@@ -61,9 +65,12 @@ class NextBankSearcher(Searcher):
 
       self.headers = helpers.getRandomRequestHeaders()
       
-      request = requests.get(self.tokenPageUrl, headers=self.headers)
+      response = requests.get(self.tokenPageUrl, headers=self.headers)
 
-      tokens = re.findall(r'(?<=token":").*?(?=")', request.content.decode('utf-8'))
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      tokens = re.findall(r'(?<=token":").*?(?=")', response.content.decode('utf-8'))
 
       if len(tokens) != 1:
          print("Token nao encontrado!")
@@ -72,13 +79,12 @@ class NextBankSearcher(Searcher):
       self.headers['Authorization'] = 'Bearer ' + tokens[0]
       self.headers['Accept'] = '*/*'
       
-      request = requests.post(self.apiUrl, headers=self.headers, json=self.apiBody)
+      response = requests.post(self.apiUrl, headers=self.headers, json=self.apiBody)
 
-      if request.status_code != 200:
-         print("Erro ao buscar os dados da API: " + str(request.request.url))
-         return
-
-      resp = json.loads(request.content.decode('utf-8'))
+      if response.status_code != 200:
+         raise UnexpectedStatusCodeException(response)
+      
+      resp = json.loads(response.content.decode('utf-8'))
       
       for jobData in resp['data']['requisitions']:
          
