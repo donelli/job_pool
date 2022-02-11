@@ -22,6 +22,7 @@ from searchers.tractian import TractianSearcher
 from searchers.globo import GloboSearcher
 from searchers.paypal import PaypalSearcher
 from searchers.whatsapp import WhatsAppSearcher
+from searchers.docker import DockerSearcher
 
 def isValidJob(job: Job) -> bool:
 
@@ -192,6 +193,7 @@ def loadOtherJobs(repo: Repository):
       DellSearcher(),
       NextBankSearcher(),
       IFoodSearcher(),
+      DockerSearcher()
    ]
    
    for searcher in searchers:
