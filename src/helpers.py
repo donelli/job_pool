@@ -33,7 +33,8 @@ def removeParamsFromLink(link: str):
   return link.split("?")[0] if link.index("?") >= 0 else link
 
 def waitRandom():
-  time.sleep(random.randint(10, 25))
+  time.sleep(random.randint(3, 10))
+
 userAgents = [
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36',
   'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36',
