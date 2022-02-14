@@ -3,3 +3,4 @@ jobs.json
 **.pyc
 __pycache__
 .mypy_cache
+src/certificates/*.json

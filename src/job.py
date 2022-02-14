@@ -1,8 +1,8 @@
 
-from enum import Enum, auto
+from enum import IntEnum, auto
 from typing import List
 
-class Origin(Enum):
+class Origin(IntEnum):
    AME_DIGITAL = auto()
    GUPY = auto()
    HOTMART = auto()
@@ -23,6 +23,7 @@ class Origin(Enum):
 
 class Job():
    
+   id: str = ''
    company: str = ''
    name: str = ''
    url: str = ''
@@ -44,8 +45,10 @@ class Job():
          'department': self.department,
          'remote': self.remote,
          'company': self.company,
-         'tags': self.tags,
-         'diferTags': self.differentialTags
+         'tags': "|".join(self.tags),
+         'diferTags': "|".join(self.differentialTags),
+         'inclusionDate': self.inclusionDate,
+         'origin': self.origin
       }
 
    def __str__(self):

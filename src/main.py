@@ -2,7 +2,7 @@
 import json
 from typing import Any, List
 import helpers
-from repository import Repository
+from repository.sqlite_repo import Repository
 from job import Job, Origin
 from searcher import Searcher
 

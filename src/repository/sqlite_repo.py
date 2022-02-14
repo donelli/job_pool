@@ -1,10 +1,11 @@
 import sqlite3
 from sqlite3 import Connection
 from typing import List
+from base_repo import Repository
 from job import Job
 import time
 
-class Repository():
+class SqliteRepository(Repository):
   
    conn: Connection
   
@@ -87,16 +88,6 @@ class Repository():
 
       return response
     
-   def getAllJobsUrls(self) -> List[str]:
-      
-      cursor = self.conn.cursor()
-      res = cursor.execute("SELECT url FROM job")
-      
-      response = [ row[0] for row in res.fetchall() ]
-      cursor.close()
-
-      return response
-   
    def removeJobByUrl(self, jobUrl: str) -> None:
       
       cursor = self.conn.cursor()
@@ -105,20 +96,6 @@ class Repository():
       self.conn.commit()
       cursor.close()
 
-   def getRecentJobs(self, days: int) -> List[Job]:
-      
-      seconds = days * 24 * 60 * 60
-
-      cursor = self.conn.cursor()
-      res = cursor.execute("SELECT * FROM job WHERE inclusionDate > ?", [ time.time() - seconds ])
-      
-      response = [ self.tupleToJob(row) for row in res.fetchall() ]
-      cursor.close()
-
-      response.sort(key=lambda x: x.inclusionDate, reverse=True)
-      
-      return response
-    
    def insertJob(self, job: Job) -> None:
       
       cursor = self.conn.cursor()
