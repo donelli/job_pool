@@ -2,7 +2,7 @@
 import json
 from typing import Any, List
 import helpers
-from repository.firebase_repo import Repository as FirebaseRepository
+from repository.firebase_repo import FirebaseRepository
 from job import Job, Origin
 from searcher import Searcher
 from base_repo import Repository
