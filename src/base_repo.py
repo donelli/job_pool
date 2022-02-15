@@ -31,3 +31,11 @@ class Repository(metaclass=abc.ABCMeta):
    @abc.abstractmethod
    def insertJob(self, job: Job) -> None:
       pass
+
+   @abc.abstractmethod
+   def saveUniqueTags(self, tags: List[dict]) -> None:
+      pass
+
+   @abc.abstractmethod
+   def saveUniqueCompanies(self, companies: List[dict]) -> None:
+      pass

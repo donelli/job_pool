@@ -226,6 +226,54 @@ def generateJson(repo: Repository):
       f.write(jsonData)
 
 
+def saveUniqueCompaniesAndTags(repo: Repository):
+   
+   print("Looking for unique companies and tags")
+   
+   jobs = repo.getAllJobs()
+   tags = []
+   companies = []
+   
+   for job in jobs:
+
+      foundCompany = False
+
+      for index, comp in enumerate(companies):
+         if comp['name'] == job.company:
+            companies[index]['jobCount'] += 1
+            foundCompany = True
+            break
+      
+      if not foundCompany:
+         companies.append({
+            "name": job.company,
+            "jobCount": 1
+         })
+      
+      for jobTag in job.tags:
+
+         foundTag = False
+
+         for index, tag in enumerate(tags):
+            if tag['name'] == jobTag:
+               tags[index]['jobCount'] += 1
+               foundTag = True
+               break
+
+         if not foundTag:
+            tags.append({
+               "name": jobTag,
+               "jobCount": 1
+            })
+      
+   print("Saving unique companies")
+   companies.sort(key=lambda comp: comp['name'])
+   repo.saveUniqueCompanies(companies)
+
+   print("Saving unique tags")
+   tags.sort(key=lambda tag: tag['name'])
+   repo.saveUniqueTags(tags)
+      
 def main():
 
    # ------- TODO Companies -------
@@ -244,11 +292,13 @@ def main():
    repo = FirebaseRepository()
    repo.connectToDb()
 
-   loadGupyJobs(repo)
+   # loadGupyJobs(repo)
    
-   loadOtherJobs(repo)
+   # loadOtherJobs(repo)
 
-   generateJson(repo)
+   # generateJson(repo)
+
+   saveUniqueCompaniesAndTags(repo)
 
    repo.closeDb()
    

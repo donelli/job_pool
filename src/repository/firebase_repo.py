@@ -80,3 +80,17 @@ class FirebaseRepository(Repository):
    def insertJob(self, job: Job) -> None:
       job.inclusionDate = time()
       db.reference('/jobs').push().set(job.toMap())
+
+   def saveUniqueTags(self, tags: List[dict]) -> None:
+      
+      ref = db.reference('/tags')
+      ref.delete()
+      
+      db.reference('/tags').set(tags)
+      
+   def saveUniqueCompanies(self, companies: List[dict]) -> None:
+      
+      ref = db.reference('/companies')
+      ref.delete()
+      
+      db.reference('/companies').set(companies)
