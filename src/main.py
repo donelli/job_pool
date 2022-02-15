@@ -241,7 +241,7 @@ def main():
    # Focco ERP: https://oportunidadesfocco.kretos.cc/
 
    print("Connection to database...")
-   repo = SqliteRepository()
+   repo = FirebaseRepository()
    repo.connectToDb()
 
    loadGupyJobs(repo)
