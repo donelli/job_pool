@@ -292,11 +292,11 @@ def main():
    repo = FirebaseRepository()
    repo.connectToDb()
 
-   # loadGupyJobs(repo)
+   loadGupyJobs(repo)
    
-   # loadOtherJobs(repo)
+   loadOtherJobs(repo)
 
-   # generateJson(repo)
+   generateJson(repo)
 
    saveUniqueCompaniesAndTags(repo)
 
