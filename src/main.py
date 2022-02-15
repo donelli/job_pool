@@ -3,6 +3,7 @@ import json
 from typing import Any, List
 import helpers
 from repository.firebase_repo import FirebaseRepository
+from repository.sqlite_repo import SqliteRepository
 from job import Job, Origin
 from searcher import Searcher
 from base_repo import Repository
@@ -240,7 +241,7 @@ def main():
    # Focco ERP: https://oportunidadesfocco.kretos.cc/
 
    print("Connection to database...")
-   repo = FirebaseRepository()
+   repo = SqliteRepository()
    repo.connectToDb()
 
    loadGupyJobs(repo)
