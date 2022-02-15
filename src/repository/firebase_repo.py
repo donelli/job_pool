@@ -79,4 +79,4 @@ class FirebaseRepository(Repository):
 
    def insertJob(self, job: Job) -> None:
       job.inclusionDate = time()
-      db.reference('/jobs').push(job.toMap())
+      db.reference('/jobs').push().set(job.toMap())
