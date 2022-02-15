@@ -17,22 +17,34 @@ class GupySearcher(Searcher):
 
    def loadDetails(self, job: Job) -> None:
 
-      helpers.waitRandom()
-      
-      response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
-      
-      if response.status_code != 200:
-         raise UnexpectedStatusCodeException(response)
-      
-      html = response.content
-      soup = BeautifulSoup(html, 'html.parser')
-      
-      description = soup.find('div', attrs={ "class": "description" })
+      error = None
 
-      if description is None:
-         raise ElementNotFoundException('div', class_='description')
+      for _ in range(0, 2):
+      
+         helpers.waitRandom()
+         
+         response = requests.get(job.url, headers=helpers.getRandomRequestHeaders())
+         
+         if response.status_code != 200:
+            error = UnexpectedStatusCodeException(response)
+            continue
+         
+         html = response.content
+         soup = BeautifulSoup(html, 'html.parser')
+         
+         description = soup.find('div', attrs={ "class": "description" })
 
-      job.tags = Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
+         if description is None:
+            error = ElementNotFoundException('div', class_='description')
+            continue
+
+         job.tags = Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
+
+         error = None
+         break
+
+      if error is not None:
+         raise error
    
    def search(self):
       pass
