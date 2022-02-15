@@ -1,6 +1,5 @@
 
 from typing import List
-from attr import attr
 from bs4 import BeautifulSoup
 import requests
 from exceptions.unexpected_status_code import UnexpectedStatusCodeException
