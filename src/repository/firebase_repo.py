@@ -86,7 +86,7 @@ class FirebaseRepository(Repository):
       data = job.toMap()
       data['urlKey'] = self.parseUrlToKey(job.url)
       
-      db.reference('/jobs').push().set()
+      db.reference('/jobs').push().set(data)
 
    def saveUniqueTags(self, tags: List[dict]) -> None:
       
