@@ -6,8 +6,12 @@ from firebase_admin import credentials
 from base_repo import Repository
 from job import Job
 from firebase_admin import db
+from urllib.parse import quote
 
 class FirebaseRepository(Repository):
+
+   def parseUrlToKey(self, url: str):
+      return quote(url)
 
    def dictToJob(self, jobDict: dict) -> Job:
       
@@ -38,7 +42,7 @@ class FirebaseRepository(Repository):
    
    def jobUrlExists(self, jobUrl: str) -> bool:
       
-      jobs = db.reference('/jobs').order_by_child('url').equal_to(jobUrl).get()
+      jobs = db.reference('/jobs').order_by_child('urlKey').equal_to(self.parseUrlToKey(jobUrl)).get()
 
       if len(jobs) == 0:
          return False
@@ -72,14 +76,18 @@ class FirebaseRepository(Repository):
     
    def removeJobByUrl(self, jobUrl: str) -> None:
       
-      jobs = db.reference('/jobs').order_by_child('url').equal_to(jobUrl).get()
+      jobs = db.reference('/jobs').order_by_child('urlKey').equal_to(self.parseUrlToKey(jobUrl)).get()
 
       for key, value in jobs.items():
          db.reference('/jobs').child(key).delete()
 
    def insertJob(self, job: Job) -> None:
       job.inclusionDate = time()
-      db.reference('/jobs').push().set(job.toMap())
+      
+      data = job.toMap()
+      data['urlKey'] = self.parseUrlToKey(job.url)
+      
+      db.reference('/jobs').push().set()
 
    def saveUniqueTags(self, tags: List[dict]) -> None:
       
