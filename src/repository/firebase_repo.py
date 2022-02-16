@@ -6,12 +6,11 @@ from firebase_admin import credentials
 from base_repo import Repository
 from job import Job
 from firebase_admin import db
-from urllib.parse import quote
 
 class FirebaseRepository(Repository):
 
    def parseUrlToKey(self, url: str):
-      return quote(url)
+      return url.replace("/", "").replace("&", "").replace("?", "").replace("=", "")
 
    def dictToJob(self, jobDict: dict) -> Job:
       
