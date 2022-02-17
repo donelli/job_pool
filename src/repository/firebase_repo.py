@@ -10,7 +10,7 @@ from firebase_admin import db
 class FirebaseRepository(Repository):
 
    def parseUrlToKey(self, url: str):
-      return url.replace("/", "").replace("&", "").replace("?", "").replace("=", "")
+      return url.replace("/", "").replace("&", "").replace("?", "").replace("=", "").replace("%", "").replace(":", "")
 
    def dictToJob(self, jobDict: dict) -> Job:
       
