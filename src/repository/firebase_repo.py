@@ -88,6 +88,12 @@ class FirebaseRepository(Repository):
       
       db.reference('/jobs').push().set(data)
 
+   def updateUrlKey(self, job: Job) -> None:
+      
+      db.reference('/jobs/' + job.id).update({
+         'urlKey': self.parseUrlToKey(job.url)
+      })
+
    def saveUniqueTags(self, tags: List[dict]) -> None:
       
       ref = db.reference('/tags')
