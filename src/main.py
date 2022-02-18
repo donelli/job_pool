@@ -296,7 +296,7 @@ def main():
    
    loadOtherJobs(repo)
 
-   generateJson(repo)
+   # generateJson(repo)
 
    saveUniqueCompaniesAndTags(repo)
 
