@@ -36,14 +36,18 @@ class LuizaLabsSearcher(Searcher):
       while currentPage <= totalOfPages:
          
          response = requests.get(self.baseUrl + str(currentPage), headers=headers)
+
+         print(" - Loading page " + str(currentPage))
          
          if response.status_code != 200:
             raise UnexpectedStatusCodeException(response)
          
          data = json.loads(response.content)
-         
+
          if currentPage == 1:
             totalOfPages = data['links']['total_pages']
+         
+         print("  - Found " + str(len(data['opportunities'])) + " jobs at this page")
          
          for jobData in data['opportunities']:
             
@@ -64,12 +68,3 @@ class LuizaLabsSearcher(Searcher):
       
       return jobs
 
-
-if __name__ == '__main__':
-   
-   searcher = LuizaLabsSearcher()
-   
-   jobs = searcher.search()
-   
-   print(jobs)
-   
