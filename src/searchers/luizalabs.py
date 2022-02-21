@@ -49,6 +49,11 @@ class LuizaLabsSearcher(Searcher):
          
          print("  - Found " + str(len(data['opportunities'])) + " jobs at this page")
          
+         if len(data['opportunities']) == 0:
+            print("---------------------------")
+            print(response.content)
+            print("---------------------------")
+         
          for jobData in data['opportunities']:
             
             job = Job()
