@@ -55,6 +55,10 @@ class SpotifySearcher(Searcher):
 
       for jobData in data['result']:
 
+         # Europa, Oriente Médio e África
+         if "EMEA" in jobData['remote_name']['name']:
+            continue
+         
          job = Job()
          job.company = self.companyName
          job.department = jobData['main_category']['name']
