@@ -15,6 +15,7 @@ from searchers.ame_digital import AmeDigitalSearcher
 from searchers.hotmart import HotmartSearcher
 from searchers.ibm import IbmSearcher
 from searchers.ifood import IFoodSearcher
+from searchers.luizalabs import LuizaLabsSearcher
 from searchers.netflix import NetflixSearcher
 from searchers.next_bank import NextBankSearcher
 from searchers.nubank import NubankSearcher
@@ -184,6 +185,7 @@ def loadGupyJobs(repo: Repository):
 def loadOtherJobs(repo: Repository):
 
    searchers: List[Searcher] = [
+      LuizaLabsSearcher(),
       AmazonSearcher(),
       GloboSearcher(),
       AmeDigitalSearcher(),

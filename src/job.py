@@ -20,6 +20,7 @@ class Origin(IntEnum):
    IFOOD = auto()
    AMAZON = auto()
    DOCKER = auto()
+   LUIZA_LABS = auto()
 
 class Job():
    
