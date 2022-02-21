@@ -110,13 +110,16 @@ class IbmSearcher(Searcher):
          if isRemote:
             company = company + " Remote"
          
+         primaryCity = result['primary_city'].strip()
+         primaryState = result['primary_state'].strip()
+         
          job = Job()
          job.company = company
          job.department = result['primary_category']
          job.name = result['title']
          job.remote = ('yes' if isRemote else 'no')
          job.url = result['url']
-         job.workplace = result['primary_city'] + ' - ' + result['primary_state']
+         job.workplace = (primaryCity + " - " + primaryState) if primaryCity != primaryState else primaryCity
          job.type = ''
          job.tags = []
          job.origin = Origin.IBM
