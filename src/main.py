@@ -91,8 +91,8 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
    print("- Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
    helpers.waitRandom()
    
-   availableJobsUrl = []
-   jobsToInsert = []
+   availableJobsUrl: List[str] = []
+   jobsToInsert: List[Job] = []
    
    for currentJob in jobs:
       
@@ -117,7 +117,11 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
       print("- Inserting " + str(len(jobsToInsert)) + " new jobs")
    
    for job in jobsToInsert:
-      repo.insertJob(job)
+      try:
+         repo.insertJob(job)
+      except Exception as e:
+         print("Error: " + str(e))
+         return
 
    jobUrlsInDb = [ job.url for job in repo.getAllJobsByCompany(companyName) ]
 
