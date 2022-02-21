@@ -86,8 +86,15 @@ class FirebaseRepository(Repository):
       data = job.toMap()
       data['urlKey'] = self.parseUrlToKey(job.url)
       
-      db.reference('/jobs').push().set(data)
+      newChildRef = db.reference('/jobs').push()
 
+      try:
+         newChildRef.set(data)
+      except TypeError as err:
+         print(data)
+         newChildRef.delete()
+         raise err
+   
    def updateUrlKey(self, job: Job) -> None:
       
       db.reference('/jobs/' + job.id).update({
