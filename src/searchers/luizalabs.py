@@ -59,7 +59,8 @@ class LuizaLabsSearcher(Searcher):
 
             jobs.append(job)
 
-            break
+         currentPage += 1
+         helpers.waitRandom()
       
       return jobs
 
