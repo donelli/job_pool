@@ -12,7 +12,7 @@ from tagger import Tagger
 class LuizaLabsSearcher(Searcher):
 
    companyName = 'Luiza Labs'
-   baseUrl     = 'https://api-oportunidades.99jobs.com//v1/opportunities?&page=1'
+   baseUrl     = 'https://api-oportunidades.99jobs.com//v1/opportunities?&page='
    token       = 'KTrB5f12tdr23mhsGZ8E2gMIu4w3'
    
    def getCompanyName(self) -> str:
