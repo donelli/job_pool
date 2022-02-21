@@ -141,7 +141,7 @@ def loadGupyJobs(repo: Repository):
       [ 'Ambev', 'https://ambevtech.gupy.io/', 'Remote Work' ],
       [ 'Sicredi', 'https://sicredi.gupy.io/', None, [ "Arquitetura Corporativa de TI", "Infraestrutura e operações TI", "Sistemas de TI" ] ],
       [ 'Randon Digital', 'https://randondigital.gupy.io/' ],
-      [ 'TOTVS', 'https://totvs.gupy.io/', None, [ 'Tech | Frame, Engenharia e  Desenvolvimento', 'Tech | Segmentos, Financial e Digital', 'Tech | TI' ] ],
+      # [ 'TOTVS', 'https://totvs.gupy.io/', None, [ 'Tech | Frame, Engenharia e  Desenvolvimento', 'Tech | Segmentos, Financial e Digital', 'Tech | TI' ] ],
       [ 'Promob', 'https://promob.gupy.io/' ],
       [ 'Picpay', 'https://picpay.gupy.io/', None, [ 'Tecnologia' ] ],
       [ 'Grupo Alura', 'https://grupoalura.gupy.io/', None, [ 'Tecnologia' ] ],
