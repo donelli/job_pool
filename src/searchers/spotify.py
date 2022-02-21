@@ -63,7 +63,7 @@ class SpotifySearcher(Searcher):
          job.company = self.companyName
          job.department = jobData['main_category']['name']
          job.name = jobData['text']
-         job.remote = ('yes' if jobData['is_remote'] else 'no') + ((' (' + jobData['remote_name']['name'] + ')') if jobData['is_remote'] else '')
+         job.remote = ('yes' if jobData['is_remote'] else 'no')
          job.url = 'https://www.lifeatspotify.com/jobs/' + jobData['id']
          job.workplace = jobData['location']['location']
          job.type = jobData['job_type']['name']
