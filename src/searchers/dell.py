@@ -90,6 +90,9 @@ class DellSearcher(Searcher):
 
          workPlace = helpers.removeSpacesAndNewLines(jobLoc.get_text())
          
+         if workPlace.startswith(", "):
+            workPlace = workPlace[2:].strip()
+         
          job = Job()
          job.company = self.companyName
          job.department = ''
