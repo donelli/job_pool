@@ -40,50 +40,7 @@ def isValidJob(job: Job) -> bool:
    if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ANALYST" in jobName or "ENGENH" in jobName or "DESENVOLVEDOR" in jobName:
       return True
    
-   if "LAW " in jobName:
-      return False
-   
-   if "MARKET SPECIALIST" in jobName:
-      return False
-
-   if "MARKETING " in jobName:
-      return False
-
-   if "INTERN " in jobName or jobName.endswith(" INTERN"):
-      return False
-
-   if "ESTAGIÁRIO" in jobName or "ESTÁGIO" in jobName:
-      return False
-
-   if "TALENT" in jobName:
-      return False
-
-   if "ATENDIMENTO" in jobName or "SAC" in jobName or "CRM" in jobName:
-      return False
-
-   if "ADMINISTRATIVO" in jobName:
-      return False
-
-   if "ANALISTA COMERCIAL" in jobName:
-      return False
-
-   if "INCLUSÃO DE PESSOAS" in jobName:
-      return False
-
-   if "ANALISTA DE NEGÓCIOS" in jobName:
-      return False
-
-   if "POLICY" in jobName:
-      return False
-
-   if 'ASSISTENTE TÉCNICO' in jobName:
-      return False
-
-   if "COMUNICAÇÃO" in jobName or "SEGUROS DIGITAIS" in jobName or \
-      "COMERCIAIS" in jobName or "CUSTOMER SERVICE" in jobName or "ESPECIALISTA | ESG" in jobName:
-      return False
-
-   return True
+   return False
 
 def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: Repository):
    
