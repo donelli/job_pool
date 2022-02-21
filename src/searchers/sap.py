@@ -1,4 +1,5 @@
 
+import re
 from typing import List
 from exceptions.unexpected_status_code import UnexpectedStatusCodeException
 import helpers
@@ -21,6 +22,8 @@ class SapSearcher(Searcher):
    ]
 
    baseUrl = 'https://jobs.sap.com/search/?optionsFacetsDD_country=BR&optionsFacetsDD_department='
+
+   cepRegex = re.compile(r', *\d{5}-\d{3}')
 
    def getCompanyName(self) -> str:
       return self.companyName
@@ -116,10 +119,13 @@ class SapSearcher(Searcher):
             aElement = tr.find('a')
             spanElement = tr.find('span', attrs={ 'class': 'jobLocation' })
 
+            workplace = helpers.removeSpacesAndNewLines(spanElement.get_text())
+            workplace = self.cepRegex.sub("", workplace)
+            
             job = Job()
             job.name = helpers.removeSpacesAndNewLines(aElement.get_text())
             job.department = department
-            job.workplace = helpers.removeSpacesAndNewLines(spanElement.get_text())
+            job.workplace = workplace
             job.url = "https://jobs.sap.com" + aElement['href']
             job.company = self.companyName
             job.origin = Origin.SAP
