@@ -110,7 +110,8 @@ def loadGupyJobs(repo: Repository):
       [ 'B2W - Americanas', 'https://b2w.gupy.io/', None, [ 'Dados', 'Desenvolvimento', 'Experiência do Usuário', 'Infraestrutura', 'Segurança da Informação', 'Suporte' ] ],
       [ 'SiDi', 'https://sidi.gupy.io/' ],
       [ 'eSales', 'https://esales.gupy.io/' ],
-      [ 'Gupy Tech', 'https://tech-career.gupy.io/' ],
+      [ 'Linx', 'https://linx.gupy.io/', None, [], [ 'Trabalho Remoto' ] ],
+      [ 'Webmotors', 'https://webmotors.gupy.io/', None, [ 'Tecnologia' ], [ 'Trabalho Remoto' ] ],
    ]
 
    searcher = GupySearcher()
