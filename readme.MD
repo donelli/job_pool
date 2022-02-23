@@ -33,32 +33,28 @@ Writen in [Python](https://www.python.org/) 3.8.3 and using mainly [requests](ht
 - [x] B2W - Americanas
 - [x] SiDi
 - [x] eSales
-- [ ] Focco ERP
-- [ ] Uber
+- [ ] [Focco ERP](https://oportunidadesfocco.kretos.cc/)
+- [ ] [Uber](https://www.uber.com/us/en/careers/list/)
 - [ ] Google
 - [ ] Adobe
 - [ ] Microsoft
 - [ ] Mercado livre
 - [ ] Oracle
-- [ ] Philips
-- [ ] Acer
-- [ ] EBANX
-- [ ] Cisco
+- [ ] [Philips](https://www.careers.philips.com/professional/latam/pt)
+- [ ] [EBANX](https://boards.greenhouse.io/ebanx)
+- [ ] [Cisco](https://jobs.cisco.com/)
 - [ ] Duracell
-- [ ] Red Hat
+- [ ] [Red Hat](https://careers-redhat.icims.com/jobs/search?ss=1)
 - [ ] HostGator Brasil
-- [ ] WebMotors
-- [ ] ClearSale
-- [ ] LINX
-- [ ] KingHost
+- [x] [WebMotors](https://webmotors.gupy.io/)
+- [ ] [ClearSale](https://br.clear.sale/carreiras)
+- [x] [LINX](https://linx.gupy.io/)
+- [ ] [KingHost](https://king.host/talentos-oportunidades)
 - [ ] Locaweb Commerce
 - [x] Gupy
-- [ ] Catho
-- [ ] Dito
-- [ ] Level Up!
-- [ ] DevMedia
+- [ ] [Catho](https://www.catho.com.br/vempracatho/)
+- [ ] [Dito](https://dito.hire.trakstar.com/?team_id=5567&team_id=6345)
 - [ ] 99Jobs
 - [ ] Zoom
 - [ ] Intelbras
-- [ ] Getnet
-- [ ] Nuuvem
+- [ ] [Nuuvem](https://careers.nuuvem.com/)
