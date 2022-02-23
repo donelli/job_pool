@@ -87,7 +87,7 @@ class GupySearcher(Searcher):
          department = tr['data-department'].strip()
          remote = tr['data-remote'].strip()
          
-         if onlyRemote and job.remote != 'true':
+         if onlyRemote and remote != 'true':
             continue
          
          job = Job()
