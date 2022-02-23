@@ -110,8 +110,9 @@ def loadGupyJobs(repo: Repository):
       [ 'B2W - Americanas', 'https://b2w.gupy.io/', None, [ 'Dados', 'Desenvolvimento', 'Experiência do Usuário', 'Infraestrutura', 'Segurança da Informação', 'Suporte' ] ],
       [ 'SiDi', 'https://sidi.gupy.io/' ],
       [ 'eSales', 'https://esales.gupy.io/' ],
-      [ 'Linx', 'https://linx.gupy.io/', None, [], [ 'Trabalho Remoto' ] ],
-      [ 'Webmotors', 'https://webmotors.gupy.io/', None, [ 'Tecnologia' ], [ 'Trabalho Remoto' ] ],
+      [ 'Linx', 'https://linx.gupy.io/', None, [], [], True ],
+      [ 'Webmotors', 'https://webmotors.gupy.io/', None, [ 'Tecnologia' ], [], True ],
+      [ 'Gupy', 'https://tech-career.gupy.io/' ]
    ]
 
    searcher = GupySearcher()
@@ -123,12 +124,13 @@ def loadGupyJobs(repo: Repository):
       defaultWorkplace  = comp[2] if len(comp) > 2 else None
       departments       = comp[3] if len(comp) > 3 else []
       workplaces        = comp[4] if len(comp) > 4 else []
+      onlyRemote        = comp[5] if len(comp) > 5 else False
       
       print()
       print("Loading jobs from Gupy: " + companyName + ' - ' + companyUrl)
 
       try:
-         jobs = searcher.searchWithParams(companyName, companyUrl, departments, workplaces)
+         jobs = searcher.searchWithParams(companyName, companyUrl, departments, workplaces, onlyRemote)
       except Exception as e:
          print("Error: " + str(e))
          continue
