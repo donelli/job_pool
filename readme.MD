@@ -52,7 +52,7 @@ Writen in [Python](https://www.python.org/) 3.8.3 and using mainly [requests](ht
 - [ ] LINX
 - [ ] KingHost
 - [ ] Locaweb Commerce
-- [ ] Gupy
+- [x] Gupy
 - [ ] Catho
 - [ ] Dito
 - [ ] Level Up!
