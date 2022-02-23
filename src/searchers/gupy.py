@@ -11,6 +11,14 @@ from searcher import Searcher
 from tagger import Tagger
 
 class GupySearcher(Searcher):
+
+   differentialsStrs = [
+      'Diferenciais',
+      'Você se destaca, se tiver:',
+      'Experiência Desejável:',
+      'Será um diferencial, caso você conheça:',
+      'Você vai se sentir mais confortável se conhecer:'
+   ]
    
    def getCompanyName(self) -> str:
       return 'Gupy'
@@ -48,6 +56,22 @@ class GupySearcher(Searcher):
             pos = text.find("INFORMAÇÕES ADICIONAIS")
             text = text[:pos].strip()
          
+         if "REQUISITOS E QUALIFICAÇÕES" in text:
+            
+            pos = text.find("REQUISITOS E QUALIFICAÇÕES")
+            diffText = text[:pos].strip()
+            
+            for startStr in self.differentialsStrs:
+
+               if diffText.count(startStr) != 1:
+                  continue
+               
+               pos = text.find(startStr)
+               job.differentialTags = Tagger().generateTags(text[pos:])
+               text = text[:pos].strip()
+               
+               break
+            
          job.tags = Tagger().generateTags(text)
 
          error = None
