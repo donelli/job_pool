@@ -38,7 +38,17 @@ class GupySearcher(Searcher):
             error = ElementNotFoundException('div', class_='description')
             continue
 
-         job.tags = Tagger().generateTags(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
+         text = helpers.toOneLineString(helpers.removeHtmlTags(description.encode_contents().decode("utf-8")))
+         
+         if "RESPONSABILIDADES E ATRIBUIÇÕES" in text:
+            pos = text.find("RESPONSABILIDADES E ATRIBUIÇÕES")
+            text = text[pos:].strip()
+         
+         if "INFORMAÇÕES ADICIONAIS" in text:
+            pos = text.find("INFORMAÇÕES ADICIONAIS")
+            text = text[:pos].strip()
+         
+         job.tags = Tagger().generateTags(text)
 
          error = None
          break
