@@ -49,7 +49,7 @@ class GupySearcher(Searcher):
    def search(self):
       pass
 
-   def searchWithParams(self, companyName, baseUrl, departments = [], workplaces = []) -> List[Job]:
+   def searchWithParams(self, companyName, baseUrl, departments = [], workplaces = [], onlyRemote = False) -> List[Job]:
       
       jobs = []
       response = requests.get(baseUrl, headers=helpers.getRandomRequestHeaders())
@@ -86,6 +86,9 @@ class GupySearcher(Searcher):
          workplace = tr['data-workplace'].strip()
          department = tr['data-department'].strip()
          remote = tr['data-remote'].strip()
+         
+         if onlyRemote and job.remote != 'true':
+            continue
          
          job = Job()
          job.name = titleElem.getText().strip()
