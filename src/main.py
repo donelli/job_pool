@@ -238,19 +238,7 @@ def saveUniqueCompaniesAndTags(repo: Repository):
    repo.saveUniqueTags(tags)
       
 def main():
-
-   # ------- TODO Companies -------
-   # Oracle          -> https://oracle.taleo.net/careersection/2/jobsearch.ftl?f=LOCATION(362940031553)
-   # Mercado livre
-   #  -> Remote:     https://mercadolibre.eightfold.ai/api/apply/v2/jobs?domain=mercadolibre.com&start=0&num=1000&location=remote&department=IT&pid=10296687&domain=mercadolibre.com&triggerGoButton=false
-   #  -> not remote: https://mercadolibre.eightfold.ai/api/apply/v2/jobs?domain=mercadolibre.com&start=0&num=1000&location=Brasil&department=IT&pid=10296687&domain=mercadolibre.com&triggerGoButton=false
-   # microsoft
-   # adobe
-   # magalu  -> https://carreiras.magazineluiza.com.br/times/Luizalabs
-   # google  -> https://careers.google.com/jobs/results/
-   # Uber
-   # Focco ERP: https://oportunidadesfocco.kretos.cc/
-
+   
    print("Connection to database...")
    repo = FirebaseRepository()
    repo.connectToDb()
@@ -258,9 +246,7 @@ def main():
    loadGupyJobs(repo)
    
    loadOtherJobs(repo)
-
-   # generateJson(repo)
-
+   
    saveUniqueCompaniesAndTags(repo)
 
    repo.closeDb()
