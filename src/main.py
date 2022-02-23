@@ -29,7 +29,7 @@ from searchers.docker import DockerSearcher
 
 def isValidJob(job: Job) -> bool:
 
-   jobName = job.name.upper()
+   jobName = " " + job.name.upper() + " "
    
    if job.origin == Origin.IFOOD and job.department == "" and len(job.tags) == 0:
       return False
@@ -37,7 +37,25 @@ def isValidJob(job: Job) -> bool:
    if len(job.tags) > 0:
       return True
    
-   if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ANALYST" in jobName or "ENGENH" in jobName or "DESENVOLVEDOR" in jobName:
+   if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ANALYST" in jobName or "ENGENH" in jobName or "DESENV" in jobName or "DEVEL" in jobName or "DEV" in jobName:
+      return True
+   
+   if "STACK" in jobName or "FRONT" in jobName or "BACK" in jobName:
+      return True
+
+   if "DADOS" in jobName or "DATA" in jobName:
+      return True
+   
+   if "WEB" in jobName:
+      return True
+   
+   if "DBA" in jobName or "DATABASE" in jobName:
+      return True
+
+   if " TI " in jobName:
+      return True
+   
+   if "EX" in jobName:
       return True
    
    return False
