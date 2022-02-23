@@ -64,8 +64,16 @@ class LuizaLabsSearcher(Searcher):
             job.origin = Origin.LUIZA_LABS
             job.remote = 'yes'
             
-            job.tags = list(set(tagger.generateTags(helpers.removeHtmlTags(jobData['responsability'])) + tagger.generateTags(helpers.removeHtmlTags(jobData['requirement']))))
-
+            responsabilityText = helpers.toOneLineString(helpers.removeHtmlTags(jobData['responsability']))
+            requirementText = helpers.toOneLineString(helpers.removeHtmlTags(jobData['requirement']))
+            
+            if requirementText.count("Diferenciais:") == 1:
+               pos = requirementText.find("Diferenciais:")
+               job.differentialTags = tagger.generateTags(requirementText[pos:])
+               requirementText = requirementText[:pos]
+            
+            job.tags = tagger.generateTags(responsabilityText + ' ' + requirementText)
+            
             jobs.append(job)
 
          currentPage += 1
