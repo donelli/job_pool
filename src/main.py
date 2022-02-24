@@ -145,7 +145,7 @@ def loadGupyJobs(repo: Repository, runOnlyCompanyName: str):
       workplaces        = comp[4] if len(comp) > 4 else []
       onlyRemote        = comp[5] if len(comp) > 5 else False
       
-      if len(runOnlyCompanyName) > 0 and companyName != runOnlyCompanyName:
+      if len(runOnlyCompanyName) > 0 and companyName.lower() != runOnlyCompanyName.lower():
          continue
       
       print()
@@ -191,7 +191,7 @@ def loadOtherJobs(repo: Repository, runOnlyCompanyName: str):
 
       companyName = searcher.getCompanyName()
 
-      if len(runOnlyCompanyName) > 0 and companyName != runOnlyCompanyName:
+      if len(runOnlyCompanyName) > 0 and companyName.lower() != runOnlyCompanyName.lower():
          continue
       
       print()
