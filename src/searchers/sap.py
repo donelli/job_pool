@@ -74,13 +74,8 @@ class SapSearcher(Searcher):
 
          content = helpers.removeHtmlTags(content.strip())
 
-         if content == "":
-            continue
-
-         if content[0] != "•":
-            continue
-
-         strsToSearch.append(content)
+         if content != "":
+            strsToSearch.append(content)
 
       for content in strsToSearch:
                   
