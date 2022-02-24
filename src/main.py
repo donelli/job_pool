@@ -35,13 +35,19 @@ def isValidJob(job: Job) -> bool:
 
    jobName = " " + job.name.upper() + " "
    
+   if "ESTAGIO" in jobName or 'ESTÁGIO' in jobName:
+      return False
+
+   if "BANCO" in jobName and "TALENTOS" in jobName:
+      return False
+   
    if job.origin == Origin.IFOOD and job.department == "" and len(job.tags) == 0:
       return False
    
    if len(job.tags) > 0 or len(job.differentialTags) > 0:
       return True
    
-   if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ANALYST" in jobName or "ENGENH" in jobName or "DESENV" in jobName or "DEVEL" in jobName or "DEV" in jobName:
+   if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ENGENH" in jobName or "DESENV" in jobName or "DEVEL" in jobName or "DEV" in jobName:
       return True
    
    if "STACK" in jobName or "FRONT" in jobName or "BACK" in jobName:
