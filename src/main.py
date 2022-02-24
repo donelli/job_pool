@@ -66,7 +66,20 @@ def isValidJob(job: Job) -> bool:
 
 def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: Repository):
    
+   global saveData
+   
    jobs = [ job for job in allJobs if isValidJob(job) ]
+   
+   if not saveData:
+      
+      print("---------------------------------------")
+      print(companyName + " - Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
+      print("---------------------------------------")
+      
+      for job in allJobs:
+         print( ("YES - " if (isValidJob(job)) else "NO  - "), job)
+      
+      return
    
    print("- Found " + str(len(jobs)) + " jobs after filter (Original count: " + str(len(allJobs)) + ")")
    helpers.waitRandom()
