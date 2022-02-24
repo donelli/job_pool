@@ -1,5 +1,6 @@
 
 import json
+import sys
 from typing import Any, List
 import helpers
 from repository.firebase_repo import FirebaseRepository
@@ -115,7 +116,7 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
    if deletedCount > 0:
       print("- Deleted " + str(deletedCount) + " jobs")
 
-def loadGupyJobs(repo: Repository):
+def loadGupyJobs(repo: Repository, runOnlyCompanyName: str):
 
    gupyCompanies: List[List[Any]] = [
       [ 'Ambev', 'https://ambevtech.gupy.io/', 'Remote Work' ],
@@ -144,6 +145,9 @@ def loadGupyJobs(repo: Repository):
       workplaces        = comp[4] if len(comp) > 4 else []
       onlyRemote        = comp[5] if len(comp) > 5 else False
       
+      if len(runOnlyCompanyName) > 0 and companyName != runOnlyCompanyName:
+         continue
+      
       print()
       print("Loading jobs from Gupy: " + companyName + ' - ' + companyUrl)
 
@@ -161,7 +165,7 @@ def loadGupyJobs(repo: Repository):
       processJobs(companyName, jobs, searcher, repo)
       
 
-def loadOtherJobs(repo: Repository):
+def loadOtherJobs(repo: Repository, runOnlyCompanyName: str):
 
    searchers: List[Searcher] = [
       LuizaLabsSearcher(),
@@ -186,6 +190,9 @@ def loadOtherJobs(repo: Repository):
    for searcher in searchers:
 
       companyName = searcher.getCompanyName()
+
+      if len(runOnlyCompanyName) > 0 and companyName != runOnlyCompanyName:
+         continue
       
       print()
       print("Loading jobs from " + companyName)
@@ -261,13 +268,39 @@ def saveUniqueCompaniesAndTags(repo: Repository):
       
 def main():
    
+   runOnlyCompanyName = ''
+   
+   if len(sys.argv) > 1:
+      
+      if sys.argv[1] == '-h':
+         print("Usage: python3 src/main.py [-c <company name>]")
+         sys.exit(1)
+      
+      i = 1
+      while i < len(sys.argv):
+         
+         if sys.argv[i] == "-c":
+            
+            if len(sys.argv) == i + 1:
+               print("Error: company name not informed")
+               sys.exit(1)
+            
+            i += 1
+            runOnlyCompanyName = sys.argv[i]
+
+            i += 1
+            continue
+
+         print("Unknown argument: " + sys.argv[i])
+         sys.exit(1)
+      
    print("Connection to database...")
    repo = FirebaseRepository()
    repo.connectToDb()
 
-   loadGupyJobs(repo)
+   loadGupyJobs(repo, runOnlyCompanyName)
    
-   loadOtherJobs(repo)
+   loadOtherJobs(repo, runOnlyCompanyName)
    
    saveUniqueCompaniesAndTags(repo)
 
