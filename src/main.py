@@ -28,6 +28,9 @@ from searchers.paypal import PaypalSearcher
 from searchers.whatsapp import WhatsAppSearcher
 from searchers.docker import DockerSearcher
 
+runOnlyCompanyName = ''
+saveData = True
+
 def isValidJob(job: Job) -> bool:
 
    jobName = " " + job.name.upper() + " "
@@ -93,30 +96,34 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
    else:
       print("- Inserting " + str(len(jobsToInsert)) + " new jobs")
    
-   for job in jobsToInsert:
-      try:
-         repo.insertJob(job)
-      except Exception as e:
-         print("Error: " + str(e))
-         return
+   if saveData:
+      for job in jobsToInsert:
+         try:
+            repo.insertJob(job)
+         except Exception as e:
+            print("Error: " + str(e))
+            return
 
    jobUrlsInDb = [ job.url for job in repo.getAllJobsByCompany(companyName) ]
 
    print("- Checking and deleting jobs that are not available anymore")
    deletedCount = 0
    
-   for jobUrl in jobUrlsInDb:
+   if saveData:
+      for jobUrl in jobUrlsInDb:
 
-      if jobUrl in availableJobsUrl:
-         continue
+         if jobUrl in availableJobsUrl:
+            continue
 
-      deletedCount += 1
-      repo.removeJobByUrl(jobUrl)
+         deletedCount += 1
+         repo.removeJobByUrl(jobUrl)
 
-   if deletedCount > 0:
-      print("- Deleted " + str(deletedCount) + " jobs")
+      if deletedCount > 0:
+         print("- Deleted " + str(deletedCount) + " jobs")
 
-def loadGupyJobs(repo: Repository, runOnlyCompanyName: str):
+def loadGupyJobs(repo: Repository):
+
+   global runOnlyCompanyName
 
    gupyCompanies: List[List[Any]] = [
       [ 'Ambev', 'https://ambevtech.gupy.io/', 'Remote Work' ],
@@ -165,7 +172,9 @@ def loadGupyJobs(repo: Repository, runOnlyCompanyName: str):
       processJobs(companyName, jobs, searcher, repo)
       
 
-def loadOtherJobs(repo: Repository, runOnlyCompanyName: str):
+def loadOtherJobs(repo: Repository):
+
+   global runOnlyCompanyName
 
    searchers: List[Searcher] = [
       LuizaLabsSearcher(),
@@ -267,17 +276,22 @@ def saveUniqueCompaniesAndTags(repo: Repository):
    repo.saveUniqueTags(tags)
       
 def main():
-   
-   runOnlyCompanyName = ''
+
+   global runOnlyCompanyName, saveData
    
    if len(sys.argv) > 1:
       
-      if sys.argv[1] == '-h':
-         print("Usage: python3 src/main.py [-c <company name>]")
+      if sys.argv[1] == '-h' or sys.argv[1] == '--help':
+         print("Usage: python3 src/main.py [-c <company name>] [--no-save]")
          sys.exit(1)
       
       i = 1
       while i < len(sys.argv):
+         
+         if sys.argv[i] == "--no-save":
+            saveData = False
+            i += 1
+            continue
          
          if sys.argv[i] == "-c":
             
@@ -298,11 +312,12 @@ def main():
    repo = FirebaseRepository()
    repo.connectToDb()
 
-   loadGupyJobs(repo, runOnlyCompanyName)
+   loadGupyJobs(repo)
    
-   loadOtherJobs(repo, runOnlyCompanyName)
+   loadOtherJobs(repo)
    
-   saveUniqueCompaniesAndTags(repo)
+   if saveData:
+      saveUniqueCompaniesAndTags(repo)
 
    repo.closeDb()
    
