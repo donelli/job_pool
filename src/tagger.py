@@ -234,6 +234,8 @@ class Tagger(metaclass=Singleton):
       text = text.replace('GO-TO-MARKET', '')
       text = text.replace('GO THROUGH', '')
       
+      text = text.replace('JAVA SCRIPT', 'JAVASCRIPT')
+      
       tags: List[str] = []
       
       for tag in self.tags:
