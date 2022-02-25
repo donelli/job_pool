@@ -197,6 +197,7 @@ class Tagger(metaclass=Singleton):
       Tag('CouchDB', [ 'COUCHDB' ]),
       Tag('DB2', [ 'DB2' ]),
       Tag('Firebase', [ 'FIREBASE' ]),
+      Tag('Appwrite', [ 'APPWRITE' ]),
 
       # Products
       Tag('Azure', [ 'AZURE' ]),
