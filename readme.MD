@@ -60,3 +60,4 @@ Writen in [Python](https://www.python.org/) 3.8.3 and using mainly [requests](ht
 - [ ] [Nuuvem](https://careers.nuuvem.com/)
 - [ ] [DB1 (Anymarket)](https://jobs.kenoby.com/vagas-db1-group)
 - [ ] [Layers](https://vagas.layers.education/)
+- [x] [Caju Benefícios](https://caju.gupy.io/)

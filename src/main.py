@@ -157,7 +157,8 @@ def loadGupyJobs(repo: Repository):
       [ 'eSales', 'https://esales.gupy.io/' ],
       [ 'Linx', 'https://linx.gupy.io/', None, [], [], True ],
       [ 'Webmotors', 'https://webmotors.gupy.io/', None, [ 'Tecnologia' ], [], True ],
-      [ 'Gupy', 'https://tech-career.gupy.io/' ]
+      [ 'Gupy', 'https://tech-career.gupy.io/' ],
+      [ 'Caju Benefícios', 'https://caju.gupy.io/', None, [ 'Tecnologia' ], [], True ],
    ]
 
    searcher = GupySearcher()
