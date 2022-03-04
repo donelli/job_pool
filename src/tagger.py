@@ -111,6 +111,7 @@ class Tagger(metaclass=Singleton):
       Tag('SAP', [ 'SAP' ]),
       Tag('Jenkins', [ 'JENKINS' ]),
       Tag('Travis', [ 'TRAVIS' ]),
+      Tag('PowerShell', [ 'POWERSHELL' ]),
       
       # Tecnologies
       Tag('WebSockets', [ 'WEBSOCKETS' ]),
@@ -198,15 +199,11 @@ class Tagger(metaclass=Singleton):
       Tag('DB2', [ 'DB2' ]),
       Tag('Firebase', [ 'FIREBASE' ]),
       Tag('Appwrite', [ 'APPWRITE' ]),
+      Tag('Windows Server', [ 'WINDOWS SERVER' ]),
 
       # Products
-      Tag('Azure', [ 'AZURE' ]),
       Tag('Machine learning', [ 'MACHINE LEARNING' ]),
       Tag('Pipelines', [ 'PIPELINES' ]),
-      Tag('Azure Datafactory', [ 'AZURE DATAFACTORY' ]),
-      Tag('AWS', [ 'AWS' ]),
-      Tag('IBM Cloud', [ 'IBM CLOUD' ]),
-      Tag('GCP', [ 'GCP', 'GOOGLE CLOUD' ]),
       Tag('i18n', [ 'i18n', 'I18N' ]),
       Tag('ElasticSearch', [ 'ELASTICSEARCH' ]),
       Tag('Power BI', [ 'POWER BI', 'POWERBI' ]),
@@ -220,6 +217,15 @@ class Tagger(metaclass=Singleton):
       Tag('Illustrator', [ 'ILLUSTRATOR' ]),
       Tag('Photoshop', [ 'PHOTOSHOP' ]),
 
+      # Cloud
+      Tag('Terraform', [ 'TERRAFORM' ]),
+      Tag('Pulumi', [ 'PULUMI' ]),
+      Tag('Azure', [ 'AZURE' ]),
+      Tag('Azure Datafactory', [ 'AZURE DATAFACTORY' ]),
+      Tag('AWS', [ 'AWS' ]),
+      Tag('IBM Cloud', [ 'IBM CLOUD' ]),
+      Tag('GCP', [ 'GCP', 'GOOGLE CLOUD' ]),
+      
    ]
 
    def __init__(self) -> None:
