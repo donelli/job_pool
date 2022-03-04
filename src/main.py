@@ -10,6 +10,7 @@ from searcher import Searcher
 from base_repo import Repository
 
 from searchers.amazon import AmazonSearcher
+from searchers.clear_sale import ClearSaleSearcher
 from searchers.dell import DellSearcher
 from searchers.gupy import GupySearcher
 from searchers.ame_digital import AmeDigitalSearcher
@@ -75,6 +76,9 @@ def isValidJob(job: Job) -> bool:
       return False
 
    if "ANALISTA DE RECURSOS HUMANOS" in jobName:
+      return False
+   
+   if "INTRAEMPREENDEDOR(A) DE NOVOS NEGÓCIOS/PRODUTOS" in jobName:
       return False
    
    return False
@@ -206,6 +210,7 @@ def loadOtherJobs(repo: Repository):
    global runOnlyCompanyName
 
    searchers: List[Searcher] = [
+      ClearSaleSearcher(),
       LuizaLabsSearcher(),
       AmazonSearcher(),
       GloboSearcher(),
