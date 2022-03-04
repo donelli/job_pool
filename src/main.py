@@ -44,6 +44,9 @@ def isValidJob(job: Job) -> bool:
    if job.origin == Origin.IFOOD and job.department == "" and len(job.tags) == 0:
       return False
    
+   if job.origin == Origin.IBM and jobName == "APPLICATION DEVELOPER-SALESFORCE":
+      return False
+   
    if len(job.tags) > 0 or len(job.differentialTags) > 0:
       return True
    
@@ -67,6 +70,12 @@ def isValidJob(job: Job) -> bool:
    
    if "EX" in jobName:
       return True
+
+   if "ENGENHEIRO DE SUPORTE" in jobName or "PROFISSIONAL DE SUPORTE TÉCNICO" in jobName:
+      return False
+
+   if "ANALISTA DE RECURSOS HUMANOS" in jobName:
+      return False
    
    return False
 
