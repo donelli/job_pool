@@ -47,7 +47,7 @@ Writen in [Python](https://www.python.org/) 3.8.3 and using mainly [requests](ht
 - [ ] [Red Hat](https://careers-redhat.icims.com/jobs/search?ss=1)
 - [ ] HostGator Brasil
 - [x] [WebMotors](https://webmotors.gupy.io/)
-- [ ] [ClearSale](https://br.clear.sale/carreiras)
+- [x] [ClearSale](https://br.clear.sale/carreiras)
 - [x] [LINX](https://linx.gupy.io/)
 - [ ] [KingHost](https://king.host/talentos-oportunidades)
 - [ ] Locaweb Commerce
