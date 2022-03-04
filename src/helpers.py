@@ -82,3 +82,21 @@ def reportGenerationError(message: List[str], fatal: bool = False):
   
   if fatal:
     sys.exit(1)
+
+
+def getDifferentialStrs():
+  return [
+    'Desejável:',
+    'Diferenciais:',
+    'O que consideramos diferencial:',
+    'Diferenciais:',
+    'Você sairá com uns pontinhos na frente se tiver:',
+    'Você sairá com uns pontinhos na frente se tiver alguma experiência com:',
+    'Será um diferencial se tiver conhecimento ou experiência em:',
+    'Você sairá com uns pontinhos a mais, se:',
+    'Será um diferencial, caso você tenha:',
+    'Você se destaca, se tiver:',
+    'Experiência Desejável:',
+    'Será um diferencial, caso você conheça:',
+    'Você vai se sentir mais confortável se conhecer:'
+  ]

@@ -137,7 +137,7 @@ class Tagger(metaclass=Singleton):
       Tag('ETL', [ 'TRANSFORMACAO DE DADOS', 'MANIPULACAO DE DADOS', 'ETL' ]),
       Tag('Message broker', [ 'MENSAGERIAS', 'RABBITMQ', 'AZURESERVICEBUS' ]),
       Tag('Peer Programming.', [ 'PEER PROGRAMMING' ]),
-      Tag('Agile Develop.', [ 'AGEIS', 'SCRUM', 'KANBAN', 'METODOLOGIA ÁGIL', 'AGILE METHODOLOGY', 'METODOLOGIA AGIL' ]),
+      Tag('Agile Develop.', [ 'AGEIS', 'SCRUM', 'KANBAN', 'METODOLOGIA ÁGIL', 'AGILE METHODOLOGY', 'METODOLOGIA AGIL', 'AGILE PROJECTS' ]),
       Tag('Design Patterns', [ 'DESIGN PATTERNS' ]),
       Tag('Clean Code', [ 'CLEAN CODE' ]),
       Tag('Data Structure', [ 'ESTRUTURAS DE DADOS' ]),

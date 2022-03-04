@@ -12,13 +12,7 @@ from tagger import Tagger
 
 class GupySearcher(Searcher):
 
-   differentialsStrs = [
-      'Diferenciais',
-      'Você se destaca, se tiver:',
-      'Experiência Desejável:',
-      'Será um diferencial, caso você conheça:',
-      'Você vai se sentir mais confortável se conhecer:'
-   ]
+   differentialsStrs = helpers.getDifferentialStrs() + [ 'Diferenciais']
    
    def getCompanyName(self) -> str:
       return 'Gupy'

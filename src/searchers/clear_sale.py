@@ -22,7 +22,7 @@ class ClearSaleSearcher(Searcher):
       'TI',
       'ENG DE SOFTWARE - PRODUTOS'
    ]
-
+   
    def getCompanyName(self) -> str:
       return self.companyName
 
@@ -44,11 +44,13 @@ class ClearSaleSearcher(Searcher):
          jobDesc = jobDesc[:jobDesc.index("Benefícios Oferecidos:")]
       
       differTags = []   
+
+      for desc in helpers.getDifferentialStrs():
+         if desc in jobDesc:
+            differTags = Tagger().generateTags(jobDesc[jobDesc.index(desc):])
+            jobDesc = jobDesc[:jobDesc.index(desc)]
+            break
    
-      if "Desejável:" in jobDesc:
-         differTags = Tagger().generateTags(jobDesc[jobDesc.index("Desejável:"):])
-         jobDesc = jobDesc[:jobDesc.index("Desejável:")]
-      
       job.tags = Tagger().generateTags(jobDesc)
 
       job.differentialTags = [diff for diff in differTags if diff not in job.tags]
