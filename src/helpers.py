@@ -6,7 +6,6 @@ import regex
 import unicodedata
 import datetime
 import re
-import pyuser_agent
 import shlex
 import subprocess
 
