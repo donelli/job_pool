@@ -98,5 +98,7 @@ def getDifferentialStrs():
     'Você se destaca, se tiver:',
     'Experiência Desejável:',
     'Será um diferencial, caso você conheça:',
-    'Você vai se sentir mais confortável se conhecer:'
+    'Você vai se sentir mais confortável se conhecer:',
+    'E será considerado um diferencial se tiver:',
+    'It would be great to see:'
   ]
