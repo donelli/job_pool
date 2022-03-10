@@ -185,7 +185,7 @@ class Tagger(metaclass=Singleton):
 
       # Databases
       Tag('SqlServer', [ 'SQLSERVER', 'SQL SERVER' ]),
-      Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL', 'POSTGREES' ]),
+      Tag('Postgres', [ 'POSTGRES', 'POSTGRESQL', 'POSTGREES', 'PGSQL' ]),
       Tag('MySQL', [ 'MYSQL' ]),
       Tag('Mongo', [ 'MONGODB', 'MONGO' ]),
       Tag('Oracle', [ 'ORACLE' ]),
