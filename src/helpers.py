@@ -87,6 +87,7 @@ def reportGenerationError(message: List[str], fatal: bool = False):
 def getDifferentialStrs():
   return [
     'Desejável:',
+    'Desejavel:'
     'Diferenciais:',
     'O que consideramos diferencial:',
     'Diferenciais:',
@@ -100,5 +101,7 @@ def getDifferentialStrs():
     'Será um diferencial, caso você conheça:',
     'Você vai se sentir mais confortável se conhecer:',
     'E será considerado um diferencial se tiver:',
-    'It would be great to see:'
+    'It would be great to see:',
+    'Será um plus:',
+    'Será um diferencial:',
   ]
