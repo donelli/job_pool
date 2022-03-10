@@ -50,6 +50,8 @@ class GupySearcher(Searcher):
             pos = text.find("INFORMAÇÕES ADICIONAIS")
             text = text[:pos].strip()
          
+         differTags: List[str] = []
+         
          if "REQUISITOS E QUALIFICAÇÕES" in text:
             
             pos = text.find("REQUISITOS E QUALIFICAÇÕES")
@@ -61,12 +63,13 @@ class GupySearcher(Searcher):
                   continue
                
                pos = text.find(startStr)
-               job.differentialTags = Tagger().generateTags(text[pos:])
+               differTags = Tagger().generateTags(text[pos:])
                text = text[:pos].strip()
                
                break
             
          job.tags = Tagger().generateTags(text)
+         job.differentialTags = [ tag for tag in differTags if tag not in job.tags ]
 
          error = None
          break
