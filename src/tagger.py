@@ -19,7 +19,7 @@ class Tag:
 tagsToSearch = [
    
    # Programing languages / markup languages
-   Tag('PHP', [ 'PHP' ]),
+   Tag('PHP', [ 'PHP', 'PHP7', 'PHP7+', 'PHP8' ]),
    Tag('HTML', [ 'HTML', 'HTML5' ]),
    Tag('CSS', [ 'CSS', 'CSS3' ]),
    Tag('JS', [ 'JAVASCRIPT', 'JS' ]),
@@ -83,6 +83,7 @@ tagsToSearch = [
    Tag('RequireJS', [ 'REQUIREJS' ]),
    Tag('Backbone.js', [ 'BACKBONE.JS' ]),
    Tag('jQuery', [ 'JQUERY' ]),
+   Tag('Micronaut', [ 'MICRONAUT' ]),
    
    # Preprocessors
    Tag('SCSS/SASS', [ 'SCSS', 'SASS' ]),
@@ -97,7 +98,7 @@ tagsToSearch = [
    Tag('Npm', [ 'NPM' ]),
    Tag('Fiori', [ 'FIORI' ]),
    Tag('Docker', [ 'DOCKER' ]),
-   Tag('Kubernetes', [ 'KUBERNETES' ]),
+   Tag('Kubernetes', [ 'KUBERNETES', 'KUBERNETS' ]),
    Tag('Big Data', [ 'BIG DATA' ]),
    Tag('Spark', [ 'SPARK' ]),
    Tag('Hive', [ 'HIVE' ]),
@@ -110,6 +111,9 @@ tagsToSearch = [
    Tag('Jenkins', [ 'JENKINS' ]),
    Tag('Travis', [ 'TRAVIS' ]),
    Tag('PowerShell', [ 'POWERSHELL' ]),
+   Tag('Composer (PHP)', [ 'COMPOSER' ]),
+   Tag('Grafana', [ 'GRAFANA' ]),
+   Tag('SonarQube', [ 'SONARQUBE' ]),
    
    # Tecnologies
    Tag('WebSockets', [ 'WEBSOCKETS' ]),
@@ -124,7 +128,7 @@ tagsToSearch = [
    Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
    
    # Programming Terms
-   Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIS', "API'S" ]),
+   Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIS', "API'S", 'RESTFULL API' ]),
    Tag('Webservice', [ 'WEB SERVICE', 'WEB SERVICES', 'WEBSERVICE', 'WEBSERVICES' ]),
    Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL', 'RELATIONAL DATABASES' ]),
    Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
@@ -147,6 +151,7 @@ tagsToSearch = [
    Tag('Distributed systems', [ 'SISTEMAS DISTRIBUÍDOS', 'DISTRIBUTED ARCHITECTURE' ]),
    Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS', 'MICRO-SERVIÇOS' ]),
    Tag('Open-source', [ 'OPEN-SOURCE' ]),
+   Tag('Serverless', [ 'SERVERLESS' ]),
 
    # Operating Systems
    Tag('Android', [ 'ANDROID' ]),
@@ -198,6 +203,7 @@ tagsToSearch = [
    Tag('Firebase', [ 'FIREBASE' ]),
    Tag('Appwrite', [ 'APPWRITE' ]),
    Tag('Windows Server', [ 'WINDOWS SERVER' ]),
+   Tag('Debezium', [ 'DEBEZIUM' ]),
 
    # Products
    Tag('Machine learning', [ 'MACHINE LEARNING' ]),
