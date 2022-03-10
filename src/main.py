@@ -17,6 +17,7 @@ from searchers.ame_digital import AmeDigitalSearcher
 from searchers.hotmart import HotmartSearcher
 from searchers.ibm import IbmSearcher
 from searchers.ifood import IFoodSearcher
+from searchers.kenoby import KenobySearcher
 from searchers.luizalabs import LuizaLabsSearcher
 from searchers.netflix import NetflixSearcher
 from searchers.next_bank import NextBankSearcher
@@ -152,6 +153,39 @@ def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: 
 
       if deletedCount > 0:
          print("- Deleted " + str(deletedCount) + " jobs")
+
+def loadKenobyJobs(repo: Repository):
+   
+   global runOnlyCompanyName
+
+   kenobyCompanies = [
+      [ 'DB1 Group', 'https://jobs.kenoby.com/vagas-db1-group/position?search=&utm_source=website', [ 'Desenvolvimento', 'Tech' ], True ],
+      [ 'Kabum', 'https://jobs.kenoby.com/kabum/position?search=&utm_source=website', [ 'TI' ], True ]
+   ]
+   
+   searcher = KenobySearcher()
+
+   for comp in kenobyCompanies:
+
+      companyName: str = comp[0]
+      htmlUrl: str = comp[1]
+      segmentsToFilter: List[str] = comp[2]
+      onlyRemote: bool = comp[3]
+
+      if len(runOnlyCompanyName) > 0 and companyName.lower() != runOnlyCompanyName.lower():
+         continue
+      
+      print()
+      print("Loading jobs from Gupy: " + companyName + ' - ' + htmlUrl)
+
+      try:
+         jobs = searcher.searchWithParams(companyName, htmlUrl, segmentsToFilter, onlyRemote)
+      except Exception as e:
+         print("Error: " + str(e))
+         continue
+   
+      processJobs(companyName, jobs, searcher, repo)
+
 
 def loadGupyJobs(repo: Repository):
 
@@ -347,6 +381,8 @@ def main():
    repo.connectToDb()
 
    loadGupyJobs(repo)
+
+   loadKenobyJobs(repo)
    
    loadOtherJobs(repo)
    
