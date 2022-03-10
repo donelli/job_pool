@@ -55,7 +55,7 @@ def isValidJob(job: Job) -> bool:
    if "ENGINEER" in jobName or "SOFTWARE" in jobName or "ENGENH" in jobName or "DESENV" in jobName or "DEVEL" in jobName or "DEV" in jobName:
       return True
    
-   if "STACK" in jobName or "FRONT" in jobName or "BACK" in jobName:
+   if "STACK" in jobName or "SATCK" in jobName or "FRONT" in jobName or "BACK" in jobName:
       return True
 
    if "DADOS" in jobName or "DATA" in jobName:
@@ -64,7 +64,7 @@ def isValidJob(job: Job) -> bool:
    if "WEB" in jobName:
       return True
    
-   if "DBA" in jobName or "DATABASE" in jobName:
+   if "DBA" in jobName or "DATABASE" in jobName or "DBRE" in jobName:
       return True
 
    if " TI " in jobName:
@@ -73,6 +73,12 @@ def isValidJob(job: Job) -> bool:
    if "EX" in jobName:
       return True
 
+   if "ANALISTA DE BI" in jobName:
+      return True
+
+   if "CLOUD" in jobName or "DEVOPS" in jobName:
+      return True
+   
    if "ENGENHEIRO DE SUPORTE" in jobName or "PROFISSIONAL DE SUPORTE TÉCNICO" in jobName:
       return False
 
@@ -81,7 +87,7 @@ def isValidJob(job: Job) -> bool:
    
    if "INTRAEMPREENDEDOR(A) DE NOVOS NEGÓCIOS/PRODUTOS" in jobName:
       return False
-   
+
    return False
 
 def processJobs(companyName: str, allJobs: List[Job], searcher: Searcher, repo: Repository):
