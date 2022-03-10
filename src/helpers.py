@@ -91,6 +91,7 @@ def getDifferentialStrs():
     'Diferenciais:',
     'O que consideramos diferencial:',
     'Diferenciais:',
+    'Diferencial:',
     'Você sairá com uns pontinhos na frente se tiver:',
     'Você sairá com uns pontinhos na frente se tiver alguma experiência com:',
     'Será um diferencial se tiver conhecimento ou experiência em:',
