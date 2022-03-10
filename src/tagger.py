@@ -56,6 +56,7 @@ tagsToSearch = [
    
    # Frameworks
    Tag('Laravel', [ 'LARAVEL' ]),
+   Tag('PHPUnit', [ 'PHPUNIT' ]),
    Tag('JSX', [ 'JSX' ]),
    Tag('AngularJS', [ 'ANGULARJS' ]),
    Tag('Angular', [ 'ANGULAR' ]),
@@ -94,7 +95,7 @@ tagsToSearch = [
    Tag('Postman', [ 'POSTMAN' ]),
    Tag('Gradle', [ 'GRADLE' ]),
    Tag('Maven', [ 'MAVEN' ]),
-   Tag('NodeJs', [ 'NODE.JS', 'NODEJS' ]),
+   Tag('NodeJs', [ 'NODE.JS', 'NODEJS', 'NODE' ]),
    Tag('Npm', [ 'NPM' ]),
    Tag('Fiori', [ 'FIORI' ]),
    Tag('Docker', [ 'DOCKER' ]),
@@ -114,24 +115,28 @@ tagsToSearch = [
    Tag('Composer (PHP)', [ 'COMPOSER' ]),
    Tag('Grafana', [ 'GRAFANA' ]),
    Tag('SonarQube', [ 'SONARQUBE' ]),
+   Tag('Styled Components', [ 'STYLED COMPONENTS', 'STYLED-COMPONENTS' ]),
    
    # Tecnologies
    Tag('WebSockets', [ 'WEBSOCKETS' ]),
    Tag('Webhooks', [ 'WEBHOOKS' ]),
    Tag('SOAP', [ 'SOAP' ]),
-   Tag('PWA', [ 'PWA' ]),
+   Tag('PWA', [ 'PWA', 'PROGRESSIVE WEB APPS' ]),
    Tag('gRPC', [ 'GRPC' ]),
    Tag('Git', [ 'GIT', 'GITHUB', 'GITLAB' ]),
    Tag('OAUTH', [ 'OAUTH', 'OAUTH2' ]),
    Tag('RPA', [ 'RPA' ]),
    Tag('JWT', [ 'JSON WEB TOKEN', 'JWT' ]),
    Tag('BI', [ 'POWER BI', 'METABASE', 'BUSINESS INTELLIGENCE', 'LOOKER', 'TABLEAU' ]),
+   Tag('SPA', [ 'SPA', 'SPAS' ]),
+   Tag('Hybrid Apps', [ 'HYBRID APPS', 'APPS HÍBRIDOS' ]),
+   Tag('Offline-first', [ 'OFFLINE-FIRST', 'OFFLINE FIRST' ]),
    
    # Programming Terms
    Tag('API', [ 'APIS', 'REST', 'WEB SERVICE', 'WEB SERVICES', 'REST APIS', "API'S", 'RESTFULL API' ]),
    Tag('Webservice', [ 'WEB SERVICE', 'WEB SERVICES', 'WEBSERVICE', 'WEBSERVICES' ]),
    Tag('SQL', [ 'BANCO DE DADOS RELACIONAL', 'BANCO DE DADOS RELACIONAIS', 'SQL', 'RELATIONAL DATABASES' ]),
-   Tag('NoSQL', [ 'NAO RELACIONAL', 'NOSQL', 'NO-SQL' ]),
+   Tag('NoSQL', [ 'NAO RELACIONAL', 'NÃO RELACIONAIS', 'NOSQL', 'NO-SQL' ]),
    Tag('Big Data', [ 'BIG DATA' ]),
    Tag('Front End', [ 'FRONT-END', 'FRONT END', 'FRONTEND' ]),
    Tag('Back End', [ 'BACK-END', 'BACK END', 'BACKEND' ]),
@@ -152,6 +157,7 @@ tagsToSearch = [
    Tag('Microservices', [ 'MICROSSERVICOS', 'MICROSSERVIÇOS', 'MICRO SERVIÇOS', 'MICRO-SERVIÇOS' ]),
    Tag('Open-source', [ 'OPEN-SOURCE' ]),
    Tag('Serverless', [ 'SERVERLESS' ]),
+   Tag('Devops', [ 'DEVOPS' ]),
 
    # Operating Systems
    Tag('Android', [ 'ANDROID' ]),
@@ -178,7 +184,7 @@ tagsToSearch = [
    Tag('Ansible', [ 'ANSIBLE' ]),
    Tag('Web tests', [ 'TESTES WEB' ]),
    Tag('API tests', [ 'TESTES DE API' ]),
-   Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT', 'DESENVOLVIMENTO ORIENTADO A TESTES' ]),
+   Tag('TDD', [ 'TDD', 'TEST-DRIVEN DEVELOPMENT', 'TEST DRIVEN DEVELOPMENT', 'DESENVOLVIMENTO ORIENTADO A TESTES' ]),
    Tag('jUnit', [ 'JUNIT' ]),
    Tag('Mocha', [ 'MOCHA' ]),
    Tag('Chai', [ 'CHAI' ]),
@@ -220,6 +226,7 @@ tagsToSearch = [
    Tag('Figma', [ 'FIGMA' ]),
    Tag('Illustrator', [ 'ILLUSTRATOR' ]),
    Tag('Photoshop', [ 'PHOTOSHOP' ]),
+   Tag('Jira', [ 'JIRA' ]),
 
    # Cloud
    Tag('Terraform', [ 'TERRAFORM' ]),
