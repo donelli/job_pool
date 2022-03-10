@@ -68,6 +68,7 @@ tagsToSearch = [
    Tag('Svelte', [ 'SVELTE' ]),
    Tag('Bootstrap', [ 'BOOTSTRAP', 'BOODSTRAP' ]),
    Tag('Tailwind', [ 'TAILWIND' ]),
+   Tag('Material Design', [ 'MATERIAL DESIGN' ]),
    Tag('Django ', [ 'DJANGO ' ]),
    Tag('Symfony', [ 'SYMFONY' ]),
    Tag('Flutter', [ 'FLUTTER' ]),
@@ -123,7 +124,7 @@ tagsToSearch = [
    Tag('SOAP', [ 'SOAP' ]),
    Tag('PWA', [ 'PWA', 'PROGRESSIVE WEB APPS' ]),
    Tag('gRPC', [ 'GRPC' ]),
-   Tag('Git', [ 'GIT', 'GITHUB', 'GITLAB' ]),
+   Tag('Git', [ 'GIT', 'GITHUB', 'GITLAB', 'GITFLOW' ]),
    Tag('OAUTH', [ 'OAUTH', 'OAUTH2' ]),
    Tag('RPA', [ 'RPA' ]),
    Tag('JWT', [ 'JSON WEB TOKEN', 'JWT' ]),
@@ -158,6 +159,7 @@ tagsToSearch = [
    Tag('Open-source', [ 'OPEN-SOURCE' ]),
    Tag('Serverless', [ 'SERVERLESS' ]),
    Tag('Devops', [ 'DEVOPS' ]),
+   Tag('SRE', [ 'SRE', 'SITE RELIABILITY ENGINEERING' ]),
 
    # Operating Systems
    Tag('Android', [ 'ANDROID' ]),
@@ -215,7 +217,7 @@ tagsToSearch = [
    Tag('Machine learning', [ 'MACHINE LEARNING' ]),
    Tag('Pipelines', [ 'PIPELINES' ]),
    Tag('i18n', [ 'i18n', 'I18N' ]),
-   Tag('ElasticSearch', [ 'ELASTICSEARCH' ]),
+   Tag('ElasticSearch', [ 'ELASTICSEARCH', 'STACK ELK' ]),
    Tag('Power BI', [ 'POWER BI', 'POWERBI' ]),
    Tag('Kafka', [ 'KAFKA' ]),
    Tag('ABAP', [ 'ABAP' ]),
