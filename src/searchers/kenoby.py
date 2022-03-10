@@ -94,6 +94,9 @@ class KenobySearcher(Searcher):
             workplace =  helpers.toOneLineString(jobAElem.find('span', attrs={ 'class': 'location' }).getText())
             remote = False
 
+            if workplace.endswith(" /"):
+               workplace = workplace[:-2]
+
             if "HOME OFFICE" in workplace.upper() or "REMOTO" in workplace.upper() or "REMOTE" in workplace.upper():
                remote = True
 
