@@ -58,9 +58,9 @@ Writen in [Python](https://www.python.org/) 3.8.3 and using mainly [requests](ht
 - [ ] Zoom
 - [ ] Intelbras
 - [ ] [Nuuvem](https://careers.nuuvem.com/)
-- [ ] [DB1 (Anymarket)](https://jobs.kenoby.com/vagas-db1-group)
+- [x] [DB1 (Anymarket)](https://jobs.kenoby.com/vagas-db1-group)
 - [ ] [Layers](https://vagas.layers.education/)
 - [x] [Caju Benefícios](https://caju.gupy.io/)
 - [ ] [VTEX](https://jobsearch.vtex.com/job-search/?countries=Brazil&departaments=Tech&teams=)
-- [ ] [Kabum](https://jobs.kenoby.com/kabum)
+- [x] [Kabum](https://jobs.kenoby.com/kabum)
 - [ ] [Stone](https://jornada.stone.com.br/times/tecnologia) ([API](https://boards-api.greenhouse.io/v1/boards/stonetech/departments?render_as=tree))
